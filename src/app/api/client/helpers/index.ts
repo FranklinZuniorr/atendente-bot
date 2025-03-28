@@ -5,7 +5,8 @@ import { EvolutionInstanceConnectReturn } from "../../services/evolution/interfa
 export const validadeInstanceStateAndGenerateQrCode = async (
   telephone: string
 ): Promise<EvolutionInstanceConnectReturn> => {
-  const state = (await EvolutionService.getState(telephone)).instance.state;
+  const state: ENUM_EVOLUTION_CONNECTION_STATE = (await EvolutionService.getState(telephone)).instance.state;
+  console.log(state)
 
   const tryConnect = async (): Promise<EvolutionInstanceConnectReturn> => {
     try {
