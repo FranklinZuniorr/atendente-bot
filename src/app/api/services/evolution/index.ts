@@ -1,65 +1,65 @@
-import axios, { AxiosInstance } from "axios";
-import { EvolutionConnectionStateReturn, EvolutionInstanceConnectReturn, EvolutionNewInstanceBody, EvolutionNewMessageBody } from "./interfaces";
-import { ENUM_EVOLUTION_CONNECTION_STATE } from "./constants";
-import { ENVS } from "@/constants";
+import axios, { AxiosInstance } from 'axios';
+import { EvolutionConnectionStateReturn, EvolutionInstanceConnectReturn, EvolutionNewInstanceBody, EvolutionNewMessageBody } from './interfaces';
+import { ENUM_EVOLUTION_CONNECTION_STATE } from './constants';
+import { ENVS } from '@/constants';
 
 export class EvolutionService {
-    private static httpClient: AxiosInstance = axios.create({
-        baseURL: ENVS.evolutionBaseUrl,
-        headers: {
-            'apiKey': ENVS.evolutionApiKey
-        }
-    });
-
-    static async getState (instanceName: string): Promise<EvolutionConnectionStateReturn> {
-        const path: string = `instance/connectionState/${instanceName}`;
-
-        try {
-            const response: EvolutionConnectionStateReturn = (await this.httpClient.get(path)).data;
-            return response;
-        } catch {
-            return {instance: { instanceName, state: ENUM_EVOLUTION_CONNECTION_STATE.NOT_FOUND }};
-        }
+  private static httpClient: AxiosInstance = axios.create({
+    baseURL: ENVS.evolutionBaseUrl,
+    headers: {
+      'apiKey': ENVS.evolutionApiKey
     }
+  });
 
-    static async newInstance (params: EvolutionNewInstanceBody) {
-        const path: string = 'instance/create';
+  static async getState (instanceName: string): Promise<EvolutionConnectionStateReturn> {
+    const path: string = `instance/connectionState/${instanceName}`;
 
-        try {
-            await this.httpClient.post(path, params);
-        } catch {
-            throw new Error(path);
-        }
+    try {
+      const response: EvolutionConnectionStateReturn = (await this.httpClient.get(path)).data;
+      return response;
+    } catch {
+      return {instance: { instanceName, state: ENUM_EVOLUTION_CONNECTION_STATE.NOT_FOUND }};
     }
+  }
 
-    static async instanceConnect (instanceName: string): Promise<EvolutionInstanceConnectReturn> {
-        const path: string =  `instance/connect/${instanceName}`;
+  static async newInstance (params: EvolutionNewInstanceBody) {
+    const path: string = 'instance/create';
 
-        try {
-            const response: EvolutionInstanceConnectReturn = (await this.httpClient.get(path, { params: { number: instanceName } })).data;
-            return response;
-        } catch {
-            throw new Error(path);
-        }
+    try {
+      await this.httpClient.post(path, params);
+    } catch {
+      throw new Error(path);
     }
+  }
 
-    static async sendMessage (instanceName: string, params: EvolutionNewMessageBody) {
-        const path: string = `message/sendText/${instanceName}`;
+  static async instanceConnect (instanceName: string): Promise<EvolutionInstanceConnectReturn> {
+    const path: string =  `instance/connect/${instanceName}`;
 
-        try {
-            await this.httpClient.post(path, params);
-        } catch {
-            throw new Error(path);
-        }
+    try {
+      const response: EvolutionInstanceConnectReturn = (await this.httpClient.get(path, { params: { number: instanceName } })).data;
+      return response;
+    } catch {
+      throw new Error(path);
     }
+  }
 
-    static async deleteInstance (instanceName: string) {
-        const path: string = `instance/delete/${instanceName}`;
+  static async sendMessage (instanceName: string, params: EvolutionNewMessageBody) {
+    const path: string = `message/sendText/${instanceName}`;
 
-        try {
-            await this.httpClient.delete(path);
-        } catch {
-            throw new Error(path);
-        }
+    try {
+      await this.httpClient.post(path, params);
+    } catch {
+      throw new Error(path);
     }
+  }
+
+  static async deleteInstance (instanceName: string) {
+    const path: string = `instance/delete/${instanceName}`;
+
+    try {
+      await this.httpClient.delete(path);
+    } catch {
+      throw new Error(path);
+    }
+  }
 }

@@ -1,10 +1,10 @@
-import { ENVS } from "@/constants";
-import mongoose from "mongoose";
+import { ENVS } from '@/constants';
+import mongoose from 'mongoose';
 
 const MONGO_URI = ENVS.mongoUrl;
 
 if (!MONGO_URI) {
-  throw new Error("⚠️ MONGO_URI não foi definida no .env");
+  throw new Error('⚠️ MONGO_URI não foi definida no .env');
 }
 
 export const connectDB = async (): Promise<void> => {
