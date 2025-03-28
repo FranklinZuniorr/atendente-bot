@@ -36,7 +36,7 @@ export class EvolutionService {
         const path: string =  `instance/connect/${instanceName}`;
 
         try {
-            const response: EvolutionInstanceConnectReturn = (await this.httpClient.get(path)).data;
+            const response: EvolutionInstanceConnectReturn = (await this.httpClient.get(path, { params: { number: instanceName } })).data;
             return response;
         } catch {
             throw new Error(path);

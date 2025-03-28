@@ -14,7 +14,7 @@ export interface EvolutionNewInstanceBody {
 	qrcode: boolean,
 	integration: 'WHATSAPP-BAILEYS',
 	webhook: {
-		url: '',
+		url: string,
 		events: [
       'MESSAGES_UPSERT'
   	]
