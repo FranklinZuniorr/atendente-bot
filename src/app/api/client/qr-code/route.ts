@@ -1,12 +1,12 @@
-import { NextResponse } from "next/server";
-import { connectDB } from "../../infra/mongoDb";
-import { ClientRepository } from "../../repositories/client";
-import ClientModel from "../../repositories/client/models/client";
-import { IResponse } from "../../interfaces";
-import { randomUUID } from "crypto";
-import { validadeInstanceStateAndGenerateQrCode } from "../helpers";
-import { GenerateQrCodeResponse } from "../interfaces";
-import { validateTelephone } from "@/app/utils";
+import { NextResponse } from 'next/server';
+import { connectDB } from '../../infra/mongoDb';
+import { ClientRepository } from '../../repositories/client';
+import ClientModel from '../../repositories/client/models/client';
+import { IResponse } from '../../interfaces';
+import { randomUUID } from 'crypto';
+import { validadeInstanceStateAndGenerateQrCode } from '../helpers';
+import { GenerateQrCodeResponse } from '../interfaces';
+import { validateTelephone } from '@/app/utils';
 
 const clientRepository = new ClientRepository(ClientModel, connectDB);
 

@@ -1,8 +1,8 @@
 'use client';
 
-import "./globals.css";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import './globals.css';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function RootLayout({
   children,
@@ -12,7 +12,7 @@ export default function RootLayout({
   const navigate = useRouter();
 
   useEffect(() => {
-    navigate.push('/')
+    navigate.push('/');
   }, []);
   return (
     <html lang="en">

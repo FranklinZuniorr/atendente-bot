@@ -1,4 +1,4 @@
-import { Client, GetClientByTelephoneResponse } from "./interfaces";
+import { Client, GetClientByTelephoneResponse } from './interfaces';
 import ClientModel from './models/client';
 
 export class ClientRepository {
@@ -21,7 +21,7 @@ export class ClientRepository {
   
       return updatedClient;
     } catch (error) {
-      throw new Error("Client not created or updated!", { cause: error });
+      throw new Error('Client not created or updated!', { cause: error });
     }
   }
 
@@ -29,13 +29,21 @@ export class ClientRepository {
     try {
       const client: GetClientByTelephoneResponse | null = await this.clientModel.findOne({ telephone });
 
-      if (!client) throw new Error("Client not found!")
+      if (!client) throw new Error('Client not found!');
 
       return client;
 
     } catch (error) {
       const errorMessage = (error as Error).message;
       throw new Error(errorMessage);
+    }
+  }
+
+  async deleteByTelephone(telephone: string) {
+    try {
+      await this.clientModel.deleteOne({ telephone });
+    } catch {
+      throw new Error('It was not possible delete user by db!');
     }
   }
   

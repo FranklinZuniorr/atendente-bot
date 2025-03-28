@@ -1,5 +1,5 @@
-import mongoose, { Document, Schema } from "mongoose";
-import { Client } from "../interfaces";
+import mongoose, { Document, Schema } from 'mongoose';
+import { Client } from '../interfaces';
 
 const ClientSchema: Schema<Client & Document> = new Schema(
   {
@@ -9,6 +9,6 @@ const ClientSchema: Schema<Client & Document> = new Schema(
   { timestamps: true }
 );
 
-const ClientModel = mongoose.models.Client || mongoose.model<Client>("Client", ClientSchema);
+const ClientModel = mongoose.models.Client || mongoose.model<Client>('Client', ClientSchema);
 
 export default ClientModel;
