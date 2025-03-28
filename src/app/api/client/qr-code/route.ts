@@ -1,13 +1,14 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "../../infra/mongoDb";
 import { ClientRepository } from "../../repositories/client";
-import Client from "../../repositories/client/models/client";
+import ClientModel from "../../repositories/client/models/client";
 import { IResponse } from "../../interfaces";
 import { randomUUID } from "crypto";
 import { validadeInstanceStateAndGenerateQrCode } from "../helpers";
 import { GenerateQrCodeResponse } from "../interfaces";
+import { validateTelephone } from "@/app/utils";
 
-const clientRepository = new ClientRepository(Client, connectDB);
+const clientRepository = new ClientRepository(ClientModel, connectDB);
 
 export async function POST(req: Request): Promise<NextResponse<IResponse<GenerateQrCodeResponse>>> {
   try {
@@ -21,9 +22,7 @@ export async function POST(req: Request): Promise<NextResponse<IResponse<Generat
         return NextResponse.json({ message: 'O telefone é obrigatório!' }, { status: 400 });
       }
 
-      const phoneRegex = /^\+?55\s?\(?\d{2}\)?\s?9\d{4}-?\d{4}$/;
-
-      if (!phoneRegex.test(telephone)) {
+      if (!validateTelephone(telephone)) {
         return NextResponse.json({ message: 'Telefone inválido! O formato correto é +55 (XX) 9XXXX-XXXX.' }, { status: 400 });
       }
 

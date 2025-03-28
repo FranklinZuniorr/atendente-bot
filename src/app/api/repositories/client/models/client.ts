@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema } from "mongoose";
-import { IClient } from "../interfaces";
+import { Client } from "../interfaces";
 
-const ClientSchema: Schema<IClient & Document> = new Schema(
+const ClientSchema: Schema<Client & Document> = new Schema(
   {
     telephone: { type: String, required: true },
     authCode: { type: String, required: true },
@@ -9,6 +9,6 @@ const ClientSchema: Schema<IClient & Document> = new Schema(
   { timestamps: true }
 );
 
-const Client = mongoose.models.Client || mongoose.model<IClient>("Client", ClientSchema);
+const ClientModel = mongoose.models.Client || mongoose.model<Client>("Client", ClientSchema);
 
-export default Client;
+export default ClientModel;
