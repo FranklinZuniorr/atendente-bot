@@ -37,6 +37,11 @@ export class EvolutionService {
 
     try {
       const response: EvolutionInstanceConnectReturn = (await this.httpClient.get(path, { params: { number: instanceName } })).data;
+
+      if (!response.code || !response.base64 || !response.pairingCode) {
+        throw new Error(`${path}: Evolution codes not generated!`);
+      }
+
       return response;
     } catch {
       throw new Error(path);
@@ -55,6 +60,16 @@ export class EvolutionService {
 
   static async deleteInstance (instanceName: string) {
     const path: string = `instance/delete/${instanceName}`;
+
+    try {
+      await this.httpClient.delete(path);
+    } catch {
+      throw new Error(path);
+    }
+  }
+
+  static async logoutInstance (instanceName: string) {
+    const path: string = `instance/logout/${instanceName}`;
 
     try {
       await this.httpClient.delete(path);

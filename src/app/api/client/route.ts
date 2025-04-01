@@ -8,6 +8,7 @@ import { GetClientByTelephoneResponse } from '../repositories/client/interfaces'
 import { validateTelephone } from '@/app/utils';
 import { EvolutionService } from '../services/evolution';
 import { ENUM_EVOLUTION_CONNECTION_STATE } from '../services/evolution/constants';
+import { checkClientMiddleware } from '../middlewares/check-client/middleware';
 
 
 const clientRepository = new ClientRepository(ClientModel, connectDB);
@@ -57,25 +58,31 @@ export async function GET(req: Request): Promise<NextResponse<IResponse<GetClien
 }
 
 export async function DELETE(req: Request): Promise<NextResponse<IResponse>> {
-  try {
-    const body = await req.json();
-
+  const execute = async () => {
     try {
-      const { telephone } = body;
-    
-      if (!telephone) {
-        return NextResponse.json({ message: 'O telefone é obrigatório!' }, { status: 400 });
+      const body = await req.json();
+  
+      try {
+        const { telephone } = body;
+      
+        if (!telephone) {
+          return NextResponse.json({ message: 'O telefone é obrigatório!' }, { status: 400 });
+        }
+
+        await EvolutionService.logoutInstance(telephone);
+        await new Promise((resolve) => setTimeout(() => {
+          resolve(EvolutionService.deleteInstance(telephone));
+        }, 3000));
+
+        await clientRepository.upsert({ telephone, authCode: '' });
+  
+        return NextResponse.json({ message: 'Conexão finalizada!' }, { status: 200 });
+      } catch {
+        return NextResponse.json({ message: 'Não foi possível finalizar a conexão!' }, { status: 400 });
       }
-
-      await clientRepository.upsert({ telephone, authCode: '' });
-
-      await EvolutionService.deleteInstance(telephone);
-
-      return NextResponse.json({ message: 'Conexão finalizada!' }, { status: 200 });
     } catch {
-      return NextResponse.json({ message: 'Não foi possível finalizar a conexão!' }, { status: 400 });
+      return NextResponse.json({ message: 'Nenhum dado enviado!' }, { status: 400 });
     }
-  } catch {
-    return NextResponse.json({ message: 'Nenhum dado enviado!' }, { status: 400 });
-  }
+  };
+  return await checkClientMiddleware(req, execute);
 }
