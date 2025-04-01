@@ -8,6 +8,7 @@ export interface GetClientResponse {
     _id: string;
     telephone: string;
     authCode: string;
+    messageTokens?: number; 
     createdAt: string;
     updatedAt: string;
 }

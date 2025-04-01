@@ -27,10 +27,15 @@ export async function POST(req: Request): Promise<NextResponse<IResponse<Generat
       }
 
       try {
+        const client = await clientRepository.getByTelephone(telephone);
         const codes = await validadeInstanceStateAndGenerateQrCode(telephone);
 
-        await clientRepository.upsert({ telephone, authCode });
-    
+        if (client) {
+          await clientRepository.upsert({ telephone, authCode });
+        } else {
+          await clientRepository.upsert({ telephone, authCode, messageTokens: 0 });
+        }
+
         return NextResponse.json({ data: { code: codes.code, pairingConde: codes.pairingCode, authCode } }, { status: 201 });
       } catch (error) {
         const errorMessage = (error as Error).message;

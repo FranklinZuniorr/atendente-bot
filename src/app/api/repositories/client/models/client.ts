@@ -5,6 +5,7 @@ const ClientSchema: Schema<Client & Document> = new Schema(
   {
     telephone: { type: String, required: true },
     authCode: { type: String, required: true },
+    messageTokens: { type: Number, required: false },
   },
   { timestamps: true }
 );
