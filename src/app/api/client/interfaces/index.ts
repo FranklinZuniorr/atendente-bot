@@ -12,3 +12,25 @@ export interface GetClientResponse {
     createdAt: string;
     updatedAt: string;
 }
+
+export interface WebhookMessageEventBody {
+    event: string;
+    instance: string;
+    data: {
+      key: {
+        remoteJid: string;
+        fromMe: boolean;
+        id: string;
+        participant: string;
+      };
+      pushName: string;
+      message: {
+        conversation: string;
+        messageContextInfo: {
+          messageSecret: string;
+        };
+      };
+      messageType: string;
+      messageTimestamp: number;
+    };
+}

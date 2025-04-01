@@ -1,3 +1,4 @@
+import { ENVS } from '@/constants';
 import { EvolutionService } from '../../services/evolution';
 import { ENUM_EVOLUTION_CONNECTION_STATE } from '../../services/evolution/constants';
 import { EvolutionInstanceConnectReturn } from '../../services/evolution/interfaces';
@@ -32,7 +33,7 @@ export const validadeInstanceStateAndGenerateQrCode = async (
         token: telephone,
         webhook: {
           events: ['MESSAGES_UPSERT'],
-          url: 'http://n8n:5678/webhook/message/'
+          url: ENVS.webhookSendMessageUrl || ''
         }
       });
       return await tryConnect();
