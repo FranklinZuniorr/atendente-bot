@@ -13,7 +13,6 @@ export class EvolutionService {
 
   static async getState (instanceName: string): Promise<EvolutionConnectionStateReturn> {
     const path: string = `instance/connectionState/${instanceName}`;
-
     try {
       const response: EvolutionConnectionStateReturn = (await this.httpClient.get(path)).data;
       return response;
