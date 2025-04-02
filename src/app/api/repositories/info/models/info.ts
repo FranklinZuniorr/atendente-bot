@@ -10,6 +10,6 @@ const InfoSchema: Schema<Info & Document> = new Schema(
   { timestamps: true }
 );
 
-const InfoModel = mongoose.models.Info || mongoose.model<Info>('Client', InfoSchema);
+const InfoModel = mongoose.models.Info || mongoose.model<Info>('Info', InfoSchema);
 
 export default InfoModel;
