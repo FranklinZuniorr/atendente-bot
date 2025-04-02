@@ -4,7 +4,6 @@ import { IResponse } from '../interfaces';
 import InfoModel from '../repositories/info/models/info';
 import { InfoRepository } from '../repositories/info';
 import { checkClientMiddleware } from '../middlewares/check-client/middleware';
-import { InfoRepositoryRepresentation } from '../repositories/info/interfaces';
 
 
 const infoRepository = new InfoRepository(InfoModel, connectDB);
@@ -116,27 +115,4 @@ export async function PUT(req: Request): Promise<NextResponse<IResponse>> {
   };
       
   return await checkClientMiddleware(req, execute);
-}
-
-export async function GET(req: Request): Promise<NextResponse<IResponse<InfoRepositoryRepresentation[]>>> {
-  const execute = async () => {
-    try {
-      const { url } = req;
-      const{ searchParams } = new URL(url);
-      const clientId = searchParams.get('clientId');
-                 
-      if (!clientId) {
-        return NextResponse.json({ message: 'O id do cliente é orbigatório!' }, { status: 400 });
-      }
-
-      const clients: InfoRepositoryRepresentation[] = await infoRepository.getAllByClientId(clientId);
-
-      return NextResponse.json({ data: clients }, { status: 200 });
-
-    } catch {
-      return NextResponse.json({ message: 'Nenhuma informação encontrada!' }, { status: 400 });
-    }
-  };
-          
-  return await checkClientMiddleware<InfoRepositoryRepresentation[]>(req, execute);
 }
