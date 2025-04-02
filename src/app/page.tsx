@@ -1,12 +1,7 @@
 import Image from 'next/image';
 import styles from './page.module.css';
-import { use } from 'react';
-import { EvolutionService } from './api/services/evolution';
 
 export default function Home() {
-  const teste = use(EvolutionService.getState('re'));
-
-  console.log(teste);
   return (
     <div className={styles.page}>
       <main className={styles.main}>
