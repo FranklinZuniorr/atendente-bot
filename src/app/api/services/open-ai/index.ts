@@ -3,7 +3,7 @@ import { ENVS } from '@/constants';
 import { OpenAiGetResponseReturn, OpenAiInputContent, OpenAiParamsBody } from './interfaces';
 import { ENUM_OPEN_AI_INPUT_ROLES } from './constants';
 
-export class EvolutionService {
+export class OpenAIService {
   private static httpClient: AxiosInstance = axios.create({
     baseURL: ENVS.openAiBaseUrl,
     headers: {
