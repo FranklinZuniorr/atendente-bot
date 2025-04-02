@@ -41,10 +41,21 @@ export class ClientRepository {
 
   async deleteByTelephone(telephone: string) {
     try {
-      await this.clientModel.deleteOne({ telephone });
+      const response = await this.clientModel.deleteOne({ telephone });
+
+      if (response.deletedCount === 0) throw new Error('None deleted!');
     } catch {
       throw new Error('It was not possible delete user by db!');
     }
   }
   
+  async decrementClientTokens(clientId: string) {
+    try {
+      const response = await this.clientModel.updateOne({ _id: clientId }, { $inc: { messageTokens: -1 }});
+
+      if (response.modifiedCount === 0 ) throw new Error('None updated!');
+    } catch {
+      throw new Error('It was not possible decrement user tokens!');
+    }
+  }
 }

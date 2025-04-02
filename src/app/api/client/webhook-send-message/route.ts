@@ -5,10 +5,18 @@ import { getInfosOfClientByTelephone } from '../helpers';
 import { InfoRepositoryRepresentation } from '../../repositories/info/interfaces';
 import { OpenAIService } from '../../services/open-ai';
 import { OpenAiInputContent } from '../../services/open-ai/interfaces';
+import { ClientRepository } from '../../repositories/client';
+import ClientModel from '../../repositories/client/models/client';
+import { connectDB } from '../../infra/mongoDb';
+
+const clientRepository = new ClientRepository(ClientModel, connectDB);
 
 export async function POST(req: Request) {
   try {
     const body: WebhookMessageEventBody = await req.json();
+    const client = await clientRepository.getByTelephone(body.instance);
+
+    if (client.messageTokens === 0) return NextResponse.json({ message: 'O cliente não possue tokens suficientes!' }, { status: 403 });
 
     if(body.data.key.fromMe && body.data.key.remoteJid.includes('@s.whatsapp.net')) {
 
@@ -28,6 +36,7 @@ export async function POST(req: Request) {
           number: body.data.key.remoteJid.replace('@s.whatsapp.net', ''), 
           text: chatGPTResponse.output[0].content[0].text
         });
+      await clientRepository.decrementClientTokens(client._id);
       return NextResponse.json({}, { status: 201 });
     }
 
