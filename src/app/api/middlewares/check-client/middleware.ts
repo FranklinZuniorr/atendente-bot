@@ -10,7 +10,7 @@ import { connectDB } from '../../infra/mongoDb';
 
 const clientRepository = new ClientRepository(ClientModel, connectDB);
 
-export const checkClientMiddleware = async (request: Request, fn: () => Promise<NextResponse<IResponse>>): Promise<NextResponse<IResponse>> => {
+export const checkClientMiddleware = async <TResponseData = unknown>(request: Request, fn: () => Promise<NextResponse<IResponse<TResponseData>>>): Promise<NextResponse<IResponse<TResponseData>>> => {
   const authCode = request.headers.get('authCode');
   const telephone = request.headers.get('telephone');
 
