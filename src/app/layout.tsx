@@ -1,23 +1,16 @@
-'use client';
-
+import { AuthMiddleware } from './components/auth-middleware';
+import ReduxProvider from './configs/redux/provider/redux-provider';
 import './globals.css';
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const navigate = useRouter();
-
-  useEffect(() => {
-    navigate.push('/');
-  }, []);
   return (
     <html lang="en">
       <body>
-        {children}
+        <ReduxProvider><AuthMiddleware>{children}</AuthMiddleware></ReduxProvider>
       </body>
     </html>
   );
