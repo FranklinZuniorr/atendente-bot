@@ -1,7 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface ClientReduxState {
+  id: string;
   telephone: string;
   authCode: string;
   createdAt: string;
@@ -9,18 +9,24 @@ export interface ClientReduxState {
   messageTokens: number;
 }
 
-const initialState: ClientReduxState | null = null;
+export const initialStateClientReduxState: ClientReduxState = {
+  authCode: '',
+  createdAt: '',
+  id: '',
+  messageTokens: 0,
+  telephone: '',
+  updatedAt: ''
+};
 
 export const clientSlice = createSlice({
   name: 'client',
-  initialState,
+  initialState: initialStateClientReduxState,
   reducers: {
-    setClient: (state: ClientReduxState | null, action: PayloadAction<ClientReduxState | null>) => {
-      state = action.payload;
+    setClient: (state, action: PayloadAction<ClientReduxState>) => {
+      return action.payload;
     },
   },
 });
 
 export const { setClient } = clientSlice.actions;
-
 export default clientSlice.reducer;
