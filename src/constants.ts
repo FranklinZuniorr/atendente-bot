@@ -12,3 +12,8 @@ export const ENVS = {
 
 export const AUTH_CODE_LOCAL_STORAGE_KEY = 'AUTH_CODE_LOCAL_STORAGE_KEY';
 export const TELEPHONE_LOCAL_STORAGE_KEY = 'TELEPHONE_LOCAL_STORAGE_KEY';
+
+export const COLORS = {
+  main: '#009CFF',
+  mainLow: '#9DD9FF',
+};
