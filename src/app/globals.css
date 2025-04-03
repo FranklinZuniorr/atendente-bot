@@ -12,6 +12,21 @@
   --color-primaryLow: #9DD9FF;
   --color-blackFont: #434343;
   --gradient-primary: linear-gradient(to right top, #009cff, #3cacff, #5fbcff, #7ecbff, #9dd9ff);
+  --animate-upDown: upDown 1s ease 0s infinite normal forwards;
+
+  @keyframes upDown {
+    0% {
+      transform: translateY(0);
+    }
+  
+    50% {
+        transform: translateY(-20px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+  }
 }
 
 .bg-gradient-custom {
@@ -19,7 +34,7 @@
 }
 
 body {
-  font-family: 'BreeSerif';
+  font-family: 'BreeSerif' !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--color-blackFont);

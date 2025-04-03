@@ -36,7 +36,7 @@ export const validadeInstanceStateAndGenerateQrCode = async (
         instanceName: telephone,
         integration: 'WHATSAPP-BAILEYS',
         number: telephone,
-        qrcode: false,
+        qrcode: true,
         token: telephone,
         webhook: {
           events: ['MESSAGES_UPSERT'],
