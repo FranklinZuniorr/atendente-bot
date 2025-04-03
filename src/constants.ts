@@ -9,3 +9,6 @@ export const ENVS = {
   stripeApiCompleteKey: process.env.STRIPE_API_COMPLETE_KEY,
   stripePriceKey: process.env.STRIPE_PRICE_KEY
 };
+
+export const AUTH_CODE_LOCAL_STORAGE_KEY = 'AUTH_CODE_LOCAL_STORAGE_KEY';
+export const TELEPHONE_LOCAL_STORAGE_KEY = 'TELEPHONE_LOCAL_STORAGE_KEY';
