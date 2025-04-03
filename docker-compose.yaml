@@ -55,7 +55,7 @@ services:
         - "80:80"  # Porta alterada para 8080
       volumes:
         - .:/app  # Monta a pasta local dentro do contêiner
-      command: sh -c "yarn install && yarn build && yarn start -p 80"
+      command: sh -c "npm run start -p 80"
       environment:
         - HOST=0.0.0.0
         - PORT=80
