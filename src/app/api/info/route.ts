@@ -5,7 +5,6 @@ import InfoModel from '../repositories/info/models/info';
 import { InfoRepository } from '../repositories/info';
 import { checkClientMiddleware } from '../middlewares/check-client/middleware';
 
-
 const infoRepository = new InfoRepository(InfoModel, connectDB);
 
 export async function POST(req: Request): Promise<NextResponse<IResponse>> {

@@ -4,5 +4,8 @@ export const ENVS = {
   mongoUrl: process.env.MONGO_URL,
   webhookSendMessageUrl: process.env.WEBHOOK_SEND_MESSAGE_URL,
   openAiBaseUrl: process.env.OPEN_AI_BASE_URL,
-  openAiApiKey: process.env.OPEN_AI_API_KEY
+  openAiApiKey: process.env.OPEN_AI_API_KEY,
+  stripeCallbackUrl: process.env.STRIPE_CALLBACK_URL,
+  stripeApiCompleteKey: process.env.STRIPE_API_COMPLETE_KEY,
+  stripePriceKey: process.env.STRIPE_PRICE_KEY
 };
