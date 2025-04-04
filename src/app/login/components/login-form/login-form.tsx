@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import QRCode from 'react-qr-code';
+import { ModalPrivacyPolicy } from '../modal-privacy-policy';
 
 export const LoginForm = () => {
   const navigate = useRouter();
@@ -62,8 +63,8 @@ export const LoginForm = () => {
     {
       !hasCodes ?
         <>
-          <div className='flex flex-col'>
-            <span>Insira o seu número e comece a usar!</span>
+          <div className='flex flex-col gap-1.5'>
+            <span>Insira o seu número do zap e comece a usar!</span>
             <Input 
               value={inputTelephoneText} 
               onChange={event => setInputTelephoneText(formatTelephone(event.target.value))} 
@@ -78,6 +79,7 @@ export const LoginForm = () => {
           >
             Iniciar conexão
           </Button>
+          <ModalPrivacyPolicy />
         </> : 
         <div className='w-full flex flex-col items-center gap-4'>
           <QRCode
@@ -92,6 +94,12 @@ export const LoginForm = () => {
             onClick={checkClient}
           >
             Validar conexão
+          </Button>
+          <Button 
+            className='w-full'
+            onClick={() => window.location.reload()}
+          >
+            Cancelar
           </Button>
         </div>
     }
