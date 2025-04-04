@@ -6,6 +6,7 @@ import { Button, Tooltip } from 'antd';
 import { PoweroffOutlined } from '@ant-design/icons';
 import { AuthService } from '@/app/services/auth';
 import { useState } from 'react';
+import { TopMenuOption } from './components/top-menu-option';
 
 export const TopMenu = () => {
   const client = useAppSelector(state => state.client);
@@ -33,6 +34,10 @@ export const TopMenu = () => {
       <Tooltip title="Desconectar">
         <Button onClick={finishConnection} loading={isLoadingFinishConnection} shape="default" icon={<PoweroffOutlined />} />
       </Tooltip>
+    </div>
+    <div className='absolute w-full min-h-[2rem] bg-primaryLow left-0 right-0 top-[4rem] p-1 flex gap-1.5 items-center overflow-x-auto'>
+      <TopMenuOption pathname='/' text='Informações' />
+      <TopMenuOption pathname='/comprar-tokens' text='Comprar tokens' />
     </div>
   </div>;
 };
