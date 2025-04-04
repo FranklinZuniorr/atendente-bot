@@ -15,6 +15,7 @@ export const ModalPrivacyPolicy = () => {
         open={isOpenModal} 
         cancelButtonProps={{ hidden: true }}
         onOk={() => setIsOpenModal(false)}
+        onCancel={() => setIsOpenModal(false)}
       >
         <div style={{ maxWidth: '800px', margin: 'auto', padding: '20px', color: 'rgb(68, 68, 68)' }}>
           <p>

@@ -12,6 +12,7 @@
   --color-primaryLow: #9DD9FF;
   --color-blackFont: #434343;
   --gradient-primary: linear-gradient(to right top, #009cff, #3cacff, #5fbcff, #7ecbff, #9dd9ff);
+  --gradient-menu: linear-gradient(to right bottom, #9dd9ff, #7ecbff, #5fbcff, #3cacff, #009cff);
   --animate-upDown: upDown 1s ease 0s infinite normal forwards;
 
   @keyframes upDown {
@@ -33,12 +34,17 @@
   background-image: var(--gradient-primary);
 }
 
+.bg-gradient-menu {
+  background-image: var(--gradient-menu);
+}
+
 body {
   font-family: 'BreeSerif' !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--color-blackFont);
   font-size: 1rem;
+  padding: 5rem 0.5rem 1rem 0.5rem !important;
 }
 
 html {
@@ -48,6 +54,5 @@ html {
 body, html {
   height: 100%;
   box-sizing: border-box;
-  padding: 0;
   margin: 0;
 }
