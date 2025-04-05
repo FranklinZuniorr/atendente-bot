@@ -1,5 +1,5 @@
 import { Controller, useForm } from 'react-hook-form';
-import { InfoCardForm } from './interfaces';
+import { InfoCardFormEdit } from './interfaces';
 import { object, string } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Input, Typography } from 'antd';
@@ -21,12 +21,12 @@ export const InfoCard = ({ description, title, id }: InfoCardProps) => {
     description: string().required('A descrição é obrigatória!').min(3, 'Insira no mínimo 3 letras')
   });
   const { handleSubmit, control, formState: { isDirty }} = 
-  useForm<InfoCardForm>({ resolver: yupResolver(schema), defaultValues: {description: description, title: title} });
+  useForm<InfoCardFormEdit>({ resolver: yupResolver(schema), defaultValues: {description: description, title: title} });
 
   const { mutate: mutateDeleteInfo, isPending: isPendingDeleteInfo } = useDeleteInfo({ onSuccess: () => invalidateGetAllInfos() });
   const { mutate: mutatePutInfo, isPending: isPendingPutInfo } = usePutInfo({ onSuccess: () => invalidateGetAllInfos() });
 
-  const onSubmit = (data: InfoCardForm) => {
+  const onSubmit = (data: InfoCardFormEdit) => {
     mutatePutInfo({ infoId: id, ...data });
   };
 

@@ -1,4 +1,4 @@
-export interface InfoCardForm {
+export interface InfoCardFormEdit {
     title: string;
     description: string;
 }
