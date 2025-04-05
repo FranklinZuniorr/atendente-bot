@@ -5,9 +5,12 @@ import { useAppSelector } from './configs/redux/store';
 import { useGetAllInfos } from './query-api/get-all-infos';
 import { InfoCard } from './components/info-card';
 import { PlusOutlined } from '@ant-design/icons';
+import { useState } from 'react';
+import { ModalNewInfo } from './components/modal-new-info/modal-new-info';
 
 export default function Home() {
   const client = useAppSelector(state  => state.client);
+  const [isOpenModalNewInfo, setIsOpenModalNewInfo] = useState<boolean>(false);
 
   const { data: dataAllInfos, isError: isErrorAllInfos, isFetching: isFetchingAllInfos } = 
   useGetAllInfos(client.id);
@@ -38,10 +41,17 @@ export default function Home() {
               }
             </div>
             <div className='w-full flex justify-end'>
-              <Button type="primary" icon={<PlusOutlined />}>Adicionar info</Button>
+              <Button 
+                type="primary" 
+                onClick={() => setIsOpenModalNewInfo(true)} 
+                icon={<PlusOutlined />}
+              >
+              Adicionar info
+              </Button>
             </div>
           </div>
       }
+      <ModalNewInfo isOpen={isOpenModalNewInfo} setIsOpen={setIsOpenModalNewInfo} />
     </div>
   );
 }
