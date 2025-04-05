@@ -11,8 +11,8 @@
     "static/chunks/node_modules_axios_lib_99999129._.js",
     "static/chunks/node_modules_@ant-design_3a2e7b8a._.js",
     "static/chunks/node_modules_@rc-component_b3b2c9b4._.js",
-    "static/chunks/node_modules_e541e12a._.js",
-    "static/chunks/src_27af923c._.js",
+    "static/chunks/node_modules_d0e8233b._.js",
+    "static/chunks/src_30c851f2._.js",
     "static/chunks/src_app_globals_b805903d.css"
   ],
   "source": "dynamic"

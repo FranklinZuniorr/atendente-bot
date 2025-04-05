@@ -11,14 +11,18 @@ import { ModalNewInfo } from './components/modal-new-info/modal-new-info';
 export default function Home() {
   const client = useAppSelector(state  => state.client);
   const [isOpenModalNewInfo, setIsOpenModalNewInfo] = useState<boolean>(false);
+  const stylesSpanTitleEmphasis = 'text-primary';
 
   const { data: dataAllInfos, isError: isErrorAllInfos, isFetching: isFetchingAllInfos } = 
-  useGetAllInfos(client.id);
+  useGetAllInfos(client.id, { retry: 1 });
 
   return (
     <div className='w-full flex flex-col gap-4'>
       <header className='relative text-[1.125rem] pl-3'>
-        Aqui você pode passar todas as informações necessárias para a nossa IA
+        Aqui você pode passar informações sobre o 
+        <span className={stylesSpanTitleEmphasis}> estabelecimento</span>, 
+        <span className={stylesSpanTitleEmphasis}> produtos</span>, 
+        <span className={stylesSpanTitleEmphasis}> serviços</span> ou o que achar necessário
         <span className='top-0 w-1 h-full absolute bg-primary left-0' />
       </header>
       {
