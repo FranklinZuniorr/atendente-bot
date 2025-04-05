@@ -16,4 +16,5 @@ export const TELEPHONE_LOCAL_STORAGE_KEY = 'TELEPHONE_LOCAL_STORAGE_KEY';
 export const COLORS = {
   main: '#009CFF',
   mainLow: '#9DD9FF',
+  red: '#FF0000'
 };

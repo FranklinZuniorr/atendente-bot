@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     const body: WebhookMessageEventBody = await req.json();
     const client = await clientRepository.getByTelephone(body.instance);
 
-    if (client.messageTokens === 0) return NextResponse.json({ message: 'O cliente não possue tokens suficientes!' }, { status: 403 });
+    if (client.messageTokens === 0) return NextResponse.json({ message: 'O cliente não possui tokens suficientes!' }, { status: 403 });
 
     if(!body.data.key.fromMe && body.data.key.remoteJid.includes('@s.whatsapp.net')) {
 

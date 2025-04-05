@@ -79,7 +79,8 @@ const AUTH_CODE_LOCAL_STORAGE_KEY = 'AUTH_CODE_LOCAL_STORAGE_KEY';
 const TELEPHONE_LOCAL_STORAGE_KEY = 'TELEPHONE_LOCAL_STORAGE_KEY';
 const COLORS = {
     main: '#009CFF',
-    mainLow: '#9DD9FF'
+    mainLow: '#9DD9FF',
+    red: '#FF0000'
 };
 }}),
 "[externals]/mongoose [external] (mongoose, cjs)": (function(__turbopack_context__) {
@@ -660,14 +661,14 @@ async function POST(req) {
                 });
             }
             try {
-                const client = await clientRepository.getByTelephone(telephone);
                 const codes = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$client$2f$helpers$2f$index$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["validadeInstanceStateAndGenerateQrCode"])(telephone);
-                if (client) {
+                try {
+                    await clientRepository.getByTelephone(telephone);
                     await clientRepository.upsert({
                         telephone,
                         authCode
                     });
-                } else {
+                } catch  {
                     await clientRepository.upsert({
                         telephone,
                         authCode,

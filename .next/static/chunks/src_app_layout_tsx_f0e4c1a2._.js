@@ -9,8 +9,10 @@
     "static/chunks/node_modules_antd_es_9515974c._.js",
     "static/chunks/node_modules_rc-field-form_es_4fb5d7cb._.js",
     "static/chunks/node_modules_axios_lib_99999129._.js",
-    "static/chunks/node_modules_f1b073bf._.js",
-    "static/chunks/src_a9962be4._.js",
+    "static/chunks/node_modules_@ant-design_3a2e7b8a._.js",
+    "static/chunks/node_modules_@rc-component_b3b2c9b4._.js",
+    "static/chunks/node_modules_e541e12a._.js",
+    "static/chunks/src_27af923c._.js",
     "static/chunks/src_app_globals_b805903d.css"
   ],
   "source": "dynamic"

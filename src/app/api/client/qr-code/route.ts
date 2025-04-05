@@ -27,12 +27,12 @@ export async function POST(req: Request): Promise<NextResponse<IResponse<Generat
       }
 
       try {
-        const client = await clientRepository.getByTelephone(telephone);
         const codes = await validadeInstanceStateAndGenerateQrCode(telephone);
-
-        if (client) {
+        
+        try {
+          await clientRepository.getByTelephone(telephone);
           await clientRepository.upsert({ telephone, authCode });
-        } else {
+        } catch  {
           await clientRepository.upsert({ telephone, authCode, messageTokens: 0 });
         }
 
