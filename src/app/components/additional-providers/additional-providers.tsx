@@ -6,6 +6,8 @@ import { ConfigProvider } from 'antd';
 import { ReactNode } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { TopMenu } from '../top-menu';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from '@/app/configs/react-query';
 
 interface AdditionalProvidersProps {
     children: ReactNode;
@@ -26,12 +28,15 @@ export const AdditionalProviders = ({ children }: AdditionalProvidersProps) => {
         components: {
           Button: {
             colorPrimary: COLORS.main,
-            fontFamily: 'BreeSerif'
+            dangerColor: COLORS.red,
+            fontFamily: 'BreeSerif',
           },
         },
       }}
     >
-      {children}
+      <QueryClientProvider client={queryClient}>
+        {children}
+      </QueryClientProvider>
     </ConfigProvider>
   </>;
 };

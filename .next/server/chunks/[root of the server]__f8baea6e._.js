@@ -201,7 +201,8 @@ const AUTH_CODE_LOCAL_STORAGE_KEY = 'AUTH_CODE_LOCAL_STORAGE_KEY';
 const TELEPHONE_LOCAL_STORAGE_KEY = 'TELEPHONE_LOCAL_STORAGE_KEY';
 const COLORS = {
     main: '#009CFF',
-    mainLow: '#9DD9FF'
+    mainLow: '#9DD9FF',
+    red: '#FF0000'
 };
 }}),
 "[project]/src/app/api/infra/mongoDb/index.ts [app-route] (ecmascript)": ((__turbopack_context__) => {

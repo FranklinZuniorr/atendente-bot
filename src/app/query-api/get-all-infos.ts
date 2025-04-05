@@ -1,4 +1,5 @@
 import { HttpClientApi } from '../configs/axios';
+import { queryClient } from '../configs/react-query';
 import { generateReactQuery } from '../helpers/react-query';
 import { ReqResponse } from '../interfaces';
 
@@ -12,6 +13,14 @@ export interface GetAllInfosExternalResponse {
     createdAt: string,
     updatedAt: string,
 }
+
+export const invalidateGetAllInfos = (clientId?: string) => {
+  if(clientId) {
+    queryClient.invalidateQueries({ queryKey: [KEY_GET_ALL_INFOS, clientId] });
+  } else {
+    queryClient.invalidateQueries({ queryKey: [KEY_GET_ALL_INFOS] });
+  }
+};
 
 const fn = async (clientId: string): Promise<GetAllInfosExternalResponse[]> => {
   const path: string = 'api/info/all-by-client';
