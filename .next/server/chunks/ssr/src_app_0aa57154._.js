@@ -451,6 +451,7 @@ const LoginForm = ()=>{
             await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$helpers$2f$index$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["setClientGlobalStateRedux"])();
             navigate.push('/');
         } catch  {
+            setIsLoadingValidateConnection(false);
             __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].error('A conexão ainda não foi estabelecida!');
         }
     };
@@ -465,7 +466,7 @@ const LoginForm = ()=>{
                             children: "Insira o seu número do zap e comece a usar!"
                         }, void 0, false, {
                             fileName: "[project]/src/app/login/components/login-form/login-form.tsx",
-                            lineNumber: 67,
+                            lineNumber: 68,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$input$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Input$3e$__["Input"], {
@@ -474,13 +475,13 @@ const LoginForm = ()=>{
                             placeholder: "(00) 00000-0000"
                         }, void 0, false, {
                             fileName: "[project]/src/app/login/components/login-form/login-form.tsx",
-                            lineNumber: 68,
+                            lineNumber: 69,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/login/components/login-form/login-form.tsx",
-                    lineNumber: 66,
+                    lineNumber: 67,
                     columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$button$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Button$3e$__["Button"], {
@@ -491,12 +492,12 @@ const LoginForm = ()=>{
                     children: "Iniciar conexão"
                 }, void 0, false, {
                     fileName: "[project]/src/app/login/components/login-form/login-form.tsx",
-                    lineNumber: 74,
+                    lineNumber: 75,
                     columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$login$2f$components$2f$modal$2d$privacy$2d$policy$2f$privacy$2d$policy$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ModalPrivacyPolicy"], {}, void 0, false, {
                     fileName: "[project]/src/app/login/components/login-form/login-form.tsx",
-                    lineNumber: 82,
+                    lineNumber: 83,
                     columnNumber: 11
                 }, this)
             ]
@@ -511,7 +512,7 @@ const LoginForm = ()=>{
                     value: qrCode
                 }, void 0, false, {
                     fileName: "[project]/src/app/login/components/login-form/login-form.tsx",
-                    lineNumber: 85,
+                    lineNumber: 86,
                     columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$button$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Button$3e$__["Button"], {
@@ -523,7 +524,7 @@ const LoginForm = ()=>{
                     children: "Validar conexão"
                 }, void 0, false, {
                     fileName: "[project]/src/app/login/components/login-form/login-form.tsx",
-                    lineNumber: 89,
+                    lineNumber: 90,
                     columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$button$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Button$3e$__["Button"], {
@@ -532,18 +533,18 @@ const LoginForm = ()=>{
                     children: "Cancelar"
                 }, void 0, false, {
                     fileName: "[project]/src/app/login/components/login-form/login-form.tsx",
-                    lineNumber: 98,
+                    lineNumber: 99,
                     columnNumber: 11
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/login/components/login-form/login-form.tsx",
-            lineNumber: 84,
+            lineNumber: 85,
             columnNumber: 9
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/login/components/login-form/login-form.tsx",
-        lineNumber: 62,
+        lineNumber: 63,
         columnNumber: 10
     }, this);
 };

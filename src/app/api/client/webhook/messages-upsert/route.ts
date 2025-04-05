@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server';
-import { WebhookMessageEventBody } from '../interfaces';
-import { EvolutionService } from '../../services/evolution';
-import { getInfosOfClientByTelephone } from '../helpers';
-import { InfoRepositoryRepresentation } from '../../repositories/info/interfaces';
-import { OpenAIService } from '../../services/open-ai';
-import { OpenAiInputContent } from '../../services/open-ai/interfaces';
-import { ClientRepository } from '../../repositories/client';
-import ClientModel from '../../repositories/client/models/client';
-import { connectDB } from '../../infra/mongoDb';
+import { WebhookMessageEventBody } from '../../interfaces';
+import { EvolutionService } from '../../../services/evolution';
+import { getInfosOfClientByTelephone } from '../../helpers';
+import { InfoRepositoryRepresentation } from '../../../repositories/info/interfaces';
+import { OpenAIService } from '../../../services/open-ai';
+import { OpenAiInputContent } from '../../../services/open-ai/interfaces';
+import { ClientRepository } from '../../../repositories/client';
+import ClientModel from '../../../repositories/client/models/client';
+import { connectDB } from '../../../infra/mongoDb';
 
 const clientRepository = new ClientRepository(ClientModel, connectDB);
 

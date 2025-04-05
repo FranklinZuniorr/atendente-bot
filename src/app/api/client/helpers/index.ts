@@ -39,7 +39,8 @@ export const validadeInstanceStateAndGenerateQrCode = async (
         qrcode: true,
         token: telephone,
         webhook: {
-          events: ['MESSAGES_UPSERT'],
+          byEvents: true,
+          events: ['MESSAGES_UPSERT', 'CONNECTION_UPDATE'],
           url: ENVS.webhookSendMessageUrl || ''
         }
       });

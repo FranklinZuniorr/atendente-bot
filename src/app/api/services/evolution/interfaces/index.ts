@@ -14,10 +14,9 @@ export interface EvolutionNewInstanceBody {
 	qrcode: boolean,
 	integration: 'WHATSAPP-BAILEYS',
 	webhook: {
+        byEvents: boolean,
 		url: string,
-		events: [
-      'MESSAGES_UPSERT'
-  	]
+		events: ['MESSAGES_UPSERT', 'CONNECTION_UPDATE']
 	}
 }
 
@@ -31,3 +30,17 @@ export interface EvolutionNewMessageBody {
     number: string;
     text: string;
 }
+
+export interface EvolutionFetchInstanceElementReturn {
+    id: string;
+    name: string;
+    ownerJid: string;
+    profileName: string | null;
+    profilePicUrl: string | null;
+    number: string;
+    businessId: string | null;
+    token: string;
+    clientName: string;
+    createdAt: string;
+    updatedAt: string;
+  }
