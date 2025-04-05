@@ -1,3 +1,5 @@
+import { ENUM_EVOLUTION_CONNECTION_STATE } from '../../services/evolution/constants';
+
 export interface GenerateQrCodeResponse {
     code: string;
     pairingConde: string;
@@ -33,4 +35,15 @@ export interface WebhookMessageEventBody {
       messageType: string;
       messageTimestamp: number;
     };
+}
+
+export interface WebhookConnectionEventBody {
+  event: string,
+  instance: string,
+  data: { instance: string, state: ENUM_EVOLUTION_CONNECTION_STATE, statusReason: number },
+  destination: string,
+  date_time: string,
+  sender?: string,
+  server_url: string,
+  apikey: string
 }

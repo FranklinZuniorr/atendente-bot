@@ -428,6 +428,19 @@ class EvolutionService {
             throw new Error(path);
         }
     }
+    static async fetchInstance(instanceName) {
+        const path = 'instance/fetchInstances';
+        try {
+            const response = (await this.httpClient.get(path, {
+                params: {
+                    instanceName
+                }
+            })).data;
+            return response;
+        } catch  {
+            throw new Error(path);
+        }
+    }
 }
 }}),
 "[project]/src/app/api/repositories/info/index.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
@@ -577,8 +590,10 @@ const validadeInstanceStateAndGenerateQrCode = async (telephone)=>{
                     qrcode: true,
                     token: telephone,
                     webhook: {
+                        byEvents: true,
                         events: [
-                            'MESSAGES_UPSERT'
+                            'MESSAGES_UPSERT',
+                            'CONNECTION_UPDATE'
                         ],
                         url: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["ENVS"].webhookSendMessageUrl || ''
                     }

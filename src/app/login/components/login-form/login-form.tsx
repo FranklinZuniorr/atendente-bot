@@ -55,6 +55,7 @@ export const LoginForm = () => {
       await setClientGlobalStateRedux();
       navigate.push('/');
     } catch {
+      setIsLoadingValidateConnection(false);
       toast.error('A conexão ainda não foi estabelecida!');
     }
   };

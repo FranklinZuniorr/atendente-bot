@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { EvolutionConnectionStateReturn, EvolutionInstanceConnectReturn, EvolutionNewInstanceBody, EvolutionNewMessageBody } from './interfaces';
+import { EvolutionConnectionStateReturn, EvolutionFetchInstanceElementReturn, EvolutionInstanceConnectReturn, EvolutionNewInstanceBody, EvolutionNewMessageBody } from './interfaces';
 import { ENUM_EVOLUTION_CONNECTION_STATE } from './constants';
 import { ENVS } from '@/constants';
 
@@ -72,6 +72,18 @@ export class EvolutionService {
 
     try {
       await this.httpClient.delete(path);
+    } catch {
+      throw new Error(path);
+    }
+  }
+
+  static async fetchInstance (instanceName: string): Promise<EvolutionFetchInstanceElementReturn[]> {
+    const path: string = 'instance/fetchInstances';
+
+    try {
+      const response: EvolutionFetchInstanceElementReturn[] = (await this.httpClient.get(path, { params: { instanceName } })).data;
+
+      return response;
     } catch {
       throw new Error(path);
     }

@@ -1,6 +1,9 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
   "/api/client/qr-code/route": "app/api/client/qr-code/route.js",
   "/api/client/route": "app/api/client/route.js",
+  "/api/client/webhook/connection-update/route": "app/api/client/webhook/connection-update/route.js",
+  "/api/client/webhook/messages-upsert/route": "app/api/client/webhook/messages-upsert/route.js",
   "/api/info/all-by-client/route": "app/api/info/all-by-client/route.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
   "/login/page": "app/login/page.js",

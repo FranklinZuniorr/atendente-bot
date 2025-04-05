@@ -441,6 +441,19 @@ class EvolutionService {
             throw new Error(path);
         }
     }
+    static async fetchInstance(instanceName) {
+        const path = 'instance/fetchInstances';
+        try {
+            const response = (await this.httpClient.get(path, {
+                params: {
+                    instanceName
+                }
+            })).data;
+            return response;
+        } catch  {
+            throw new Error(path);
+        }
+    }
 }
 }}),
 "[project]/src/app/api/middlewares/check-client/middleware.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
