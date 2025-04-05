@@ -1,1 +1,1 @@
-export { TopMenuOption } from './top-menu-options';
+export { TopMenuOption } from './top-menu-option';
