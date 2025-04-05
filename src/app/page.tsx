@@ -28,7 +28,7 @@ export default function Home() {
       {
         isFetchingAllInfos ? <Skeleton /> :
           <div className='max-w-[60rem] flex flex-col gap-[1rem]'>
-            <div className='shadow-lg p-2 rounded-md'>
+            <div className='shadow-lg p-2 rounded-md flex flex-col gap-4'>
               {
                 isErrorAllInfos ?
                   <Alert message="Nenhuma informação encontrada!" type="error" /> :

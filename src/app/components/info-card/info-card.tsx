@@ -2,7 +2,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { InfoCardFormEdit } from './interfaces';
 import { object, string } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Input, Typography } from 'antd';
+import { Button, Collapse, Input, Typography } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import { DeleteOutlined } from '@ant-design/icons';
 import { useDeleteInfo } from '@/app/query-api/delete-info';
@@ -34,49 +34,52 @@ export const InfoCard = ({ description, title, id }: InfoCardProps) => {
     mutateDeleteInfo({ infoId: id });
   };
 
-  return <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-2 p-1.5 border-gray-300 border rounded-md'>
-    <label>Título: <span className='text-red-500'>*</span></label>
-    <Controller 
-      name='title' 
-      control={control} 
-      render={({ field, fieldState }) => (<>
-        <Input {...field} />
-        {fieldState.error && <Typography.Text type="danger">{fieldState.error.message}</Typography.Text>}
-      </>)} 
-    />
-
-    <label>Descrição: <span className='text-red-500'>*</span></label>
-    <Controller 
-      name='description' 
-      control={control} 
-      render={({ field, fieldState }) => (
-        <>
-          <TextArea {...field} />
+  return <Collapse
+    size="small"
+    items={[{ key: '1', label: title, children: <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-2 p-1.5 border-gray-300 border rounded-md'>
+      <label>Título: <span className='text-red-500'>*</span></label>
+      <Controller 
+        name='title' 
+        control={control} 
+        render={({ field, fieldState }) => (<>
+          <Input {...field} />
           {fieldState.error && <Typography.Text type="danger">{fieldState.error.message}</Typography.Text>}
-        </>
-      )} 
-    />
-
-    <div className='w-full flex justify-end gap-2'>
-      <Button 
-        disabled={!isDirty} 
-        htmlType='submit' 
-        variant='solid' 
-        color='primary' 
-        type="primary"
-        loading={isPendingPutInfo}
-      >
-        Editar
-      </Button>
-      <Button 
-        variant='solid' 
-        htmlType='button' 
-        color='red' 
-        shape="circle" 
-        icon={<DeleteOutlined />} 
-        loading={isPendingDeleteInfo}
-        onClick={handleDeleteInfo}
+        </>)} 
       />
-    </div>
-  </form>;
+
+      <label>Descrição: <span className='text-red-500'>*</span></label>
+      <Controller 
+        name='description' 
+        control={control} 
+        render={({ field, fieldState }) => (
+          <>
+            <TextArea {...field} />
+            {fieldState.error && <Typography.Text type="danger">{fieldState.error.message}</Typography.Text>}
+          </>
+        )} 
+      />
+
+      <div className='w-full flex justify-end gap-2'>
+        <Button 
+          disabled={!isDirty} 
+          htmlType='submit' 
+          variant='solid' 
+          color='primary' 
+          type="primary"
+          loading={isPendingPutInfo}
+        >
+        Editar
+        </Button>
+        <Button 
+          variant='solid' 
+          htmlType='button' 
+          color='red' 
+          shape="circle" 
+          icon={<DeleteOutlined />} 
+          loading={isPendingDeleteInfo}
+          onClick={handleDeleteInfo}
+        />
+      </div>
+    </form> }]}
+  />;
 };
