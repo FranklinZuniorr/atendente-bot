@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { EvolutionConnectionStateReturn, EvolutionFetchInstanceElementReturn, EvolutionInstanceConnectReturn, EvolutionNewInstanceBody, EvolutionNewMessageBody } from './interfaces';
+import { EvolutionConnectionStateReturn, EvolutionEditWebhookBody, EvolutionFetchInstanceElementReturn, EvolutionInstanceConnectReturn, EvolutionNewInstanceBody, EvolutionNewMessageBody } from './interfaces';
 import { ENUM_EVOLUTION_CONNECTION_STATE } from './constants';
 import { ENVS } from '@/constants';
 
@@ -84,6 +84,24 @@ export class EvolutionService {
       const response: EvolutionFetchInstanceElementReturn[] = (await this.httpClient.get(path, { params: { instanceName } })).data;
 
       return response;
+    } catch {
+      throw new Error(path);
+    }
+  }
+
+  static async changeWebhookStatus (instanceName: string, isActive: boolean) {
+    const path: string = `webhook/set/${instanceName}`;
+
+    const body: EvolutionEditWebhookBody = {
+      webhook: {
+        enabled: isActive,
+        events: ['MESSAGES_UPSERT', 'CONNECTION_UPDATE'],
+        url: ENVS.webhookSendMessageUrl || ''
+      }
+    };
+
+    try {
+      await this.httpClient.post(path, body);
     } catch {
       throw new Error(path);
     }

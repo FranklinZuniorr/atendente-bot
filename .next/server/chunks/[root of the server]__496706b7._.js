@@ -441,6 +441,10 @@ class EvolutionService {
             throw new Error(path);
         }
     }
+    static async modifyWebhook() {
+        const path = '';
+        try {} catch (error) {}
+    }
 }
 }}),
 "[project]/src/app/api/repositories/info/index.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
