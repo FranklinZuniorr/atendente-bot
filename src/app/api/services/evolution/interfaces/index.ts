@@ -52,3 +52,7 @@ export interface EvolutionEditWebhookBody {
         events: ['MESSAGES_UPSERT', 'CONNECTION_UPDATE']
     }
 }
+
+export interface EvolutionWebhookStatusReturn {
+    enabled: boolean;
+}

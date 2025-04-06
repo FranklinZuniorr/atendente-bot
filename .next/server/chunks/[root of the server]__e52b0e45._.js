@@ -298,9 +298,34 @@ class EvolutionService {
             throw new Error(path);
         }
     }
-    static async modifyWebhook() {
-        const path = '';
-        try {} catch (error) {}
+    static async changeWebhookStatus(instanceName, isActive) {
+        const path = `webhook/set/${instanceName}`;
+        const body = {
+            webhook: {
+                enabled: isActive,
+                events: [
+                    'MESSAGES_UPSERT',
+                    'CONNECTION_UPDATE'
+                ],
+                url: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["ENVS"].webhookSendMessageUrl || ''
+            }
+        };
+        try {
+            await this.httpClient.post(path, body);
+        } catch  {
+            throw new Error(path);
+        }
+    }
+    static async webhookStatus(instanceName) {
+        const path = `webhook/find/${instanceName}`;
+        try {
+            const response = (await this.httpClient.get(path)).data;
+            return {
+                enabled: response.enabled
+            };
+        } catch  {
+            throw new Error(path);
+        }
     }
 }
 }}),

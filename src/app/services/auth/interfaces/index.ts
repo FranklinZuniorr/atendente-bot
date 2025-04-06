@@ -17,3 +17,9 @@ export interface AuthServiceCheckClientResponse {
     updatedAt: string,
     messageTokens: number
 }
+
+export interface AuthServiceWebhookStatusResponse {
+    data: {
+        enabled: boolean;
+    }
+}
