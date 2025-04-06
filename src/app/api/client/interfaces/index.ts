@@ -47,3 +47,8 @@ export interface WebhookConnectionEventBody {
   server_url: string,
   apikey: string
 }
+
+export interface WebhookChangeStatusBody {
+  instanceName: string;
+  enabled: boolean;
+}

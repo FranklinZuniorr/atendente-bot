@@ -43,4 +43,12 @@ export interface EvolutionFetchInstanceElementReturn {
     clientName: string;
     createdAt: string;
     updatedAt: string;
-  }
+}
+
+export interface EvolutionEditWebhookBody {
+    webhook: {
+        enabled: boolean;
+        url: string;
+        events: ['MESSAGES_UPSERT', 'CONNECTION_UPDATE']
+    }
+}

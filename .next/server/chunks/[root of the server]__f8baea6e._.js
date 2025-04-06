@@ -454,6 +454,10 @@ class EvolutionService {
             throw new Error(path);
         }
     }
+    static async modifyWebhook() {
+        const path = '';
+        try {} catch (error) {}
+    }
 }
 }}),
 "[project]/src/app/api/middlewares/check-client/middleware.ts [app-route] (ecmascript)": ((__turbopack_context__) => {

@@ -1,6 +1,6 @@
 module.exports = {
 
-"[project]/.next-internal/server/app/api/client/webhook/connection-update/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
+"[project]/.next-internal/server/app/api/client/webhook/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
@@ -298,13 +298,27 @@ class EvolutionService {
             throw new Error(path);
         }
     }
-    static async modifyWebhook() {
-        const path = '';
-        try {} catch (error) {}
+    static async changeWebhookStatus(instanceName, isActive) {
+        const path = `webhook/set/${instanceName}`;
+        const body = {
+            webhook: {
+                enabled: isActive,
+                events: [
+                    'MESSAGES_UPSERT',
+                    'CONNECTION_UPDATE'
+                ],
+                url: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["ENVS"].webhookSendMessageUrl || ''
+            }
+        };
+        try {
+            await this.httpClient.post(path, body);
+        } catch  {
+            throw new Error(path);
+        }
     }
 }
 }}),
-"[project]/src/app/api/client/webhook/connection-update/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/api/client/webhook/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
@@ -314,35 +328,36 @@ __turbopack_context__.s({
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$services$2f$evolution$2f$index$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/api/services/evolution/index.ts [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$services$2f$evolution$2f$constants$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/api/services/evolution/constants.ts [app-route] (ecmascript)");
-;
 ;
 ;
 async function POST(req) {
     try {
         const body = await req.json();
-        if (body.data.state === __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$services$2f$evolution$2f$constants$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["ENUM_EVOLUTION_CONNECTION_STATE"].OPEN) {
-            const instances = await new Promise((resolve)=>setTimeout(()=>{
-                    resolve(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$services$2f$evolution$2f$index$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["EvolutionService"].fetchInstance(body.instance));
-                }, 2000));
-            const instance = instances[0];
-            const ownerTelephone = instance.ownerJid.slice(4).replace('@s.whatsapp.net', '');
-            const normalizedOwnerTelephone = ownerTelephone.length === 8 ? `55799${ownerTelephone}` : `5579${ownerTelephone}`;
-            if (!normalizedOwnerTelephone.startsWith(body.instance)) {
-                await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$services$2f$evolution$2f$index$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["EvolutionService"].logoutInstance(body.instance);
-                await new Promise((resolve)=>setTimeout(()=>{
-                        resolve(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$services$2f$evolution$2f$index$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["EvolutionService"].deleteInstance(body.instance));
-                    }, 3000));
-                return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({}, {
-                    status: 404
-                });
-            }
+        if (!body.instanceName) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                message: 'O id da instância é obrigatório!'
+            }, {
+                status: 400
+            });
         }
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({}, {
+        if (body.enabled === undefined) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                message: 'O status é obrigatório!'
+            }, {
+                status: 400
+            });
+        }
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$services$2f$evolution$2f$index$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["EvolutionService"].changeWebhookStatus(body.instanceName, body.enabled);
+        const dynamicMessage = body.enabled ? 'ChatBot ativado' : 'ChatBot inativado';
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            message: dynamicMessage
+        }, {
             status: 200
         });
     } catch  {
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({}, {
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            message: 'Nenhum dado enviado!'
+        }, {
             status: 400
         });
     }
@@ -351,4 +366,4 @@ async function POST(req) {
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__e52b0e45._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__a835e4ce._.js.map
