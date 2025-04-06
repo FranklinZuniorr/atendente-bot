@@ -477,6 +477,7 @@ const TopMenu = ()=>{
     const [isLoadingFinishConnection, setIsLoadingFinishConnection] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [isLoadingStopChatBot, setIsLoadingStopChatBot] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [currentWebhookStatus, setCurrentWebhookStatus] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [isLoadingGetChatBotStatus, setIsLoadingGetChatBoStatus] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const finishConnection = async ()=>{
         try {
             setIsLoadingFinishConnection(true);
@@ -499,9 +500,12 @@ const TopMenu = ()=>{
     };
     const handleDefineWebhookStatus = async ()=>{
         try {
+            setIsLoadingGetChatBoStatus(true);
             const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$services$2f$auth$2f$index$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AuthService"].getWebhookStatus(client.telephone);
+            setIsLoadingGetChatBoStatus(false);
             setCurrentWebhookStatus(response);
         } catch  {
+            setIsLoadingGetChatBoStatus(false);
             throw new Error('Error on try get webhook info!');
         }
     };
@@ -520,20 +524,20 @@ const TopMenu = ()=>{
                         alt: "robot"
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/top-menu/top-menu.tsx",
-                        lineNumber: 57,
+                        lineNumber: 60,
                         columnNumber: 7
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                         children: "Atendente bot"
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/top-menu/top-menu.tsx",
-                        lineNumber: 58,
+                        lineNumber: 61,
                         columnNumber: 7
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/components/top-menu/top-menu.tsx",
-                lineNumber: 56,
+                lineNumber: 59,
                 columnNumber: 5
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -545,25 +549,25 @@ const TopMenu = ()=>{
                         title: currentWebhookStatus ? 'Parar ChatBot' : 'Iniciar ChatBot',
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$button$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Button$3e$__["Button"], {
                             onClick: stopChatBot,
-                            loading: isLoadingStopChatBot,
+                            loading: isLoadingStopChatBot || isLoadingGetChatBotStatus,
                             shape: "default",
                             icon: currentWebhookStatus ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$PauseCircleOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__PauseCircleOutlined$3e$__["PauseCircleOutlined"], {}, void 0, false, {
                                 fileName: "[project]/src/app/components/top-menu/top-menu.tsx",
-                                lineNumber: 67,
+                                lineNumber: 70,
                                 columnNumber: 40
                             }, void 0) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$CheckOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__CheckOutlined$3e$__["CheckOutlined"], {}, void 0, false, {
                                 fileName: "[project]/src/app/components/top-menu/top-menu.tsx",
-                                lineNumber: 67,
+                                lineNumber: 70,
                                 columnNumber: 66
                             }, void 0)
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/top-menu/top-menu.tsx",
-                            lineNumber: 63,
+                            lineNumber: 66,
                             columnNumber: 9
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/top-menu/top-menu.tsx",
-                        lineNumber: 62,
+                        lineNumber: 65,
                         columnNumber: 7
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$tooltip$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Tooltip$3e$__["Tooltip"], {
@@ -574,23 +578,23 @@ const TopMenu = ()=>{
                             shape: "default",
                             icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$PoweroffOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__PoweroffOutlined$3e$__["PoweroffOutlined"], {}, void 0, false, {
                                 fileName: "[project]/src/app/components/top-menu/top-menu.tsx",
-                                lineNumber: 71,
+                                lineNumber: 74,
                                 columnNumber: 102
                             }, void 0)
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/top-menu/top-menu.tsx",
-                            lineNumber: 71,
+                            lineNumber: 74,
                             columnNumber: 9
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/top-menu/top-menu.tsx",
-                        lineNumber: 70,
+                        lineNumber: 73,
                         columnNumber: 7
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/components/top-menu/top-menu.tsx",
-                lineNumber: 60,
+                lineNumber: 63,
                 columnNumber: 5
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -603,12 +607,12 @@ const TopMenu = ()=>{
                             size: 14
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/top-menu/top-menu.tsx",
-                            lineNumber: 75,
+                            lineNumber: 78,
                             columnNumber: 60
                         }, void 0)
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/top-menu/top-menu.tsx",
-                        lineNumber: 75,
+                        lineNumber: 78,
                         columnNumber: 7
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$top$2d$menu$2f$components$2f$top$2d$menu$2d$option$2f$top$2d$menu$2d$option$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TopMenuOption"], {
@@ -618,24 +622,24 @@ const TopMenu = ()=>{
                             size: 14
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/top-menu/top-menu.tsx",
-                            lineNumber: 76,
+                            lineNumber: 79,
                             columnNumber: 77
                         }, void 0)
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/top-menu/top-menu.tsx",
-                        lineNumber: 76,
+                        lineNumber: 79,
                         columnNumber: 7
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/components/top-menu/top-menu.tsx",
-                lineNumber: 74,
+                lineNumber: 77,
                 columnNumber: 5
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/top-menu/top-menu.tsx",
-        lineNumber: 55,
+        lineNumber: 58,
         columnNumber: 10
     }, this);
 };

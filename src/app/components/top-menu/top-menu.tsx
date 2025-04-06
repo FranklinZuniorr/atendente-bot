@@ -14,6 +14,7 @@ export const TopMenu = () => {
   const [isLoadingFinishConnection, setIsLoadingFinishConnection] = useState<boolean>(false);
   const [isLoadingStopChatBot, setIsLoadingStopChatBot] = useState<boolean>(false);
   const [currentWebhookStatus, setCurrentWebhookStatus] = useState<boolean>(false);
+  const [isLoadingGetChatBotStatus, setIsLoadingGetChatBoStatus] = useState<boolean>(false);
 
   const finishConnection = async () => {
     try {
@@ -40,10 +41,12 @@ export const TopMenu = () => {
 
   const handleDefineWebhookStatus = async () => {
     try {
+      setIsLoadingGetChatBoStatus(true);
       const response = await AuthService.getWebhookStatus(client.telephone);
-
+      setIsLoadingGetChatBoStatus(false);
       setCurrentWebhookStatus(response);
     } catch {
+      setIsLoadingGetChatBoStatus(false);
       throw new Error('Error on try get webhook info!');
     }
   };
@@ -62,7 +65,7 @@ export const TopMenu = () => {
       <Tooltip title={currentWebhookStatus ? 'Parar ChatBot' : 'Iniciar ChatBot'}>
         <Button 
           onClick={stopChatBot} 
-          loading={isLoadingStopChatBot} 
+          loading={isLoadingStopChatBot || isLoadingGetChatBotStatus} 
           shape="default" 
           icon={currentWebhookStatus ? <PauseCircleOutlined /> : <CheckOutlined />} 
         />
