@@ -1,6 +1,6 @@
 module.exports = {
 
-"[project]/.next-internal/server/app/api/client/webhook/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
+"[project]/.next-internal/server/app/api/client/webhook/[instanceName]/route/actions.js [app-rsc] (server actions loader, ecmascript)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
@@ -42,14 +42,6 @@ module.exports = mod;
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
 const mod = __turbopack_context__.x("next/dist/server/app-render/work-async-storage.external.js", () => require("next/dist/server/app-render/work-async-storage.external.js"));
-
-module.exports = mod;
-}}),
-"[externals]/next/dist/server/app-render/after-task-async-storage.external.js [external] (next/dist/server/app-render/after-task-async-storage.external.js, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("next/dist/server/app-render/after-task-async-storage.external.js", () => require("next/dist/server/app-render/after-task-async-storage.external.js"));
 
 module.exports = mod;
 }}),
@@ -329,47 +321,47 @@ class EvolutionService {
     }
 }
 }}),
-"[project]/src/app/api/client/webhook/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[externals]/next/dist/server/app-render/after-task-async-storage.external.js [external] (next/dist/server/app-render/after-task-async-storage.external.js, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("next/dist/server/app-render/after-task-async-storage.external.js", () => require("next/dist/server/app-render/after-task-async-storage.external.js"));
+
+module.exports = mod;
+}}),
+"[project]/src/app/api/client/webhook/[instanceName]/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
-    "POST": (()=>POST)
+    "GET": (()=>GET)
 });
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$services$2f$evolution$2f$index$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/api/services/evolution/index.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
 ;
 ;
-async function POST(req) {
-    try {
-        const body = await req.json();
-        if (!body.instanceName) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: 'O id da instância é obrigatório!'
-            }, {
-                status: 400
-            });
-        }
-        if (body.enabled === undefined) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                message: 'O status é obrigatório!'
-            }, {
-                status: 400
-            });
-        }
-        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$services$2f$evolution$2f$index$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["EvolutionService"].changeWebhookStatus(body.instanceName, body.enabled);
-        const dynamicMessage = body.enabled ? 'ChatBot ativado' : 'ChatBot inativado';
+async function GET(_, context) {
+    const { instanceName } = await context.params;
+    if (!instanceName) {
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: dynamicMessage
+            message: 'O nome da instância é obrigatório!'
+        }, {
+            status: 400
+        });
+    }
+    try {
+        const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$services$2f$evolution$2f$index$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["EvolutionService"].webhookStatus(instanceName);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            data: response
         }, {
             status: 200
         });
     } catch  {
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: 'Nenhum dado enviado!'
+            message: 'Não foi possível obter informações sobre o status do chatBot!'
         }, {
-            status: 400
+            status: 404
         });
     }
 }
@@ -377,4 +369,4 @@ async function POST(req) {
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__a835e4ce._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__de825df8._.js.map

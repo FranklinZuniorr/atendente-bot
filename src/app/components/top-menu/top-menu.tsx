@@ -3,15 +3,17 @@
 import { useAppSelector } from '@/app/configs/redux/store';
 import RobotIcon from '../../assets/images/robot.png';
 import { Button, Tooltip } from 'antd';
-import { PoweroffOutlined } from '@ant-design/icons';
+import { CheckOutlined, PauseCircleOutlined, PoweroffOutlined } from '@ant-design/icons';
 import { AuthService } from '@/app/services/auth';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TopMenuOption } from './components/top-menu-option';
 import { DollarSign, Info } from 'lucide-react';
 
 export const TopMenu = () => {
   const client = useAppSelector(state => state.client);
   const [isLoadingFinishConnection, setIsLoadingFinishConnection] = useState<boolean>(false);
+  const [isLoadingStopChatBot, setIsLoadingStopChatBot] = useState<boolean>(false);
+  const [currentWebhookStatus, setCurrentWebhookStatus] = useState<boolean>(false);
 
   const finishConnection = async () => {
     try {
@@ -25,6 +27,31 @@ export const TopMenu = () => {
     }
   };
 
+  const stopChatBot = async () => {
+    try {
+      setIsLoadingStopChatBot(true);
+      await AuthService.stopChatBot(client.telephone, !currentWebhookStatus);
+      handleDefineWebhookStatus();
+      setIsLoadingStopChatBot(false);
+    } catch  {
+      setIsLoadingStopChatBot(false);
+    }
+  };
+
+  const handleDefineWebhookStatus = async () => {
+    try {
+      const response = await AuthService.getWebhookStatus(client.telephone);
+
+      setCurrentWebhookStatus(response);
+    } catch {
+      throw new Error('Error on try get webhook info!');
+    }
+  };
+
+  useEffect(() => {
+    handleDefineWebhookStatus();
+  }, []);
+
   return <div className="fixed left-0 top-0 right-0 h-[4rem] bg-gradient-menu z-10 p-2 flex items-center justify-between">
     <div className='flex gap-3 h-fit items-center text-white font-bold ml-2'>
       <img className='w-[2.5rem] h-[2.5rem]' src={RobotIcon.src} alt='robot' />
@@ -32,6 +59,14 @@ export const TopMenu = () => {
     </div>
     <div className='flex items-center mr-2 text-white gap-3'>
         Tokens: {client.messageTokens || 0}
+      <Tooltip title={currentWebhookStatus ? 'Parar ChatBot' : 'Iniciar ChatBot'}>
+        <Button 
+          onClick={stopChatBot} 
+          loading={isLoadingStopChatBot} 
+          shape="default" 
+          icon={currentWebhookStatus ? <PauseCircleOutlined /> : <CheckOutlined />} 
+        />
+      </Tooltip>
       <Tooltip title="Desconectar">
         <Button onClick={finishConnection} loading={isLoadingFinishConnection} shape="default" icon={<PoweroffOutlined />} />
       </Tooltip>

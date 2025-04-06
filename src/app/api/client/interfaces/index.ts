@@ -52,3 +52,7 @@ export interface WebhookChangeStatusBody {
   instanceName: string;
   enabled: boolean;
 }
+
+export interface WebhookGetStatusResponse {
+  enabled: boolean;
+}

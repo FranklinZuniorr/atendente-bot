@@ -1,5 +1,5 @@
 import { ReqResponse } from '@/app/interfaces';
-import { AuthServiceCheckClientParams, AuthServiceCheckClientResponse, AuthServiceGetQrCodeResponse } from './interfaces';
+import { AuthServiceCheckClientParams, AuthServiceCheckClientResponse, AuthServiceGetQrCodeResponse, AuthServiceWebhookStatusResponse } from './interfaces';
 import { HttpClientApi } from '@/app/configs/axios';
 
 export class AuthService {
@@ -32,6 +32,27 @@ export class AuthService {
 
     try {
       await HttpClientApi.delete(path, { data: { telephone } });
+    } catch {
+      throw new Error(path);
+    }
+  }
+
+  static async stopChatBot (instanceName: string, enabled: boolean) {
+    const path: string = 'api/client/webhook';
+
+    try {
+      await HttpClientApi.post(path, { instanceName, enabled });
+    } catch {
+      throw new Error(path);
+    }
+  }
+
+  static async getWebhookStatus (instanceName: string): Promise<boolean> {
+    const path: string = `api/client/webhook/${instanceName}`;
+
+    try {
+      const response: AuthServiceWebhookStatusResponse = (await HttpClientApi.get(path)).data;
+      return response.data.enabled;      
     } catch {
       throw new Error(path);
     }
