@@ -19,7 +19,7 @@ export const CardDefaultTokens = () => {
   return <div className="flex flex-col gap-1">
     <div className="flex items-center gap-4 shadow-md p-2.5 rounded-md border border-primary">
       <div className='flex flex-col text-center'>
-        <span className="text-primary font-bold text-[22px]">+60</span>
+        <span className="text-primary font-bold text-[22px]">+50</span>
         <div className="text-[18px]">Tokens</div>
       </div>
       <span className='h-full w-[1px] bg-primary' />
