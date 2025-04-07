@@ -87,6 +87,11 @@ export const LoginForm = () => {
             style={{ height: '10rem', width: '10rem' }}
             value={qrCode}
           />
+          <span className='w-full text-center'>{pairingCode}</span>
+          <div className='w-full text-start flex flex-col'>
+            <li>Aponte o leitor de qr-code do WhatsApp para conectar!</li>
+            <li>Após conectar, clique em <strong>Validar conexão</strong></li>
+          </div>
           <Button 
             className='w-full'
             type="primary" 
