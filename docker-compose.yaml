@@ -14,7 +14,7 @@ services:
       - postgres_data:/var/lib/postgresql/data  # Persistência de dados
     networks:
       - rede_geral
-    restart: always
+    restart: unless-stopped
     deploy:
       resources:
         limits:
@@ -22,10 +22,10 @@ services:
           cpus: "0.5"
 
   nextjs:
-      image: node:18  # Usa uma imagem oficial do Node.js
+      image: node:18-alpine  # Usa uma imagem oficial do Node.js
       container_name: nextjs_app
       working_dir: /app
-      restart: always
+      restart: unless-stopped
       ports:
         - "80:80"  # Porta alterada para 8080
       volumes:
@@ -47,7 +47,7 @@ services:
       - rede_geral  # Usando a rede geral
     ports:
       - "8080:8080"  # Mapeando a porta 8080 do host para o contêiner
-    restart: always
+    restart: unless-stopped
     depends_on:
       - postgres
     environment:
