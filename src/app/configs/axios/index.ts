@@ -21,7 +21,8 @@ const handleSuccess = async (response: AxiosResponse) => {
   }
   
   if (isSuccess) {
-    if (response.config.method !== 'get') {
+    const rejectedPaths = new Set(['api/payment']);
+    if (response.config.method !== 'get' && !rejectedPaths.has(response.config.url as string)) {
       toast.success(response.data.message || 'Solicitação concluída!');
     }
   }

@@ -211,7 +211,8 @@ const AUTH_CODE_LOCAL_STORAGE_KEY = 'AUTH_CODE_LOCAL_STORAGE_KEY';
 const TELEPHONE_LOCAL_STORAGE_KEY = 'TELEPHONE_LOCAL_STORAGE_KEY';
 const COLORS = {
     main: '#009CFF',
-    mainLow: '#9DD9FF'
+    mainLow: '#9DD9FF',
+    red: '#FF0000'
 };
 }}),
 "[project]/src/app/api/services/evolution/index.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
@@ -293,6 +294,48 @@ class EvolutionService {
         const path = `instance/logout/${instanceName}`;
         try {
             await this.httpClient.delete(path);
+        } catch  {
+            throw new Error(path);
+        }
+    }
+    static async fetchInstance(instanceName) {
+        const path = 'instance/fetchInstances';
+        try {
+            const response = (await this.httpClient.get(path, {
+                params: {
+                    instanceName
+                }
+            })).data;
+            return response;
+        } catch  {
+            throw new Error(path);
+        }
+    }
+    static async changeWebhookStatus(instanceName, isActive) {
+        const path = `webhook/set/${instanceName}`;
+        const body = {
+            webhook: {
+                enabled: isActive,
+                events: [
+                    'MESSAGES_UPSERT',
+                    'CONNECTION_UPDATE'
+                ],
+                url: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["ENVS"].webhookSendMessageUrl || ''
+            }
+        };
+        try {
+            await this.httpClient.post(path, body);
+        } catch  {
+            throw new Error(path);
+        }
+    }
+    static async webhookStatus(instanceName) {
+        const path = `webhook/find/${instanceName}`;
+        try {
+            const response = (await this.httpClient.get(path)).data;
+            return {
+                enabled: response.enabled
+            };
         } catch  {
             throw new Error(path);
         }
@@ -592,7 +635,7 @@ async function POST(req) {
                 }
                 const responseCheckout = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$services$2f$stripe$2f$index$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["StripeService"].checkout({
                     clientId,
-                    qty: 100
+                    qty: 60
                 });
                 return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                     data: responseCheckout

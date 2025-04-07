@@ -17,7 +17,7 @@ export async function POST(req: Request): Promise<NextResponse<IResponse<Payment
             json({ message: 'O id do cliente é obrigatório e precisa ser do tipo string!' }, { status: 400 });
         }
 
-        const responseCheckout = await StripeService.checkout({clientId, qty: 100});
+        const responseCheckout = await StripeService.checkout({clientId, qty: 60});
 
         return NextResponse.json({ data: responseCheckout }, { status: 200 });
       } catch {

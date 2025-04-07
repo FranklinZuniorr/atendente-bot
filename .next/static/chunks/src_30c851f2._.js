@@ -169,7 +169,10 @@ const handleSuccess = async (response)=>{
         return Promise.reject(false);
     }
     if (isSuccess) {
-        if (response.config.method !== 'get') {
+        const rejectedPaths = new Set([
+            'api/payment'
+        ]);
+        if (response.config.method !== 'get' && !rejectedPaths.has(response.config.url)) {
             __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].success(response.data.message || 'Solicitação concluída!');
         }
     }
