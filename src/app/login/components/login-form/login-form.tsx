@@ -4,12 +4,12 @@ import { removePhoneFormatting, setClientGlobalStateRedux } from '@/app/helpers'
 import { AuthService } from '@/app/services/auth';
 import { AUTH_CODE_LOCAL_STORAGE_KEY, TELEPHONE_LOCAL_STORAGE_KEY } from '@/constants';
 import { Button, Input } from 'antd';
-import { formatTelephone } from 'frutils.js';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import QRCode from 'react-qr-code';
 import { ModalPrivacyPolicy } from '../modal-privacy-policy';
+import { formatTelephone } from '@/app/utils';
 
 export const LoginForm = () => {
   const navigate = useRouter();
