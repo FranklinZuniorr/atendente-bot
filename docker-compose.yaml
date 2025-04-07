@@ -1,31 +1,6 @@
 version: "3.8"
 
 services:
-  # Serviço Redis
-  redis:
-    image: redis:latest
-    container_name: redis_service
-    command: [
-        "redis-server",
-        "--appendonly",
-        "yes",
-        "--port",
-        "6379"
-      ]
-    volumes:
-      - redis_data:/data
-    networks:
-      - rede_geral
-    deploy:
-      placement:
-        constraints:
-          - node.role == manager
-      resources:
-        limits:
-          cpus: "0.5"
-          memory: 1024M
-    restart: always
-
   # Serviço PostgreSQL
   postgres:
     image: postgres:14.13
@@ -74,7 +49,6 @@ services:
       - "8080:8080"  # Mapeando a porta 8080 do host para o contêiner
     restart: always
     depends_on:
-      - redis
       - postgres
     environment:
       # URL da Evolution API
@@ -128,7 +102,7 @@ services:
       - S3_USE_SSL=true
 
       # Configurações do Cache Redis
-      - CACHE_REDIS_ENABLED=true
+      - CACHE_REDIS_ENABLED=false
       - CACHE_REDIS_URI=redis://redis_service:6379/2
       - CACHE_REDIS_PREFIX_KEY=evolution
       - CACHE_REDIS_SAVE_INSTANCES=false
@@ -213,18 +187,12 @@ services:
       - WEBHOOK_EVENTS_ERRORS_WEBHOOK=
 
 volumes:
-  redis_data:
-    external: false
-    name: redis_data
   postgres_data:
     external: false
     name: postgres_data
   evolution_instancesv2:
     external: false  
     name: evolution_instancesv2
-  n8n_data:
-    external: false
-    name: n8n_data
 
 networks:
   rede_geral:
