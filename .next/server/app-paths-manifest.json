@@ -1,5 +1,17 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/client/route": "app/api/client/route.js",
+  "/api/client/qr-code/route": "app/api/client/qr-code/route.js",
   "/api/client/webhook/connection-update/route": "app/api/client/webhook/connection-update/route.js",
+  "/api/client/webhook/[instanceName]/route": "app/api/client/webhook/[instanceName]/route.js",
   "/api/client/webhook/messages-upsert/route": "app/api/client/webhook/messages-upsert/route.js",
-  "/api/client/webhook/route": "app/api/client/webhook/route.js"
+  "/api/client/webhook/route": "app/api/client/webhook/route.js",
+  "/api/info/all-by-client/route": "app/api/info/all-by-client/route.js",
+  "/api/payment/route": "app/api/payment/route.js",
+  "/api/payment/webhook-process/route": "app/api/payment/webhook-process/route.js",
+  "/api/info/route": "app/api/info/route.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/comprar-tokens/page": "app/comprar-tokens/page.js",
+  "/page": "app/page.js",
+  "/login/page": "app/login/page.js"
 }
