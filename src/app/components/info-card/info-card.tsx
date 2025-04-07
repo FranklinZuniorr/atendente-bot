@@ -42,7 +42,7 @@ export const InfoCard = ({ description, title, id }: InfoCardProps) => {
         name='title' 
         control={control} 
         render={({ field, fieldState }) => (<>
-          <Input {...field} />
+          <Input {...field} maxLength={200} showCount />
           {fieldState.error && <Typography.Text type="danger">{fieldState.error.message}</Typography.Text>}
         </>)} 
       />
@@ -53,13 +53,13 @@ export const InfoCard = ({ description, title, id }: InfoCardProps) => {
         control={control} 
         render={({ field, fieldState }) => (
           <>
-            <TextArea {...field} />
+            <TextArea {...field} maxLength={2000} showCount />
             {fieldState.error && <Typography.Text type="danger">{fieldState.error.message}</Typography.Text>}
           </>
         )} 
       />
 
-      <div className='w-full flex justify-end gap-2'>
+      <div className='w-full flex justify-end gap-2 mt-6'>
         <Button 
           disabled={!isDirty} 
           htmlType='submit' 

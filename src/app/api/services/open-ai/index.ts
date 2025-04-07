@@ -19,7 +19,7 @@ export class OpenAIService {
   static async getResponse (infosClient: OpenAiInputContent[], userMessage: string): Promise<OpenAiGetResponseReturn> {
     const path: string = 'v1/responses';
     const body: OpenAiParamsBody = {
-      model: 'gpt-4o',
+      model: 'gpt-4o-mini',
       input: [
         {
           role: ENUM_OPEN_AI_INPUT_ROLES.DEVELOPER,
