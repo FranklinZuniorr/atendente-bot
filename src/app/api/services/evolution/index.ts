@@ -96,7 +96,7 @@ export class EvolutionService {
       webhook: {
         enabled: isActive,
         events: ['MESSAGES_UPSERT', 'CONNECTION_UPDATE'],
-        url: ENVS.webhookSendMessageUrl || ''
+        url: ENVS.webhookNext || ''
       }
     };
 
