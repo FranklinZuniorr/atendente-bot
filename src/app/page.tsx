@@ -12,9 +12,12 @@ export default function Home() {
   const client = useAppSelector(state  => state.client);
   const [isOpenModalNewInfo, setIsOpenModalNewInfo] = useState<boolean>(false);
   const stylesSpanTitleEmphasis = 'text-primary';
+  const MAX_INFOS_QTY = 50;
 
   const { data: dataAllInfos, isError: isErrorAllInfos, isFetching: isFetchingAllInfos } = 
   useGetAllInfos(client.id, { retry: 1 });
+
+  const isBlockedAddMoreInfos = (dataAllInfos?.length || 0) >= MAX_INFOS_QTY;
 
   return (
     <div className='w-full flex flex-col gap-4'>
@@ -49,8 +52,9 @@ export default function Home() {
                 type="primary" 
                 onClick={() => setIsOpenModalNewInfo(true)} 
                 icon={<PlusOutlined />}
+                disabled={isBlockedAddMoreInfos}
               >
-              Adicionar info
+              Adicionar info {(dataAllInfos?.length || 0)}/{MAX_INFOS_QTY}
               </Button>
             </div>
           </div>

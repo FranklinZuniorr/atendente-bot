@@ -12,7 +12,7 @@ export interface OpenAiInput {
 }
 
 export interface OpenAiParamsBody {
-    model: 'gpt-4o',
+    model: 'gpt-4o-mini',
     input: OpenAiInput[],
     text: {
       format: {
