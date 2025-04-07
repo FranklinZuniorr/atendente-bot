@@ -1,0 +1,17 @@
+{
+  "/api/client/qr-code/route": "/api/client/qr-code",
+  "/api/client/route": "/api/client",
+  "/api/client/webhook/connection-update/route": "/api/client/webhook/connection-update",
+  "/_not-found/page": "/_not-found",
+  "/api/client/webhook/[instanceName]/route": "/api/client/webhook/[instanceName]",
+  "/api/client/webhook/messages-upsert/route": "/api/client/webhook/messages-upsert",
+  "/api/client/webhook/route": "/api/client/webhook",
+  "/api/info/all-by-client/route": "/api/info/all-by-client",
+  "/api/info/route": "/api/info",
+  "/api/payment/route": "/api/payment",
+  "/api/payment/webhook-process/route": "/api/payment/webhook-process",
+  "/favicon.ico/route": "/favicon.ico",
+  "/comprar-tokens/page": "/comprar-tokens",
+  "/login/page": "/login",
+  "/page": "/"
+}

@@ -1,12 +1,11 @@
 import { EvolutionService } from '@/app/api/services/evolution';
-import { NextApiRequest } from 'next';
 import { NextResponse } from 'next/server';
 
 export async function GET(
-  _: NextApiRequest,
-  context: { params: { instanceName: string } }
+  request: Request,
 ) {
-  const { instanceName } = await context.params;
+  const { searchParams } = new URL(request.url);
+  const instanceName = searchParams.get('instanceName');
 
   if (!instanceName) {
     return NextResponse.json({ message: 'O nome da instância é obrigatório!' }, { status: 400 });
