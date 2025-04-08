@@ -23,20 +23,22 @@ export const AdditionalProviders = ({ children }: AdditionalProvidersProps) => {
     {
       client.id && <TopMenu />
     }
-    <ConfigProvider
-      theme={{
-        components: {
-          Button: {
-            colorPrimary: COLORS.main,
-            dangerColor: COLORS.red,
-            fontFamily: 'BreeSerif',
+    <div className='pt-[7rem] pr-4 pb-8 pl-4'>
+      <ConfigProvider
+        theme={{
+          components: {
+            Button: {
+              colorPrimary: COLORS.main,
+              dangerColor: COLORS.red,
+              fontFamily: 'BreeSerif',
+            },
           },
-        },
-      }}
-    >
-      <QueryClientProvider client={queryClient}>
-        {children}
-      </QueryClientProvider>
-    </ConfigProvider>
+        }}
+      >
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
+      </ConfigProvider>
+    </div>
   </>;
 };

@@ -15,7 +15,9 @@ export const CardMessage = ({
   message
 }: CardMessageProps) => {
   const stylesDivMessage = 'w-full flex';
-  return <div className="relative flex flex-col w-full h-fit border border-primaryLow rounded-md p-4">
+  return <div className={`
+    relative flex flex-col w-full h-fit border border-primaryLow rounded-md p-4 overflow-hidden
+  `}>
     <div className='absolute right-0 top-0 p-2 bg-primaryLow rounded-bl-lg'>
       {dayjs(message.createdAt).format('DD/MM/YYYY HH:mm')}
     </div>

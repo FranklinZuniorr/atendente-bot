@@ -31,7 +31,7 @@ export const ContentMsgs = () => {
               <Alert className='max-w-[20rem]' message="Nenhuma mensagem encontrada!" type="error" /> :
               <>
                 {
-                  dataGetMessagesHistory?.data.map((message, index) => (
+                  dataGetMessagesHistory?.data.reverse().map((message, index) => (
                     <CardMessage key={index} message={message} />
                   ))
                 }
