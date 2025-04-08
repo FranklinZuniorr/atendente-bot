@@ -44,7 +44,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: var(--color-blackFont);
   font-size: 1rem;
-  padding: 7rem 1rem 1rem 0.5rem !important;
+  padding: 7rem 1rem 2rem 1rem !important;
 }
 
 html {
@@ -53,6 +53,6 @@ html {
 
 body, html {
   height: 100%;
-  box-sizing: border-box;
+  box-sizing: inherit;
   margin: 0;
 }

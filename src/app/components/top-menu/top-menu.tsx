@@ -7,7 +7,7 @@ import { CheckOutlined, PauseCircleOutlined, PoweroffOutlined } from '@ant-desig
 import { AuthService } from '@/app/services/auth';
 import { useEffect, useState } from 'react';
 import { TopMenuOption } from './components/top-menu-option';
-import { DollarSign, Info } from 'lucide-react';
+import { DollarSign, Info, MessageSquare } from 'lucide-react';
 
 export const TopMenu = () => {
   const client = useAppSelector(state => state.client);
@@ -76,6 +76,7 @@ export const TopMenu = () => {
     </div>
     <div className='absolute w-full min-h-[2rem] bg-primaryLow left-0 right-0 top-[4rem] p-1 flex gap-1.5 items-center overflow-x-auto'>
       <TopMenuOption pathname='/' text='Informações' icon={<Info size={14} />} />
+      <TopMenuOption pathname='/msgs' text='Mensagens recebidas' icon={<MessageSquare size={14} />} />
       <TopMenuOption pathname='/comprar-tokens' text='Comprar tokens' icon={<DollarSign size={14} />} />
     </div>
   </div>;

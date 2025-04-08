@@ -56,3 +56,10 @@ export interface WebhookChangeStatusBody {
 export interface WebhookGetStatusResponse {
   enabled: boolean;
 }
+
+export interface MessagesHistoryResponse {
+  user: string;
+  receivedMessage: string;
+  replyMessage: string;
+  createdAt: string;
+}
