@@ -22,7 +22,7 @@ export async function POST(req: Request) {
 
     if (client.messageTokens === 0) return NextResponse.json({ message: 'O cliente não possui tokens suficientes!' }, { status: 403 });
 
-    if(body.data.key.fromMe && body.data.key.remoteJid.includes('@s.whatsapp.net')) {
+    if(!body.data.key.fromMe && body.data.key.remoteJid.includes('@s.whatsapp.net')) {
 
       const clientInfos: InfoRepositoryRepresentation[] = await getInfosOfClientByTelephone(body.instance);
 
