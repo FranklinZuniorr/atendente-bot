@@ -1,0 +1,10 @@
+{
+  "/api/client/messages-history/[clientId]/route": "app/api/client/messages-history/[clientId]/route.js",
+  "/api/client/qr-code/route": "app/api/client/qr-code/route.js",
+  "/api/client/route": "app/api/client/route.js",
+  "/api/client/webhook/[instanceName]/route": "app/api/client/webhook/[instanceName]/route.js",
+  "/api/info/all-by-client/route": "app/api/info/all-by-client/route.js",
+  "/login/page": "app/login/page.js",
+  "/msgs/page": "app/msgs/page.js",
+  "/page": "app/page.js"
+}
