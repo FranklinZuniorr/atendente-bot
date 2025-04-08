@@ -1,0 +1,362 @@
+(globalThis.TURBOPACK = globalThis.TURBOPACK || []).push(["static/chunks/src_app_c8b52f25._.js", {
+
+"[project]/src/app/helpers/react-query.ts [app-client] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname, k: __turbopack_refresh__, m: module } = __turbopack_context__;
+{
+/* eslint-disable @typescript-eslint/no-explicit-any */ __turbopack_context__.s({
+    "generateReactQuery": (()=>generateReactQuery),
+    "generateReactQueryInfinityScroll": (()=>generateReactQueryInfinityScroll),
+    "generateReactQueryMutation": (()=>generateReactQueryMutation)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useInfiniteQuery$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@tanstack/react-query/build/modern/useInfiniteQuery.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useMutation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@tanstack/react-query/build/modern/useMutation.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useQuery$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@tanstack/react-query/build/modern/useQuery.js [app-client] (ecmascript)");
+;
+const generateReactQuery = (queryKey, fn)=>{
+    var _s = __turbopack_context__.k.signature();
+    return _s((params, options)=>{
+        _s();
+        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useQuery$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useQuery"])({
+            ...options,
+            queryKey: [
+                queryKey,
+                params
+            ],
+            queryFn: {
+                "generateReactQuery.useQuery": ()=>fn(params)
+            }["generateReactQuery.useQuery"]
+        });
+    }, "4ZpngI1uv+Uo3WQHEZmTQ5FNM+k=", false, function() {
+        return [
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useQuery$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useQuery"]
+        ];
+    });
+};
+const generateReactQueryMutation = (queryKey, fn)=>{
+    var _s = __turbopack_context__.k.signature();
+    return _s((options)=>{
+        _s();
+        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useMutation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMutation"])({
+            ...options,
+            mutationKey: [
+                queryKey
+            ],
+            mutationFn: {
+                "generateReactQueryMutation.useMutation": (event)=>fn(event)
+            }["generateReactQueryMutation.useMutation"]
+        });
+    }, "wwwtpB20p0aLiHIvSy5P98MwIUg=", false, function() {
+        return [
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useMutation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMutation"]
+        ];
+    });
+};
+const generateReactQueryInfinityScroll = (queryKey, fn)=>{
+    var _s = __turbopack_context__.k.signature();
+    return _s((params, options)=>{
+        _s();
+        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useInfiniteQuery$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useInfiniteQuery"])({
+            ...options,
+            queryKey: [
+                queryKey,
+                params
+            ],
+            queryFn: {
+                "generateReactQueryInfinityScroll.useInfiniteQuery": ({ pageParam })=>{
+                    const normalizedPageParam = pageParam;
+                    return fn(params, normalizedPageParam);
+                }
+            }["generateReactQueryInfinityScroll.useInfiniteQuery"],
+            initialPageParam: undefined,
+            getNextPageParam: {
+                "generateReactQueryInfinityScroll.useInfiniteQuery": ()=>null
+            }["generateReactQueryInfinityScroll.useInfiniteQuery"]
+        });
+    }, "xMCOiuh9cV5e8gBi6hogZoGnISk=", false, function() {
+        return [
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useInfiniteQuery$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useInfiniteQuery"]
+        ];
+    });
+};
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
+}
+}}),
+"[project]/src/app/msgs/query-api/get-messages-history.ts [app-client] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname, k: __turbopack_refresh__, m: module } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "KEY_GET_MESSAGES_HISTORY": (()=>KEY_GET_MESSAGES_HISTORY),
+    "invalidateGetMessagesHistory": (()=>invalidateGetMessagesHistory),
+    "useGetMessagesHistory": (()=>useGetMessagesHistory)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$configs$2f$axios$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/configs/axios/index.ts [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$configs$2f$react$2d$query$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/configs/react-query/index.ts [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$helpers$2f$react$2d$query$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/helpers/react-query.ts [app-client] (ecmascript)");
+;
+;
+;
+const KEY_GET_MESSAGES_HISTORY = 'KEY_GET_MESSAGES_HISTORY';
+const invalidateGetMessagesHistory = (clientId)=>{
+    if (clientId) {
+        __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$configs$2f$react$2d$query$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["queryClient"].invalidateQueries({
+            queryKey: [
+                KEY_GET_MESSAGES_HISTORY,
+                clientId
+            ]
+        });
+    } else {
+        __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$configs$2f$react$2d$query$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["queryClient"].invalidateQueries({
+            queryKey: [
+                KEY_GET_MESSAGES_HISTORY
+            ]
+        });
+    }
+};
+const getMessagesHistory = async (clientId)=>{
+    const path = `api/client/messages-history/${clientId}`;
+    try {
+        const response = (await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$configs$2f$axios$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HttpClientApi"].get(path)).data;
+        return response;
+    } catch  {
+        throw new Error(path);
+    }
+};
+const useGetMessagesHistory = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$helpers$2f$react$2d$query$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["generateReactQuery"])(KEY_GET_MESSAGES_HISTORY, getMessagesHistory);
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
+}
+}}),
+"[project]/src/app/msgs/components/card-message/card-message.tsx [app-client] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname, k: __turbopack_refresh__, m: module } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "CardMessage": (()=>CardMessage)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$dayjs$2f$dayjs$2e$min$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/dayjs/dayjs.min.js [app-client] (ecmascript)");
+;
+;
+const CardMessage = ({ message })=>{
+    const stylesDivMessage = 'w-full flex';
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: `
+    relative flex flex-col w-full h-fit border border-primaryLow rounded-md p-4 overflow-hidden
+  `,
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "absolute right-0 top-0 p-2 bg-primaryLow rounded-bl-lg",
+                children: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$dayjs$2f$dayjs$2e$min$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])(message.createdAt).format('DD/MM/YYYY HH:mm')
+            }, void 0, false, {
+                fileName: "[project]/src/app/msgs/components/card-message/card-message.tsx",
+                lineNumber: 21,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: `${stylesDivMessage} justify-start`,
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "flex flex-col gap-1.5 w-fit rounded-lg max-w-[50%] max-md:max-w-[100%]",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                            children: message.user
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/msgs/components/card-message/card-message.tsx",
+                            lineNumber: 26,
+                            columnNumber: 9
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "p-2 bg-gray-200 rounded-lg w-fit whitespace-pre-line",
+                            children: message.receivedMessage
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/msgs/components/card-message/card-message.tsx",
+                            lineNumber: 27,
+                            columnNumber: 9
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/app/msgs/components/card-message/card-message.tsx",
+                    lineNumber: 25,
+                    columnNumber: 7
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/src/app/msgs/components/card-message/card-message.tsx",
+                lineNumber: 24,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: `${stylesDivMessage} justify-end`,
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "flex flex-col gap-1.5 w-fit items-end text-right max-w-[50%] max-md:max-w-[100%]",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                            children: "Resposta da IA"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/msgs/components/card-message/card-message.tsx",
+                            lineNumber: 32,
+                            columnNumber: 9
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "p-2 rounded-lg bg-gray-200 w-fit whitespace-pre-line",
+                            children: message.replyMessage
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/msgs/components/card-message/card-message.tsx",
+                            lineNumber: 33,
+                            columnNumber: 9
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/app/msgs/components/card-message/card-message.tsx",
+                    lineNumber: 31,
+                    columnNumber: 7
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/src/app/msgs/components/card-message/card-message.tsx",
+                lineNumber: 30,
+                columnNumber: 5
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/src/app/msgs/components/card-message/card-message.tsx",
+        lineNumber: 18,
+        columnNumber: 10
+    }, this);
+};
+_c = CardMessage;
+var _c;
+__turbopack_context__.k.register(_c, "CardMessage");
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
+}
+}}),
+"[project]/src/app/msgs/components/card-message/index.ts [app-client] (ecmascript) <locals>": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname, k: __turbopack_refresh__, m: module } = __turbopack_context__;
+{
+__turbopack_context__.s({});
+;
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
+}
+}}),
+"[project]/src/app/msgs/components/card-message/index.ts [app-client] (ecmascript) <module evaluation>": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$msgs$2f$components$2f$card$2d$message$2f$card$2d$message$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/msgs/components/card-message/card-message.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$msgs$2f$components$2f$card$2d$message$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/src/app/msgs/components/card-message/index.ts [app-client] (ecmascript) <locals>");
+}}),
+"[project]/src/app/msgs/components/content-msgs/content-msgs.tsx [app-client] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname, k: __turbopack_refresh__, m: module } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "ContentMsgs": (()=>ContentMsgs)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$configs$2f$redux$2f$store$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/configs/redux/store.ts [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$msgs$2f$query$2d$api$2f$get$2d$messages$2d$history$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/msgs/query-api/get-messages-history.ts [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$msgs$2f$components$2f$card$2d$message$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/app/msgs/components/card-message/index.ts [app-client] (ecmascript) <module evaluation>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$msgs$2f$components$2f$card$2d$message$2f$card$2d$message$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/msgs/components/card-message/card-message.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$alert$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Alert$3e$__ = __turbopack_context__.i("[project]/node_modules/antd/es/alert/index.js [app-client] (ecmascript) <export default as Alert>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$skeleton$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Skeleton$3e$__ = __turbopack_context__.i("[project]/node_modules/antd/es/skeleton/index.js [app-client] (ecmascript) <export default as Skeleton>");
+;
+var _s = __turbopack_context__.k.signature();
+'use client';
+;
+;
+;
+;
+const ContentMsgs = ()=>{
+    _s();
+    const client = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$configs$2f$redux$2f$store$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"])({
+        "ContentMsgs.useAppSelector[client]": (state)=>state.client
+    }["ContentMsgs.useAppSelector[client]"]);
+    const { data: dataGetMessagesHistory, isFetching: isFetchingGetMessagesHistory, isError: isErrorGetMessagesHistory } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$msgs$2f$query$2d$api$2f$get$2d$messages$2d$history$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useGetMessagesHistory"])(client.id, {
+        retry: 2,
+        refetchOnWindowFocus: true,
+        refetchInterval: 1000 * 60
+    });
+    const normalizedDataGetMessagesHistory = dataGetMessagesHistory?.data || [];
+    const reversedMessages = [
+        ...normalizedDataGetMessagesHistory
+    ].reverse();
+    const allUsers = new Set(normalizedDataGetMessagesHistory.map((message)=>message.user));
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: "flex flex-col gap-3 w-full shadow-lg p-2 rounded-b-md",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "w-full bg-gray-200 px-2 rounded-md",
+                children: [
+                    ...allUsers
+                ].map((user)=>user)
+            }, void 0, false, {
+                fileName: "[project]/src/app/msgs/components/content-msgs/content-msgs.tsx",
+                lineNumber: 27,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                children: [
+                    "Total de mensagens: ",
+                    dataGetMessagesHistory?.data.length || 0
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/app/msgs/components/content-msgs/content-msgs.tsx",
+                lineNumber: 32,
+                columnNumber: 5
+            }, this),
+            isFetchingGetMessagesHistory ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$skeleton$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Skeleton$3e$__["Skeleton"], {}, void 0, false, {
+                fileName: "[project]/src/app/msgs/components/content-msgs/content-msgs.tsx",
+                lineNumber: 36,
+                columnNumber: 38
+            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+                children: isErrorGetMessagesHistory ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$alert$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Alert$3e$__["Alert"], {
+                    className: "max-w-[20rem]",
+                    message: "Nenhuma mensagem encontrada!",
+                    type: "error"
+                }, void 0, false, {
+                    fileName: "[project]/src/app/msgs/components/content-msgs/content-msgs.tsx",
+                    lineNumber: 40,
+                    columnNumber: 15
+                }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+                    children: reversedMessages.map((message, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$msgs$2f$components$2f$card$2d$message$2f$card$2d$message$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardMessage"], {
+                            message: message
+                        }, index, false, {
+                            fileName: "[project]/src/app/msgs/components/content-msgs/content-msgs.tsx",
+                            lineNumber: 44,
+                            columnNumber: 21
+                        }, this))
+                }, void 0, false)
+            }, void 0, false)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/src/app/msgs/components/content-msgs/content-msgs.tsx",
+        lineNumber: 26,
+        columnNumber: 10
+    }, this);
+};
+_s(ContentMsgs, "PETmZba0rmOMvL4aJt9MhnmLL3I=", false, function() {
+    return [
+        __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$configs$2f$redux$2f$store$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppSelector"],
+        __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$msgs$2f$query$2d$api$2f$get$2d$messages$2d$history$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useGetMessagesHistory"]
+    ];
+});
+_c = ContentMsgs;
+var _c;
+__turbopack_context__.k.register(_c, "ContentMsgs");
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
+}
+}}),
+}]);
+
+//# sourceMappingURL=src_app_c8b52f25._.js.map

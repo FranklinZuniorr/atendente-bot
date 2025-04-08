@@ -8,7 +8,7 @@ export interface OpenAiInputContent {
 
 export interface OpenAiInput {
     role: ENUM_OPEN_AI_INPUT_ROLES,
-    content: OpenAiInputContent[]
+    content: OpenAiInputContent[] | string
 }
 
 export interface OpenAiParamsBody {
