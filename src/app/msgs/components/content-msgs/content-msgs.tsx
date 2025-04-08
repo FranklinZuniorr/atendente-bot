@@ -6,10 +6,12 @@ import { CardMessage } from '../card-message';
 import { Alert, Skeleton } from 'antd';
 import { HeaderUsers } from '../header-users';
 import { useState } from 'react';
+import { HeaderUsersElement } from '../header-users/header-users';
 
 export const ContentMsgs = () => {
   const client = useAppSelector(state => state.client);
-  const [selectedUserFilter, setSelectedUserFilter] = useState<string>('');
+  const [selectedUserTelephoneFilter, setSelectedUserTelephoneFilter] = 
+  useState<string>('');
 
   const { 
     data: dataGetMessagesHistory, 
@@ -22,17 +24,23 @@ export const ContentMsgs = () => {
     refetchInterval: 1000 * 60
   });
 
-  const normalizedDataGetMessagesHistory = selectedUserFilter ? 
-    dataGetMessagesHistory?.data.filter(message => message.user === selectedUserFilter) || [] : 
+  const normalizedDataGetMessagesHistory = selectedUserTelephoneFilter ? 
+    dataGetMessagesHistory?.data.filter(message => message.userTelephone === selectedUserTelephoneFilter) || [] : 
     dataGetMessagesHistory?.data || [];
   const reversedMessages = [...normalizedDataGetMessagesHistory].reverse();
-  const allUsers: Set<string> = new Set(normalizedDataGetMessagesHistory.map(message => message.user));
+
+  const allUsersMap = new Map<string, HeaderUsersElement>();
+  normalizedDataGetMessagesHistory.forEach(message => {
+    const key = `${message.user}-${message.userTelephone}`;
+    allUsersMap.set(key, { name: message.user, telephone: message.userTelephone });
+  });
+  const allUsers = Array.from(allUsersMap.values());
 
   return <div className="flex flex-col gap-4 w-full shadow-lg p-2 rounded-b-md">
     <HeaderUsers 
       users={[...allUsers]} 
-      selectedUser={selectedUserFilter} 
-      onChange={user => setSelectedUserFilter(user)}
+      selectedUserTelephone={selectedUserTelephoneFilter} 
+      onChange={user => setSelectedUserTelephoneFilter(user)}
     />
     <div>
       Total de mensagens: {dataGetMessagesHistory?.data.length || 0}

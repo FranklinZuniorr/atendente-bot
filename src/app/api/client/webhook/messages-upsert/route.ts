@@ -20,6 +20,8 @@ export async function POST(req: Request) {
     const body: WebhookMessageEventBody = await req.json();
     const client = await clientRepository.getByTelephone(body.instance);
 
+    const userTelephone = body.data.key.remoteJid.replace('@s.whatsapp.net', '');
+
     if (client.messageTokens === 0) return NextResponse.json({ message: 'O cliente não possui tokens suficientes!' }, { status: 403 });
 
     if(!body.data.key.fromMe && body.data.key.remoteJid.includes('@s.whatsapp.net')) {
@@ -37,8 +39,8 @@ export async function POST(req: Request) {
       let lastGPTMessages: OpenAiInput[] = [];
 
       try {
-        const allMessageHistoryOfClient = await messageHistoryRepository.getAllByClientId(client._id);
-        const userContextGPT = allMessageHistoryOfClient.filter(message => message.user === body.data.pushName) || [];
+        const allMessagesHistoryOfClient = await messageHistoryRepository.getAllByClientId(client._id);
+        const userContextGPT = allMessagesHistoryOfClient.filter(message => message.userTelephone === userTelephone) || [];
 
         lastGPTMessages = userContextGPT.map(message => ({
           role: ENUM_OPEN_AI_INPUT_ROLES.ASSISTANT,
@@ -55,11 +57,17 @@ export async function POST(req: Request) {
 
       await EvolutionService.
         sendMessage(body.instance, { 
-          number: body.data.key.remoteJid.replace('@s.whatsapp.net', ''), 
+          number: userTelephone, 
           text: replyMessage
         });
       await clientRepository.decrementClientTokens(client._id);
-      await messageHistoryRepository.create({ clientId: client._id, receivedMessage, replyMessage, user: body.data.pushName });
+      await messageHistoryRepository.create({ 
+        clientId: client._id, 
+        receivedMessage, 
+        replyMessage, 
+        user: body.data.pushName,
+        userTelephone: userTelephone
+      });
       return NextResponse.json({}, { status: 201 });
     }
 

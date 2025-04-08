@@ -62,4 +62,5 @@ export interface MessagesHistoryResponse {
   receivedMessage: string;
   replyMessage: string;
   createdAt: string;
+  userTelephone: string;
 }

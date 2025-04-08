@@ -3,6 +3,7 @@ export interface MessageHistory {
     receivedMessage: string;
     replyMessage: string;
     clientId: string;
+    userTelephone: string;
 }
 
 export interface MessageHistoryRepositoryRepresentation {
@@ -12,5 +13,6 @@ export interface MessageHistoryRepositoryRepresentation {
     user: string;
     receivedMessage: string;
     replyMessage: string;
+    userTelephone: string;
     clientId: string;
 }
