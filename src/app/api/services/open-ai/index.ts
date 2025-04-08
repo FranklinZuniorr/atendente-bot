@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import { ENVS } from '@/constants';
-import { OpenAiGetResponseReturn, OpenAiInputContent, OpenAiParamsBody } from './interfaces';
+import { OpenAiGetResponseReturn, OpenAiInput, OpenAiInputContent, OpenAiParamsBody } from './interfaces';
 import { ENUM_OPEN_AI_INPUT_ROLES } from './constants';
 
 export class OpenAIService {
@@ -16,7 +16,8 @@ export class OpenAIService {
   dentro do escopo de atendimento e das informações disponíveis, sem abordar assuntos fora desse contexto! Pode adicionar emojis nas 
   respostas, deixar bem humanizado.`;
 
-  static async getResponse (infosClient: OpenAiInputContent[], userMessage: string): Promise<OpenAiGetResponseReturn> {
+  static async getResponse (lastAssistantMessages: OpenAiInput[], infosClient: OpenAiInputContent[], userMessage: string): Promise<OpenAiGetResponseReturn> {
+    
     const path: string = 'v1/responses';
     const body: OpenAiParamsBody = {
       model: 'gpt-4o-mini',
@@ -26,7 +27,8 @@ export class OpenAIService {
           content: [{ type: 'input_text', text: this.iaContext }]
         }, 
         { role: ENUM_OPEN_AI_INPUT_ROLES.DEVELOPER, content: infosClient },
-        { role: ENUM_OPEN_AI_INPUT_ROLES.USER, content: [{ type: 'input_text', text: userMessage }] }
+        ...lastAssistantMessages,
+        { role: ENUM_OPEN_AI_INPUT_ROLES.USER, content: [{ type: 'input_text', text: userMessage }] },
       ],
       text: {
         format: {
