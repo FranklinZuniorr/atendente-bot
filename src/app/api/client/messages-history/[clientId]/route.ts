@@ -22,7 +22,8 @@ export async function GET(req: Request, { params }: { params: Promise<{ clientId
         user: element.user,
         createdAt: element.createdAt, 
         receivedMessage: element.receivedMessage,
-        replyMessage: element.replyMessage
+        replyMessage: element.replyMessage,
+        userTelephone: element.userTelephone
       })) }, { status: 200 });
     } catch  {
       return NextResponse.json({ message: 'Não foi possível obter o histórico de mensagens!' }, { status: 404 });

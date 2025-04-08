@@ -10,6 +10,7 @@ interface GetMessagesHistoryReturn {
         receivedMessage: string;
         replyMessage: string;
         createdAt: string;
+        userTelephone: string;
     }[]
 }
 

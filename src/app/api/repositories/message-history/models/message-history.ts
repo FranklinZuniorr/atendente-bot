@@ -6,7 +6,8 @@ const MessageHistorySchema: Schema<MessageHistory & Document> = new Schema(
     replyMessage: { type: String, required: true },
     receivedMessage: { type: String, required: true },
     clientId: { type: String, required: true },
-    user: { type: String, required: true }
+    user: { type: String, required: true },
+    userTelephone: { type: String, required: true },
   },
   { 
     timestamps: true, 
