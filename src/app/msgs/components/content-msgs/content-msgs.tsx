@@ -24,16 +24,19 @@ export const ContentMsgs = () => {
     refetchOnWindowFocus: true,
   });
 
-  const normalizedDataGetMessagesHistory = selectedUserTelephoneFilter ? 
+  const normalizedDataGetMessagesHistory = isErrorGetMessagesHistory ? [] : selectedUserTelephoneFilter ? 
     dataGetMessagesHistory?.data.filter(message => message.userTelephone === selectedUserTelephoneFilter) || [] : 
     dataGetMessagesHistory?.data || [];
+    
   const reversedMessages = [...normalizedDataGetMessagesHistory].reverse();
 
   const allUsersMap = new Map<string, HeaderUsersElement>();
-  dataGetMessagesHistory?.data.forEach(message => {
+
+  normalizedDataGetMessagesHistory?.forEach(message => {
     const key = `${message.user}-${message.userTelephone}`;
     allUsersMap.set(key, { name: message.user, telephone: message.userTelephone });
   });
+
   const allUsers = Array.from(allUsersMap.values());
 
   return <div className="flex flex-col gap-4 w-full shadow-lg p-2 rounded-b-md">
@@ -53,7 +56,7 @@ export const ContentMsgs = () => {
           icon={<RedoOutlined />} 
         />
       </Tooltip>
-      Total de mensagens: {dataGetMessagesHistory?.data.length || 0}
+      Total de mensagens: {normalizedDataGetMessagesHistory.length}
     </div>
     {
       isFetchingGetMessagesHistory ? <Skeleton /> :
