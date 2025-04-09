@@ -30,7 +30,7 @@ export const ContentMsgs = () => {
   const reversedMessages = [...normalizedDataGetMessagesHistory].reverse();
 
   const allUsersMap = new Map<string, HeaderUsersElement>();
-  normalizedDataGetMessagesHistory.forEach(message => {
+  dataGetMessagesHistory?.data.forEach(message => {
     const key = `${message.user}-${message.userTelephone}`;
     allUsersMap.set(key, { name: message.user, telephone: message.userTelephone });
   });
