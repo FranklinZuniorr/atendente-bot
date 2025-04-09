@@ -70,7 +70,6 @@ export const TopMenu = () => {
         <Tooltip title="Atualizar página">
           <Button
             onClick={() => window.location.reload()} 
-            loading={isLoadingFinishConnection} 
             shape="default" 
             size={screenWidth <= 768 ? 'small' : 'middle'}
             icon={<RedoOutlined />} 
