@@ -24,9 +24,6 @@ export const validadeInstanceStateAndGenerateQrCode = async (
   };
 
   switch (state) {
-  case ENUM_EVOLUTION_CONNECTION_STATE.OPEN:
-    throw new Error('Esse telofone já está conectado!');
-
   case ENUM_EVOLUTION_CONNECTION_STATE.CLOSE:
     return await tryConnect();
 
@@ -50,7 +47,7 @@ export const validadeInstanceStateAndGenerateQrCode = async (
     }
 
   default:
-    EvolutionService.deleteInstance(telephone);
+    await EvolutionService.deleteInstance(telephone);
     throw new Error('Erro inesperado!');
   }
 };

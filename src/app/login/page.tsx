@@ -3,7 +3,7 @@ import { LoginForm } from './components/login-form';
 
 export default function Login() {
   return (
-    <div className="bg-gradient-custom h-full w-full p-1 px-3 fixed overflow-y-auto left-0 top-0">
+    <div className="bg-gradient-custom h-full w-full p-1 px-3 fixed overflow-y-auto left-0 top-0 z-10">
       <div className='flex flex-col items-center justify-center min-h-full'>
         <div className="bg-white p-4 rounded-md max-w-[30rem] w-full flex flex-col gap-5 border-b-[4px] border-b-primary shadow-2xl">
           <header className="w-full flex flex-col">

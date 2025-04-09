@@ -3,6 +3,18 @@ import { AuthMiddleware } from './components/auth-middleware';
 import ReduxProvider from './configs/redux/provider/redux-provider';
 import './globals.css';
 
+export const metadata = {
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/robot.png', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/robot.png' },
+    ],
+  }
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -20,7 +32,6 @@ export default function RootLayout({
         <meta name="keywords" content="robô, bot, zap bot, whatsapp bot, whats, whatsapp" />
         <meta name="language" content="pt-BR" />
         <link rel="canonical" href="https://atendente-bot.site" />
-        <link rel="icon" href="/robot.png" type="image/png" />
       </head>
       <body>
         <ReduxProvider>
