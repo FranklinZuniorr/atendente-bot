@@ -15,6 +15,7 @@ interface AdditionalProvidersProps {
 
 export const AdditionalProviders = ({ children }: AdditionalProvidersProps) => {
   const client = useAppSelector(state => state.client);
+
   return <>
     <Toaster
       position="bottom-center"
@@ -23,7 +24,7 @@ export const AdditionalProviders = ({ children }: AdditionalProvidersProps) => {
     {
       client.id && <TopMenu />
     }
-    <div className='pt-[7rem] pr-4 pb-8 pl-4'>
+    <div className='pt-[7.5rem] pr-4 pb-8 pl-4'>
       <ConfigProvider
         theme={{
           components: {

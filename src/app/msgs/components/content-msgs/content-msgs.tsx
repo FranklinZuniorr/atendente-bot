@@ -1,12 +1,13 @@
 'use client';
 
 import { useAppSelector } from '@/app/configs/redux/store';
-import { useGetMessagesHistory } from '../../query-api/get-messages-history';
+import { invalidateGetMessagesHistory, useGetMessagesHistory } from '../../query-api/get-messages-history';
 import { CardMessage } from '../card-message';
-import { Alert, Skeleton } from 'antd';
+import { Alert, Button, Skeleton, Tooltip } from 'antd';
 import { HeaderUsers } from '../header-users';
 import { useState } from 'react';
 import { HeaderUsersElement } from '../header-users/header-users';
+import { RedoOutlined } from '@ant-design/icons';
 
 export const ContentMsgs = () => {
   const client = useAppSelector(state => state.client);
@@ -19,9 +20,8 @@ export const ContentMsgs = () => {
     isError: isErrorGetMessagesHistory
   } = 
   useGetMessagesHistory(client.id, {
-    retry: 2,
+    retry: 1,
     refetchOnWindowFocus: true,
-    refetchInterval: 1000 * 60
   });
 
   const normalizedDataGetMessagesHistory = selectedUserTelephoneFilter ? 
@@ -30,7 +30,7 @@ export const ContentMsgs = () => {
   const reversedMessages = [...normalizedDataGetMessagesHistory].reverse();
 
   const allUsersMap = new Map<string, HeaderUsersElement>();
-  normalizedDataGetMessagesHistory.forEach(message => {
+  dataGetMessagesHistory?.data.forEach(message => {
     const key = `${message.user}-${message.userTelephone}`;
     allUsersMap.set(key, { name: message.user, telephone: message.userTelephone });
   });
@@ -42,7 +42,17 @@ export const ContentMsgs = () => {
       selectedUserTelephone={selectedUserTelephoneFilter} 
       onChange={user => setSelectedUserTelephoneFilter(user)}
     />
-    <div>
+    <div className='flex items-center gap-2'>
+      <Tooltip title="Atualizar">
+        <Button 
+          onClick={() => invalidateGetMessagesHistory()} 
+          loading={isFetchingGetMessagesHistory} 
+          shape="default" 
+          variant='solid'
+          color='primary'
+          icon={<RedoOutlined />} 
+        />
+      </Tooltip>
       Total de mensagens: {dataGetMessagesHistory?.data.length || 0}
     </div>
     {
