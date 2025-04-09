@@ -27,8 +27,7 @@ export async function POST(req: Request) {
     if(
       !body.data.key.fromMe && 
       body.data.key.remoteJid.includes('@s.whatsapp.net') && 
-      body.event === 'messages.upsert' &&
-      body.data.pushName.length > 0
+      body.event === 'messages.upsert'
     ) {
 
       const clientInfos: InfoRepositoryRepresentation[] = await getInfosOfClientByTelephone(body.instance);
