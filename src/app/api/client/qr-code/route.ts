@@ -7,6 +7,9 @@ import { randomUUID } from 'crypto';
 import { validadeInstanceStateAndGenerateQrCode } from '../helpers';
 import { GenerateQrCodeResponse } from '../interfaces';
 import { validateTelephone } from '@/app/utils';
+import { EvolutionService } from '../../services/evolution';
+import { ENUM_EVOLUTION_CONNECTION_STATE } from '../../services/evolution/constants';
+import { EvolutionInstanceConnectReturn } from '../../services/evolution/interfaces';
 
 const clientRepository = new ClientRepository(ClientModel, connectDB);
 
@@ -26,8 +29,34 @@ export async function POST(req: Request): Promise<NextResponse<IResponse<Generat
         return NextResponse.json({ message: 'Telefone inválido! O formato correto é +55 (XX) 9XXXX-XXXX.' }, { status: 400 });
       }
 
+      let delayGenerateCodes = 2000;
+
       try {
-        const codes = await validadeInstanceStateAndGenerateQrCode(telephone);
+        const instance = await EvolutionService.getState(telephone);
+
+        switch (instance.instance.state) {
+        case ENUM_EVOLUTION_CONNECTION_STATE.CONNECTING:
+          await EvolutionService.deleteInstance(telephone);
+          break;
+        case ENUM_EVOLUTION_CONNECTION_STATE.OPEN:
+          return NextResponse.json({ message: 'Esse telefone já está conectado!' }, { status: 400 });
+        case ENUM_EVOLUTION_CONNECTION_STATE.CLOSE:
+          await EvolutionService.deleteInstance(telephone);
+          break;
+        default:
+          delayGenerateCodes = 0;
+          break;
+        }
+      } catch {
+        return NextResponse.json({ message: 'Não foi possível deletar a instância!' }, { status: 500 });
+      }
+
+      try {
+        const codes: EvolutionInstanceConnectReturn = await new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(validadeInstanceStateAndGenerateQrCode(telephone));
+          }, delayGenerateCodes);
+        });
         
         try {
           await clientRepository.getByTelephone(telephone);

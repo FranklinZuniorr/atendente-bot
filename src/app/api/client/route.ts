@@ -10,7 +10,6 @@ import { EvolutionService } from '../services/evolution';
 import { ENUM_EVOLUTION_CONNECTION_STATE } from '../services/evolution/constants';
 import { checkClientMiddleware } from '../middlewares/check-client/middleware';
 
-
 const clientRepository = new ClientRepository(ClientModel, connectDB);
 
 export async function GET(req: Request): Promise<NextResponse<IResponse<GetClientResponse>>> {
