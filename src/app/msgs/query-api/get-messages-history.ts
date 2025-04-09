@@ -14,7 +14,7 @@ interface GetMessagesHistoryReturn {
     }[]
 }
 
-export const invalidateGetMessagesHistory = (clientId: string) => {
+export const invalidateGetMessagesHistory = (clientId?: string) => {
   if (clientId) {
     queryClient.invalidateQueries({ queryKey: [KEY_GET_MESSAGES_HISTORY, clientId] });
   } else {
