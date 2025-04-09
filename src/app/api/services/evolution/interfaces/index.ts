@@ -29,6 +29,12 @@ export interface EvolutionInstanceConnectReturn {
 export interface EvolutionNewMessageBody {
     number: string;
     text: string;
+    delay: number;
+    quoted: {
+        key: {
+            id:  string
+        },
+    },
 }
 
 export interface EvolutionFetchInstanceElementReturn {

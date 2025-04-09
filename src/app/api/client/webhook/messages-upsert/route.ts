@@ -35,7 +35,15 @@ export async function POST(req: Request) {
 
       if (clientInfos.length === 0) {
         await EvolutionService.
-          sendMessage(body.instance, { number: body.data.key.remoteJid.replace('@s.whatsapp.net', ''), text: 'Nenhuma informação disponível!' });
+          sendMessage(
+            body.instance, 
+            { 
+              number: body.data.key.remoteJid.replace('@s.whatsapp.net', ''), 
+              text: 'Nenhuma informação disponível!',
+              delay: 0,
+              quoted: {...body.data }
+            }
+          );
         return NextResponse.json({}, { status: 201 });
       }
 
@@ -63,7 +71,9 @@ export async function POST(req: Request) {
       await EvolutionService.
         sendMessage(body.instance, { 
           number: userTelephone, 
-          text: replyMessage
+          text: replyMessage,
+          delay: 0,
+          quoted: {...body.data }
         });
       await clientRepository.decrementClientTokens(client._id);
       await messageHistoryRepository.create({ 
