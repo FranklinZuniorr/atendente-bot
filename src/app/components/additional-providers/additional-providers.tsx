@@ -22,9 +22,11 @@ export const AdditionalProviders = ({ children }: AdditionalProvidersProps) => {
       position="bottom-center"
       reverseOrder={false}
     />
-    <ModalAttentionTokens />
     {
-      client.id && <TopMenu />
+      client.id && <>
+        <ModalAttentionTokens />
+        <TopMenu />
+      </>
     }
     <div className='pt-[7.5rem] pr-4 pb-8 pl-4'>
       <ConfigProvider
