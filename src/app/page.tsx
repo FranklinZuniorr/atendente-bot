@@ -54,7 +54,7 @@ export default function Home() {
                 icon={<PlusOutlined />}
                 disabled={isBlockedAddMoreInfos}
               >
-              Adicionar info {(dataAllInfos?.length || 0)}/{MAX_INFOS_QTY}
+              Adicionar info e alimentar IA {(dataAllInfos?.length || 0)}/{MAX_INFOS_QTY}
               </Button>
             </div>
           </div>

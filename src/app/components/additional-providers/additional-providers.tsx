@@ -8,6 +8,7 @@ import { Toaster } from 'react-hot-toast';
 import { TopMenu } from '../top-menu';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from '@/app/configs/react-query';
+import { ModalAttentionTokens } from '../modal-attention-tokens';
 
 interface AdditionalProvidersProps {
     children: ReactNode;
@@ -21,6 +22,7 @@ export const AdditionalProviders = ({ children }: AdditionalProvidersProps) => {
       position="bottom-center"
       reverseOrder={false}
     />
+    <ModalAttentionTokens />
     {
       client.id && <TopMenu />
     }

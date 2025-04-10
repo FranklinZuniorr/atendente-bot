@@ -42,7 +42,7 @@ export const ModalNewInfo = ({ isOpen, setIsOpen }: ModalNewInfoProps) => {
   };
 
   return <Modal 
-    title="Nova info" 
+    title="Nova informação" 
     okButtonProps={{ hidden: true }}
     cancelButtonProps={{ hidden: true }}
     open={isOpen} 
@@ -54,7 +54,7 @@ export const ModalNewInfo = ({ isOpen, setIsOpen }: ModalNewInfoProps) => {
         name='title' 
         control={control} 
         render={({ field, fieldState }) => (<>
-          <Input {...field} placeholder='Lista de produtos' />
+          <Input {...field} placeholder='Lista de produtos, serviços, avisos, detalhes da loja' />
           {fieldState.error && <Typography.Text type="danger">{fieldState.error.message}</Typography.Text>}
         </>)} 
       />
@@ -65,7 +65,7 @@ export const ModalNewInfo = ({ isOpen, setIsOpen }: ModalNewInfoProps) => {
         control={control} 
         render={({ field, fieldState }) => (
           <>
-            <TextArea {...field} placeholder='- Coca cola, R$ 5.00, 250ml.' />
+            <TextArea {...field} placeholder='- Coca cola, R$ 5.00, 250ml.' autoSize={{ minRows: 10 }} />
             {fieldState.error && <Typography.Text type="danger">{fieldState.error.message}</Typography.Text>}
           </>
         )} 
@@ -80,7 +80,7 @@ export const ModalNewInfo = ({ isOpen, setIsOpen }: ModalNewInfoProps) => {
           loading={isPendingNewInfo}
           icon={<PlusOutlined />}
         >
-            Criar
+            Criar info e alimentar IA
         </Button>
       </div>
     </form>

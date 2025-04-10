@@ -53,7 +53,7 @@ export const InfoCard = ({ description, title, id }: InfoCardProps) => {
         control={control} 
         render={({ field, fieldState }) => (
           <>
-            <TextArea {...field} maxLength={2000} showCount />
+            <TextArea {...field} maxLength={2000} autoSize showCount />
             {fieldState.error && <Typography.Text type="danger">{fieldState.error.message}</Typography.Text>}
           </>
         )} 
