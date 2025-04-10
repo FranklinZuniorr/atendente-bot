@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 export const ModalAttentionTokens = () => {
   const client = useAppSelector(state => state.client);
-  const tokens = client.messageTokens;
+  const tokens =  client.messageTokens;
   const [isOpenModal, setIsOpenModal] = useState<boolean>(tokens === 0 ? true : false);
   const navigate = useRouter();
 
@@ -27,10 +27,11 @@ export const ModalAttentionTokens = () => {
     cancelText="Ficar sem respostas automáticas"
     cancelButtonProps={{ variant: 'solid', color: 'red' }}
     open={isOpenModal} 
+    footer={children => <div className='flex flex-wrap gap-2 justify-end max-md:flex-col-reverse'>{children}</div>}
     onOk={handleOk} 
     onCancel={handleCancel}
   >
-    <div className='flex flex-col items-center gap-3 mb-5'>
+    <div className='flex flex-col items-center gap-3 mb-5 mt-4'>
       <WarningOutlined className='text-3xl' />
       <Alert 
         type='error'
