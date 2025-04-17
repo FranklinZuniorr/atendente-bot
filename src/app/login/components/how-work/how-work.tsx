@@ -1,6 +1,6 @@
 'use client';
 
-import { Bell, Bot, CircleHelp, NotebookPen, Smartphone } from 'lucide-react';
+import { Bell, Bot, CircleHelp, MonitorPlay, NotebookPen, Smartphone } from 'lucide-react';
 import { div as MDiv } from 'motion/react-client';
 import { useInView } from 'motion/react';
 import { ReactNode, useRef } from 'react';
@@ -69,5 +69,17 @@ export const HowWork = () => {
         ))
       }
     </div>
+    <div className='flex gap-3 items-center mt-4 mb-2 text-[1.5rem] max-md:text-[1rem] text-white max-md:flex-col'>
+      <MonitorPlay className='w-[2rem] h-[1.5rem] mb-[-4px]' /> Vídeo de exemplo:
+    </div>
+    <video
+      className='border-2 border-white rounded-[0.5rem]' 
+      width="640" 
+      height="360" 
+      controls
+    >
+      <source src="example.webm" type="video/mp4" />
+        Seu navegador não suporta a tag de vídeo.
+    </video>
   </div>;
 };
