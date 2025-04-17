@@ -10,6 +10,7 @@ import toast from 'react-hot-toast';
 import QRCode from 'react-qr-code';
 import { ModalPrivacyPolicy } from '../modal-privacy-policy';
 import { formatTelephone } from '@/app/utils';
+import RobotIcon from '../../../assets/images/robot.png';
 
 export const LoginForm = () => {
   const navigate = useRouter();
@@ -60,54 +61,69 @@ export const LoginForm = () => {
     }
   };
 
-  return <div className='flex flex-col gap-5'>
-    {
-      !hasCodes ?
-        <>
-          <div className='flex flex-col gap-1.5'>
-            <span>Insira o seu número do zap e comece a usar!</span>
-            <Input 
-              value={inputTelephoneText} 
-              onChange={event => setInputTelephoneText(formatTelephone(event.target.value))} 
-              placeholder='(00) 00000-0000'
-            />
-          </div>
-          <Button 
-            type="primary" 
-            color='primary'
-            loading={isLoadingGetCodes}
-            onClick={getQrCode}
-          >
-            Iniciar conexão
-          </Button>
-          <ModalPrivacyPolicy />
-        </> : 
-        <div className='w-full flex flex-col items-center gap-4'>
-          <QRCode
-            style={{ height: '10rem', width: '10rem' }}
-            value={qrCode}
-          />
-          <span className='w-full text-center'>{pairingCode}</span>
-          <div className='w-full text-start flex flex-col'>
-            <li>Aponte o leitor de qr-code do WhatsApp ou use o código de pareamento para conectar!</li>
-            <li>Após conectar, clique em <strong>Validar conexão</strong></li>
-          </div>
-          <Button 
-            className='w-full'
-            type="primary" 
-            color='primary'
-            loading={isLoadingValidateConnection}
-            onClick={checkClient}
-          >
-            Validar conexão
-          </Button>
-          <Button 
-            className='w-full'
-            onClick={() => window.location.reload()}
-          >
-            Cancelar
-          </Button>
+  return <div className="bg-gradient-custom h-full w-full px-3 py-16 rounded-b-2xl">
+    <div className='flex flex-col items-center justify-center min-h-full'>
+      <div className="bg-white p-4 rounded-md max-w-[30rem] w-full flex flex-col gap-5 border-b-[4px] border-b-primary shadow-2xl">
+        <header className="w-full flex flex-col">
+          <span className='w-full flex justify-center'>
+            <img className='w-[3rem] h-[3rem]' src={RobotIcon.src} alt='robot' />
+          </span>
+          <h3 className="text-[1.25rem] text-center w-full">Atendente bot</h3>
+          <span className="text-[0.8rem] font-normal text-center w-full">
+          Atendimento ágil, inteligente e 24/7 para o seu negócio no WhatsApp! 🚀💬
+          </span>
+        </header>
+        <div className='flex flex-col gap-5'>
+          {
+            !hasCodes ?
+              <>
+                <div className='flex flex-col gap-1.5'>
+                  <span>Insira o seu número do zap e comece a usar!</span>
+                  <Input 
+                    value={inputTelephoneText} 
+                    onChange={event => setInputTelephoneText(formatTelephone(event.target.value))} 
+                    placeholder='(00) 00000-0000'
+                  />
+                </div>
+                <Button 
+                  type="primary" 
+                  color='primary'
+                  loading={isLoadingGetCodes}
+                  onClick={getQrCode}
+                >
+                  Iniciar conexão
+                </Button>
+                <ModalPrivacyPolicy />
+              </> : 
+              <div className='w-full flex flex-col items-center gap-4'>
+                <QRCode
+                  style={{ height: '10rem', width: '10rem' }}
+                  value={qrCode}
+                />
+                <span className='w-full text-center'>{pairingCode}</span>
+                <div className='w-full text-start flex flex-col'>
+                  <li>Aponte o leitor de qr-code do WhatsApp ou use o código de pareamento para conectar!</li>
+                  <li>Após conectar, clique em <strong>Validar conexão</strong></li>
+                </div>
+                <Button 
+                  className='w-full'
+                  type="primary" 
+                  color='primary'
+                  loading={isLoadingValidateConnection}
+                  onClick={checkClient}
+                >
+                  Validar conexão
+                </Button>
+                <Button 
+                  className='w-full'
+                  onClick={() => window.location.reload()}
+                >
+                  Cancelar
+                </Button>
+              </div>
+          }
         </div>
-    }
+      </div>
+    </div>
   </div>;
 };

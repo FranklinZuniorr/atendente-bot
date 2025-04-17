@@ -28,7 +28,7 @@ export const AdditionalProviders = ({ children }: AdditionalProvidersProps) => {
         <TopMenu />
       </>
     }
-    <div className='pt-[7.5rem] pr-4 pb-8 pl-4'>
+    <div className={`${client.id ? 'pt-[7.5rem] pr-4 pb-8 pl-4' : ''}`}>
       <ConfigProvider
         theme={{
           components: {

@@ -1,0 +1,1 @@
+export { TopMenuProspect } from './top-menu-prospect';
