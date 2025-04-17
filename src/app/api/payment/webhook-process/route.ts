@@ -16,14 +16,14 @@ export async function POST(req: Request): Promise<NextResponse<IResponse>> {
       const { clientId, qty } = response.data.object.metadata;
       const status = response.data.object.status;
 
-      if(status !== 'complete' || !clientId) return NextResponse.json({ }, { status: 400 });
+      if(status !== 'complete' || !clientId) return NextResponse.json({ }, { status: 202 });
       await clientRepository.incrementClientTokens(clientId, qty);
 
       return NextResponse.json({ }, { status: 200 });
     } catch {
-      return NextResponse.json({ message: 'Não foi possível processar o pagamento!' }, { status: 400 });
+      return NextResponse.json({ message: 'Não foi possível processar o pagamento!' }, { status: 203 });
     }
   } catch {
-    return NextResponse.json({ message: 'Nenhum dado encontrado no corpo da requisição!' }, { status: 400 });
+    return NextResponse.json({ message: 'Nenhum dado encontrado no corpo da requisição!' }, { status: 202 });
   }
 }
