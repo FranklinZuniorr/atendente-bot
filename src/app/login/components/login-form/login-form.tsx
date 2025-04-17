@@ -61,7 +61,7 @@ export const LoginForm = () => {
     }
   };
 
-  return <div className="bg-gradient-custom h-full w-full px-3 py-10 rounded-b-2xl">
+  return <div className="bg-gradient-custom h-full w-full px-3 py-16 rounded-b-2xl">
     <div className='flex flex-col items-center justify-center min-h-full'>
       <div className="bg-white p-4 rounded-md max-w-[30rem] w-full flex flex-col gap-5 border-b-[4px] border-b-primary shadow-2xl">
         <header className="w-full flex flex-col">
@@ -91,7 +91,7 @@ export const LoginForm = () => {
                   loading={isLoadingGetCodes}
                   onClick={getQrCode}
                 >
-            Iniciar conexão
+                  Iniciar conexão
                 </Button>
                 <ModalPrivacyPolicy />
               </> : 
@@ -112,13 +112,13 @@ export const LoginForm = () => {
                   loading={isLoadingValidateConnection}
                   onClick={checkClient}
                 >
-            Validar conexão
+                  Validar conexão
                 </Button>
                 <Button 
                   className='w-full'
                   onClick={() => window.location.reload()}
                 >
-            Cancelar
+                  Cancelar
                 </Button>
               </div>
           }
