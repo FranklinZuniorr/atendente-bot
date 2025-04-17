@@ -1,5 +1,6 @@
 import { Advantages } from './components/advantages';
 import { Charges } from './components/charges';
+import { Footer } from './components/footer';
 import { HowWork } from './components/how-work';
 import { LoginForm } from './components/login-form';
 import { PriceInfo } from './components/price-info';
@@ -14,6 +15,7 @@ export default function Login() {
       <HowWork />
       <Advantages />
       <Charges />
+      <Footer />
     </div>
   );
 }
