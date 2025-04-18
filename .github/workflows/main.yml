@@ -22,7 +22,7 @@ jobs:
 
     - name: SSH into EC2 and deploy
       run: |
-        ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
+        sudo ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
           cd app/atendente-bot
           git pull origin main
           sudo docker compose down
