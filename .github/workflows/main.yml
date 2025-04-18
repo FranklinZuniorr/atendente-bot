@@ -15,23 +15,16 @@ jobs:
 
     - name: Set up SSH key
       run: |
-        echo "Secret EC2_SSH_KEY_BASE64 is available."
-        
-        echo "LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBdi9PU1VTbEZHbXBWY2FMUnJKWFl5M040WGVxOWhmUlp2N0NXdGZzT3UxYTlrcTFGCmc5RFA1bklkMWt5ZE16S2x6ck81ck1QcXZNa29jOHo5V3B4blFBbzdaY0tmd2sxSXlJY3Z3THR3Y2IwUHIvdEcKOS9RdnBqQm1WS21EL29RaVVQVm1EWW9Ib09HWmUvaHA3RU5KNk1hWFpnbWwzSmUvYnBpb2NOVE5pYzFVUjYrRgpxMTZXNVkrcFh5Rm92ZEYwcmkzakIrSUhRWCtIaEt5dkM1OVZxcFZHM2JXcllZTGN1MU96ZzVxbGxCSVpGYnNuCnp2c2UzQTBPZUxuekJSZGV3dWY3RUszRTZsWFZ3ZUZ6eXlBdlE5cjhWVzQ2RFhXN2U1cDkzY29CVkEvMUdaRi8KR0JoWnhMMXZacWcxZlE1cTJWSHlsRWNWTm1RdGFVQkVzdk9GQXdJREFRQUJBb0lCQUdiOGJmSnhyQXZDSlZtMAp1NzVYSDF2NDlnbWRtbFcyaGppY3JCK3pOWEk1MWJoT2tzOW9SME1pMHZOWlk3WkdaRU9FbGdnbGpWb0FxMTJHCkRDQ0RiYm9rUXo0VHI5ZDEwNmtUTHdHL0QxTlcxb1hhMFhiVFlvVk56bmw2QWNHYWJ6YjBrdTZNc2c4Vk8xNFMKSi9LRkg3QnViR2hvb0w2OEJBOTRoRmNWTmJuS3ErVWdZMVlzTTVhMTd2WkhQZ2hMckRaRnNwTXl2QURvNWFNcwpEMDZ5UTZ4WEcvTVEwSUJrNjBiazFuNW1UZW43OXRoangwMHNUajdlODdJeFBmdjdwMkoyMWV0NUVEdE9mdXpXCkh2Q21uaGJoNHFmeUZ1dXQ3aUFaa2ppSzJVWGlRWWQ2bTNQY0pkZ2M1cHRtQ0VrV2c5TGQreEVodG8xMWZ1VkYKOWpBQyt1RUNnWUVBNzhSdjc0K29halRuQzIrdkErRUFBVHIrZ3JpMmNST3VMQVoyZlkrWnR2ZXZvMHdMUU55UAo1dkkvRzVDS2VPb1JPSnl5Z0lRcmF4TlJJdGU4RzBXdURhc1JEanMwK2ZHOWlEbzRLR3ByT1hQMDAwR0ZBVTZwCnk3SjQ0Q3EwUlVnZ2lsUFlUb3c5cGwvdUlka295WWdYeXBER2VYUUZuQlVxeGNFSFdrMTNhOXNDZ1lFQXpQSm8KQlBWWXBsOEVnOCtoRXluR3I4TkI4em1ZZXh6Q2xxQWN3RjRsUWpkbDVFTlY1L3Z5ZTJLMjdRenV2VjcwdmNrVwpLeU1CQXJucXFGekxkYmFFWS80ZmQxS3RIUUdMZFUwbG10VWN0QU9JZmVYWlBlTVhhSjB6MUdleHBIUENnOExpCkNxQW56ZWhreUYvQnBmSWxzaHhhWTA0bG12blp1SW54Z3ZRNzUva0NnWUVBdk9vRTNEZFBsaWNLcUVzZUZhdFIKYXFiRjQ4K1FDRFplZEZlL1FwMURteE02OHlvMmI2dVpRbms2V2dpZjRqZGl6RDFDczludnI5VXZoNGw5cit0TwpBWHo0MmtLeU1nRlR1YU5ObmlLRFMyaGV6WmtCS0ErSDMzUkdvekZpaW5nVEU0cU9rdzBTZ2lWeHBuL0pFRWxICm5aWkdtMmxjQmlmelpJNzdzUjM2YXlNQ2dZQThFNWJRVlVjdVJjNGlBVndiTFBUVUV1MmpLYS83N3J0UHdoR0wKaGsxdnNxT0luUUJ5cDFVMlBBS1pUR0F6WE1GclhLWEY4VlhiZ2JvNnJqRHFDWjJYWGlmRko1UWRXNVdReGhPTwo1b2VxY1JxeXBRemdhbEF6VjFtWkd1aGs1NVlPWDdNNUlDZHE0WU9oaFFoVDU3NkxEbXFrajRUUWdBc0ZZRkpPCmE5K2ZxUUtCZ0JZN2RVcjFuYVdqYUR2eUFxKzV5U1p6RHhuayt4akRzK2hmMWV6eWVnODBCOTJqSG9pYlNRdnQKZCtRRFFYMkwyeGNIc0lHdWlFMStyOFc5eXNWSzdSbTRWODJFMCtCdVExbnkwdkZJdWM3b1psbDYvbko5c29rUQpEcHB2TUNpZWVhc2M3Tk1ub3FrQnVzRWl0MlRaUHFLK1ZKei9IbFlWQ0NWcHRNd3FIa0o2Ci0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0t" | base64 --decode > private_key.pem
-        
+        echo "${{ secrets.EC2_SSH_KEY_BASE64 }}" | base64 --decode > private_key.pem
         chmod 600 private_key.pem
-        
-        ls -l private_key.pem
-        
         eval $(ssh-agent -s)
         ssh-add private_key.pem
 
     - name: SSH into EC2 and deploy
       run: |
-        echo "Trying to SSH into EC2..."
-        ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
-          cd /path/to/your/project
+        ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
+          cd app/atendente-bot
           git pull origin main
-          docker-compose down
-          docker-compose up -d
+          sudo docker compose down
+          sudo docker compose up -d
         EOF
