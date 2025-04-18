@@ -31,7 +31,7 @@ export const HowWork = () => {
       icon: <Bell className='min-w-[24px]' />
     },
     {
-      title: 'As mensagens começam a serem respondidas pelo robô',
+      title: 'As mensagens começam a ser respondidas pelo robô',
       icon: <Bot className='min-w-[24px]' />
     }
   ];
@@ -77,8 +77,11 @@ export const HowWork = () => {
       width="640" 
       height="360" 
       controls
+      playsInline
+      muted
     >
-      <source src="example.webm" type="video/mp4" />
+      <source src="example.webm" type="video/webm" />
+      <source src="example.mp4" type="video/mp4" />
         Seu navegador não suporta a tag de vídeo.
     </video>
   </div>;
