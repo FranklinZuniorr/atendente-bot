@@ -5,7 +5,8 @@ export const ENVS = {
   webhookNext: process.env.WEBHOOK_NEXT,
   openAiBaseUrl: process.env.OPEN_AI_BASE_URL,
   openAiApiKey: process.env.OPEN_AI_API_KEY,
-  stripeCallbackUrl: process.env.STRIPE_CALLBACK_URL,
+  stripeCallbackUrlSuccess: process.env.STRIPE_CALLBACK_URL_SUCCESS,
+  stripeCallbackUrlError: process.env.STRIPE_CALLBACK_URL_ERROR,
   stripeApiCompleteKey: process.env.STRIPE_API_COMPLETE_KEY,
   stripePriceKey: process.env.STRIPE_PRICE_KEY
 };

@@ -10,8 +10,8 @@ export class StripeService {
     const { clientId, qty } = params;
     try {
       const session = (await this.stripe.checkout.sessions.create({
-        success_url: ENVS.stripeCallbackUrl,
-        cancel_url: ENVS.stripeCallbackUrl,
+        success_url: ENVS.stripeCallbackUrlSuccess,
+        cancel_url: ENVS.stripeCallbackUrlError,
         line_items: [
           {
             price: ENVS.stripePriceKey,
