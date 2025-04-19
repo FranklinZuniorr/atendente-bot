@@ -1,3 +1,4 @@
+import Script from 'next/script';
 import { AdditionalProviders } from './components/additional-providers';
 import { AuthMiddleware } from './components/auth-middleware';
 import ReduxProvider from './configs/redux/provider/redux-provider';
@@ -32,6 +33,23 @@ export default function RootLayout({
         <meta name="keywords" content="robô, bot, zap bot, whatsapp bot, whats, whatsapp" />
         <meta name="language" content="pt-BR" />
         <link rel="canonical" href="https://atendente-bot.site" />
+
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-17016272973"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="gtag-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-17016272973');
+            `,
+          }}
+        />
       </head>
       <body>
         <ReduxProvider>
