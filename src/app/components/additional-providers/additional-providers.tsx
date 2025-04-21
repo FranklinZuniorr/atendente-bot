@@ -41,6 +41,9 @@ export const AdditionalProviders = ({ children }: AdditionalProvidersProps) => {
               dangerColor: COLORS.red,
               fontFamily: 'BreeSerif',
             },
+            Input: {
+              fontSize: 16
+            }
           },
         }}
       >
