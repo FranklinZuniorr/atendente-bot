@@ -11,7 +11,6 @@ import QRCode from 'react-qr-code';
 import { ModalPrivacyPolicy } from '../modal-privacy-policy';
 import { formatTelephone } from '@/app/utils';
 import RobotIcon from '../../../assets/images/robot.png';
-import { span as MSpan } from 'motion/react-client';
  
 export const LoginForm = () => {
   const navigate = useRouter();
@@ -101,13 +100,16 @@ export const LoginForm = () => {
                   style={{ height: '10rem', width: '10rem' }}
                   value={qrCode}
                 />
-                <MSpan 
-                  initial={{ opacity: 0 }} 
-                  animate={{ opacity: 1 }}
-                  transition={{ repeat: Infinity, duration: 3 }}
-                  className='w-full text-center text-primary font-bold tracking-[0.5rem]'>
-                  {pairingCode}
-                </MSpan>
+                <div
+                  className='flex flex-col gap-1'
+                >
+                  Código de pareamento:
+                  <span 
+                    className='w-full text-center text-primary tracking-[0.5rem] text-[1.2rem]'
+                  >
+                    {pairingCode}
+                  </span>
+                </div>
                 <a 
                   className='text-blue-600 underline underline-offset-2 text-center'
                   target='_blank'
