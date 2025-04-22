@@ -11,7 +11,8 @@ import QRCode from 'react-qr-code';
 import { ModalPrivacyPolicy } from '../modal-privacy-policy';
 import { formatTelephone } from '@/app/utils';
 import RobotIcon from '../../../assets/images/robot.png';
-
+import { span as MSpan } from 'motion/react-client';
+ 
 export const LoginForm = () => {
   const navigate = useRouter();
   const [inputTelephoneText, setInputTelephoneText] = useState<string>('');
@@ -100,7 +101,20 @@ export const LoginForm = () => {
                   style={{ height: '10rem', width: '10rem' }}
                   value={qrCode}
                 />
-                <span className='w-full text-center'>{pairingCode}</span>
+                <MSpan 
+                  initial={{ opacity: 0 }} 
+                  animate={{ opacity: 1 }}
+                  transition={{ repeat: Infinity, duration: 3 }}
+                  className='w-full text-center text-primary font-bold tracking-[0.5rem]'>
+                  {pairingCode}
+                </MSpan>
+                <a 
+                  className='text-blue-600 underline underline-offset-2 text-center'
+                  target='_blank'
+                  href="https://www.youtube.com/watch?v=uEMSxPQ-vFg"
+                >
+                  Clique aqui para ver o tutorial
+                </a>
                 <div className='w-full text-start flex flex-col'>
                   <li>Aponte o leitor de qr-code do WhatsApp ou use o código de pareamento para conectar!</li>
                   <li>Após conectar, clique em <strong>Validar conexão</strong></li>
