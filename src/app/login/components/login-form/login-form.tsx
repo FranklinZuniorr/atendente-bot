@@ -11,7 +11,9 @@ import QRCode from 'react-qr-code';
 import { ModalPrivacyPolicy } from '../modal-privacy-policy';
 import { formatTelephone } from '@/app/utils';
 import RobotIcon from '../../../assets/images/robot.png';
+import ZapSecurityIcon from '../../../assets/images/zap-security.png';
 import { ModalGuide } from '../modal-guide';
+import Image from 'next/image';
  
 export const LoginForm = () => {
   const navigate = useRouter();
@@ -67,7 +69,7 @@ export const LoginForm = () => {
       <div className="bg-white p-4 rounded-md max-w-[30rem] w-full flex flex-col gap-5 border-b-[4px] border-b-primary shadow-2xl">
         <header className="w-full flex flex-col">
           <span className='w-full flex justify-center'>
-            <img className='w-[3rem] h-[3rem]' src={RobotIcon.src} alt='robot' />
+            <Image width={48} height={48} src={RobotIcon.src} alt='robot' />
           </span>
           <h3 className="text-[1.25rem] text-center w-full">Atendente bot</h3>
           <span className="text-[0.8rem] font-normal text-center w-full">
@@ -96,7 +98,7 @@ export const LoginForm = () => {
                 </Button>
                 <ModalPrivacyPolicy />
               </> : 
-              <div className='w-full flex flex-col items-center gap-4'>
+              <div className='w-full flex flex-col items-center gap-4 mt-2'>
                 <QRCode
                   style={{ height: '10rem', width: '10rem' }}
                   value={qrCode}
@@ -115,6 +117,13 @@ export const LoginForm = () => {
                 <div className='w-full text-start flex flex-col'>
                   <li>Aponte o leitor de qr-code do WhatsApp ou use o código de pareamento para conectar!</li>
                   <li>Após conectar, clique em <strong>Validar conexão</strong></li>
+                </div>
+                <div className="w-full flex gap-2 items-center mt-2">
+                  <img className='w-[50px]' src={ZapSecurityIcon.src} alt='robot' />
+                  <span className="text-[0.8rem] font-normal text-left">
+                  🔒 Integração oficial com o <strong className='text-green-500 font-bold underline underline-offset-2'>WhatsApp</strong>.
+                    <strong className='font-bold'> Conexão 100% segura e criptografada com a plataforma.</strong>
+                  </span>
                 </div>
                 <Button 
                   className='w-full'
