@@ -27,13 +27,13 @@ services:
       working_dir: /app
       restart: unless-stopped
       ports:
-        - "80:80"  # Porta alterada para 8080
+        - "443:443"
       volumes:
         - .:/app  # Monta a pasta local dentro do contêiner
       command: sh -c "yarn && yarn build && yarn start"
       environment:
         - HOST=0.0.0.0
-        - PORT=80
+        - PORT=443
       networks:
         - rede_geral
 
