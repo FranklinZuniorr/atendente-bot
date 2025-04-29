@@ -15,8 +15,8 @@ export class AuthService {
     }
   }
 
-  static async checkClient (params: AuthServiceCheckClientParams): Promise<ReqResponse<AuthServiceCheckClientResponse>> {
-    const path: string = 'api/client';
+  static async checkClient (params: AuthServiceCheckClientParams, flag?: boolean): Promise<ReqResponse<AuthServiceCheckClientResponse>> {
+    const path: string = flag ? 'api/client/?login-form=login-form' : 'api/client';
 
     try {
       const response = (await HttpClientApi.get(path, { params })).data;

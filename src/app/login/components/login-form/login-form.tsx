@@ -50,7 +50,7 @@ export const LoginForm = () => {
     try {
       const normalizedTelephone = `55${removePhoneFormatting(inputTelephoneText)}`;
       setIsLoadingValidateConnection(true);
-      await AuthService.checkClient({ authCode, telephone: normalizedTelephone });
+      await AuthService.checkClient({ authCode, telephone: normalizedTelephone }, true);
       setIsLoadingValidateConnection(false);
 
       localStorage.setItem(AUTH_CODE_LOCAL_STORAGE_KEY, authCode);
@@ -60,7 +60,7 @@ export const LoginForm = () => {
       navigate.push('/');
     } catch {
       setIsLoadingValidateConnection(false);
-      toast.error('A conexão ainda não foi estabelecida!');
+      toast.error('Conecte o seu dispositivo com o QR-CODE ou CÓDIGO de PAREAMENTO!');
     }
   };
 
