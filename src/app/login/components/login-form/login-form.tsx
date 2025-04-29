@@ -2,10 +2,10 @@
 
 import { removePhoneFormatting, setClientGlobalStateRedux } from '@/app/helpers';
 import { AuthService } from '@/app/services/auth';
-import { AUTH_CODE_LOCAL_STORAGE_KEY, TELEPHONE_LOCAL_STORAGE_KEY } from '@/constants';
+import { AUTH_CODE_LOCAL_STORAGE_KEY, CODES_LOCAL_STORAGE_KEY, TELEPHONE_LOCAL_STORAGE_KEY } from '@/constants';
 import { Button, Input } from 'antd';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import QRCode from 'react-qr-code';
 import { ModalPrivacyPolicy } from '../modal-privacy-policy';
@@ -17,6 +17,7 @@ import Image from 'next/image';
 import { CopyOutlined } from '@ant-design/icons';
  
 export const LoginForm = () => {
+  const SPLIT_CODE_CHAR = '<!!!>';
   const navigate = useRouter();
   const [inputTelephoneText, setInputTelephoneText] = useState<string>('');
   const [qrCode, setQrCode] = useState<string>('');
@@ -41,6 +42,7 @@ export const LoginForm = () => {
       setQrCode(response.data.code);
       setPairingCode(response.data.pairingConde);
       setAuthCode(response.data.authCode);
+      localStorage.setItem(CODES_LOCAL_STORAGE_KEY, `${response.data.code}${SPLIT_CODE_CHAR}${response.data.pairingConde}`);
 
     } catch {
       setIsLoadingGetCodes(false);
@@ -69,6 +71,26 @@ export const LoginForm = () => {
     copyToClipboard(pairingCode);
     toast.success('Copiado!');
   };
+
+  const handleLocalStorageCodes = () => {
+    const hasLocalStorageCodes = localStorage.getItem(CODES_LOCAL_STORAGE_KEY);
+    if(!hasLocalStorageCodes) return;
+    const codes = hasLocalStorageCodes.split(SPLIT_CODE_CHAR);
+    const code = codes[0];
+    const pairingCode = codes[1];
+
+    setPairingCode(pairingCode);
+    setQrCode(code);
+  };
+
+  const handleBtnCancel = () => {
+    window.location.reload();
+    localStorage.removeItem(CODES_LOCAL_STORAGE_KEY);
+  };
+
+  useEffect(() => {
+    handleLocalStorageCodes();
+  }, []);
 
   return <div className="bg-gradient-custom h-full w-full px-3 py-16 rounded-b-2xl">
     <div className='flex flex-col items-center justify-center min-h-full'>
@@ -147,7 +169,7 @@ export const LoginForm = () => {
                 </Button>
                 <Button 
                   className='w-full'
-                  onClick={() => window.location.reload()}
+                  onClick={handleBtnCancel}
                 >
                   Cancelar
                 </Button>
