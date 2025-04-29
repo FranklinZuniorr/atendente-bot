@@ -38,7 +38,9 @@ const handleError = async (error: AxiosError) => {
       toast.error(message || 'Erro na solicitação!');
     }
 
-    if (error.status === 403) {
+    const ignoredPaths: string[] = ['api/client/?login-form=login-form'];
+
+    if (error.status === 403 && !ignoredPaths.includes(error.config?.url || '')) {
       localStorage.removeItem(AUTH_CODE_LOCAL_STORAGE_KEY);
       localStorage.removeItem(TELEPHONE_LOCAL_STORAGE_KEY);
       window.location.reload();
