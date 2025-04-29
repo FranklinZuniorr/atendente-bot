@@ -8,3 +8,7 @@ export const formatTelephone = (text: string) => {
   text = text.slice(0, 11);
   return text.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
 };
+
+export const copyToClipboard = (text: string) => {
+  navigator.clipboard.writeText(text);
+};

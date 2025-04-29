@@ -9,11 +9,12 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import QRCode from 'react-qr-code';
 import { ModalPrivacyPolicy } from '../modal-privacy-policy';
-import { formatTelephone } from '@/app/utils';
+import { copyToClipboard, formatTelephone } from '@/app/utils';
 import RobotIcon from '../../../assets/images/robot.png';
 import ZapSecurityIcon from '../../../assets/images/zap-security.png';
 import { ModalGuide } from '../modal-guide';
 import Image from 'next/image';
+import { CopyOutlined } from '@ant-design/icons';
  
 export const LoginForm = () => {
   const navigate = useRouter();
@@ -64,6 +65,11 @@ export const LoginForm = () => {
     }
   };
 
+  const handleOnClickCopyPairingCode = () => {
+    copyToClipboard(pairingCode);
+    toast.success('Copiado!');
+  };
+
   return <div className="bg-gradient-custom h-full w-full px-3 py-16 rounded-b-2xl">
     <div className='flex flex-col items-center justify-center min-h-full'>
       <div className="bg-white p-4 rounded-md max-w-[30rem] w-full flex flex-col gap-5 border-b-[4px] border-b-primary shadow-2xl">
@@ -104,13 +110,18 @@ export const LoginForm = () => {
                   value={qrCode}
                 />
                 <div
-                  className='flex flex-col gap-1'
+                  className='flex flex-col gap-2 text-center'
                 >
                   Código de pareamento:
                   <span 
-                    className='w-full text-center text-primary tracking-[0.5rem] text-[1.2rem]'
+                    className='flex items-center w-full text-center text-primary tracking-[0.5rem] text-[1.2rem]'
                   >
                     {pairingCode}
+                    <Button 
+                      shape="circle" 
+                      icon={<CopyOutlined />} 
+                      onClick={handleOnClickCopyPairingCode} 
+                    />
                   </span>
                 </div>
                 <ModalGuide />
