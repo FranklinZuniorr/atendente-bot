@@ -2,7 +2,7 @@
 
 import { removePhoneFormatting, setClientGlobalStateRedux } from '@/app/helpers';
 import { AuthService } from '@/app/services/auth';
-import { AUTH_CODE_LOCAL_STORAGE_KEY, CODES_LOCAL_STORAGE_KEY, TELEPHONE_LOCAL_STORAGE_KEY } from '@/constants';
+import { AUTH_CODE_LOCAL_STORAGE_KEY, META_DATA_LOGIN_LOCAL_STORAGE_KEY, TELEPHONE_LOCAL_STORAGE_KEY } from '@/constants';
 import { Button, Input } from 'antd';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -42,7 +42,18 @@ export const LoginForm = () => {
       setQrCode(response.data.code);
       setPairingCode(response.data.pairingConde);
       setAuthCode(response.data.authCode);
-      localStorage.setItem(CODES_LOCAL_STORAGE_KEY, `${response.data.code}${SPLIT_CODE_CHAR}${response.data.pairingConde}`);
+      localStorage.setItem(
+        META_DATA_LOGIN_LOCAL_STORAGE_KEY, 
+        `
+          ${response.data.code}
+          ${SPLIT_CODE_CHAR}
+          ${response.data.pairingConde}
+          ${SPLIT_CODE_CHAR}
+          ${inputTelephoneText}
+          ${SPLIT_CODE_CHAR}
+          ${response.data.authCode}
+        `.trim()
+      );
 
     } catch {
       setIsLoadingGetCodes(false);
@@ -58,7 +69,7 @@ export const LoginForm = () => {
 
       localStorage.setItem(AUTH_CODE_LOCAL_STORAGE_KEY, authCode);
       localStorage.setItem(TELEPHONE_LOCAL_STORAGE_KEY, normalizedTelephone);
-      localStorage.removeItem(CODES_LOCAL_STORAGE_KEY);
+      localStorage.removeItem(META_DATA_LOGIN_LOCAL_STORAGE_KEY);
         
       await setClientGlobalStateRedux();
       navigate.push('/');
@@ -73,24 +84,28 @@ export const LoginForm = () => {
     toast.success('Copiado!');
   };
 
-  const handleLocalStorageCodes = () => {
-    const hasLocalStorageCodes = localStorage.getItem(CODES_LOCAL_STORAGE_KEY);
+  const handleLocalStorageMetaData = () => {
+    const hasLocalStorageCodes = localStorage.getItem(META_DATA_LOGIN_LOCAL_STORAGE_KEY);
     if(!hasLocalStorageCodes) return;
-    const codes = hasLocalStorageCodes.split(SPLIT_CODE_CHAR);
-    const code = codes[0];
-    const pairingCode = codes[1];
+    const metaData = hasLocalStorageCodes.split(SPLIT_CODE_CHAR);
+    const code = metaData[0].trim();
+    const pairingCode = metaData[1].trim();
+    const telephone = metaData[2].trim();
+    const authCode = metaData[3].trim();
 
     setPairingCode(pairingCode);
     setQrCode(code);
+    setInputTelephoneText(telephone);
+    setAuthCode(authCode);
   };
 
   const handleBtnCancel = () => {
     window.location.reload();
-    localStorage.removeItem(CODES_LOCAL_STORAGE_KEY);
+    localStorage.removeItem(META_DATA_LOGIN_LOCAL_STORAGE_KEY);
   };
 
   useEffect(() => {
-    handleLocalStorageCodes();
+    handleLocalStorageMetaData();
   }, []);
 
   return <div className="bg-gradient-custom h-full w-full px-3 py-16 rounded-b-2xl">
