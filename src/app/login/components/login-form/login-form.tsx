@@ -58,6 +58,7 @@ export const LoginForm = () => {
 
       localStorage.setItem(AUTH_CODE_LOCAL_STORAGE_KEY, authCode);
       localStorage.setItem(TELEPHONE_LOCAL_STORAGE_KEY, normalizedTelephone);
+      localStorage.removeItem(CODES_LOCAL_STORAGE_KEY);
         
       await setClientGlobalStateRedux();
       navigate.push('/');
