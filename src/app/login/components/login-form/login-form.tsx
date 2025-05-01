@@ -16,10 +16,13 @@ import { ModalGuide } from '../modal-guide';
 import Image from 'next/image';
 import { CopyOutlined } from '@ant-design/icons';
 import { WhatsappCardFloat } from '../whatsapp-card-float';
+import useScreenWidth from '@/app/hooks/useScreenWidth';
  
 export const LoginForm = () => {
   const SPLIT_CODE_CHAR = '<!!!>';
   const navigate = useRouter();
+  const screenWidth = useScreenWidth();
+  const isMobile = screenWidth <= 1024;
   const [inputTelephoneText, setInputTelephoneText] = useState<string>('');
   const [qrCode, setQrCode] = useState<string>('');
   const [pairingCode, setPairingCode] = useState<string>('');
@@ -81,6 +84,7 @@ export const LoginForm = () => {
   };
 
   const handleOpenWhatsAppLink = (delay: number) => {
+    if (!isMobile) return;
     const link = `https://wa.me/${normalizedTelephone}?text=Insira%20esse%20c%C3%B3digo%20de%20pareamento%20na%20aba%20'dispositivos%20conectados'%20no%20WhatsApp: ${pairingCode}`;
     setTimeout(() => {
       window.open(link);
@@ -90,7 +94,6 @@ export const LoginForm = () => {
   const handleOnClickCopyPairingCode = () => {
     copyToClipboard(pairingCode);
     toast.success('Copiado!');
-    handleOpenWhatsAppLink(1000);
   };
 
   const handleLocalStorageMetaData = () => {
@@ -161,7 +164,7 @@ export const LoginForm = () => {
                 <ModalPrivacyPolicy />
               </> : 
               <div className='w-full flex flex-col items-center gap-4 mt-2'>
-                <WhatsappCardFloat onClick={() => handleOpenWhatsAppLink(0)} />
+                {isMobile && <WhatsappCardFloat onClick={() => handleOpenWhatsAppLink(0)} />}
                 <QRCode
                   style={{ height: '10rem', width: '10rem' }}
                   value={qrCode}
