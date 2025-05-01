@@ -111,15 +111,24 @@ export const LoginForm = () => {
   return <div className="bg-gradient-custom h-full w-full px-3 py-16 rounded-b-2xl">
     <div className='flex flex-col items-center justify-center min-h-full'>
       <div className="bg-white p-4 rounded-md max-w-[30rem] w-full flex flex-col gap-5 border-b-[4px] border-b-primary shadow-2xl">
-        <header className="w-full flex flex-col">
-          <span className='w-full flex justify-center'>
-            <Image width={48} height={48} src={RobotIcon.src} alt='robot' />
-          </span>
-          <h3 className="text-[1.25rem] text-center w-full">Atendente bot</h3>
-          <span className="text-[0.8rem] font-normal text-center w-full">
+        {
+          !hasCodes ? 
+            <header className="w-full flex flex-col">
+              <span className='w-full flex justify-center'>
+                <Image width={48} height={48} src={RobotIcon.src} alt='robot' />
+              </span>
+              <h3 className="text-[1.25rem] text-center w-full">Atendente bot</h3>
+              <span className="text-[0.8rem] font-normal text-center w-full">
           Atendimento ágil, inteligente e 24/7 para o seu negócio no WhatsApp! 🚀💬
-          </span>
-        </header>
+              </span>
+            </header>: 
+            <header className="w-full flex flex-col items-center text-center">
+              <h3 className='text-[1.4rem] text-primary'>Etapa final</h3>
+              <span>
+              Escaneie o <b>QR Code</b> ou use o <b>código de pareamento</b> abaixo para parear com o WhatsApp e ativar sua conexão.
+              </span>
+            </header>
+        }
         <div className='flex flex-col gap-5'>
           {
             !hasCodes ?
@@ -163,10 +172,6 @@ export const LoginForm = () => {
                   </span>
                 </div>
                 <ModalGuide />
-                <div className='w-full text-start flex flex-col'>
-                  <li>Aponte o leitor de qr-code do WhatsApp ou use o código de pareamento para conectar!</li>
-                  <li>Após conectar, clique em <strong>Validar conexão</strong></li>
-                </div>
                 <div className="w-full flex gap-2 items-center mt-2">
                   <img className='w-[50px]' src={ZapSecurityIcon.src} alt='robot' />
                   <span className="text-[0.8rem] font-normal text-left">
@@ -181,7 +186,7 @@ export const LoginForm = () => {
                   loading={isLoadingValidateConnection}
                   onClick={checkClient}
                 >
-                  Validar conexão
+                  <b>ATIVAR CONEXÃO</b>
                 </Button>
                 <Button 
                   className='w-full'
