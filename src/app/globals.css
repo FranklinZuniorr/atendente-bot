@@ -14,6 +14,7 @@
   --gradient-primary: linear-gradient(to right top, #009cff, #3cacff, #5fbcff, #7ecbff, #9dd9ff);
   --gradient-menu: linear-gradient(to right bottom, #9dd9ff, #7ecbff, #5fbcff, #3cacff, #009cff);
   --animate-upDown: upDown 1s ease 0s infinite normal forwards;
+  --animate-pulse: pulse 2s ease 0s infinite normal forwards;
 
   @keyframes upDown {
     0% {
@@ -26,6 +27,34 @@
 
     100% {
         transform: translateY(0);
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      animation-timing-function: ease-out;
+      transform: scale(1);
+      transform-origin: center center;
+    }
+  
+    10% {
+      animation-timing-function: ease-in;
+      transform: scale(0.91);
+    }
+  
+    17% {
+      animation-timing-function: ease-out;
+      transform: scale(0.98);
+    }
+  
+    33% {
+      animation-timing-function: ease-in;
+      transform: scale(0.87);
+    }
+  
+    45% {
+      animation-timing-function: ease-out;
+      transform: scale(1);
     }
   }
 }

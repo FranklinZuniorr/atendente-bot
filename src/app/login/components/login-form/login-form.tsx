@@ -15,6 +15,7 @@ import ZapSecurityIcon from '../../../assets/images/zap-security.png';
 import { ModalGuide } from '../modal-guide';
 import Image from 'next/image';
 import { CopyOutlined } from '@ant-design/icons';
+import { WhatsappCardFloat } from '../whatsapp-card-float';
  
 export const LoginForm = () => {
   const SPLIT_CODE_CHAR = '<!!!>';
@@ -27,9 +28,9 @@ export const LoginForm = () => {
   const [isLoadingValidateConnection, setIsLoadingValidateConnection] = useState<boolean>(false);
 
   const hasCodes = qrCode.length > 0 && pairingCode.length > 0;
+  const normalizedTelephone = `55${removePhoneFormatting(inputTelephoneText)}`;
 
   const getQrCode = async () => {
-    const normalizedTelephone = `55${removePhoneFormatting(inputTelephoneText)}`;
     if (normalizedTelephone.length < 13) {
       toast.error('Insira um número válido!');
       return;
@@ -62,7 +63,6 @@ export const LoginForm = () => {
 
   const checkClient = async () => {
     try {
-      const normalizedTelephone = `55${removePhoneFormatting(inputTelephoneText)}`;
       setIsLoadingValidateConnection(true);
       await AuthService.checkClient({ authCode, telephone: normalizedTelephone }, true);
       setIsLoadingValidateConnection(false);
@@ -76,12 +76,21 @@ export const LoginForm = () => {
     } catch {
       setIsLoadingValidateConnection(false);
       toast.error('Conecte o seu dispositivo com o QR-CODE ou CÓDIGO de PAREAMENTO!');
+      handleOpenWhatsAppLink(2000);
     }
+  };
+
+  const handleOpenWhatsAppLink = (delay: number) => {
+    const link = `https://wa.me/${normalizedTelephone}?text=Insira%20esse%20c%C3%B3digo%20de%20pareamento%20na%20aba%20'dispositivos%20conectados'%20no%20WhatsApp: ${pairingCode}`;
+    setTimeout(() => {
+      window.open(link);
+    }, delay);
   };
 
   const handleOnClickCopyPairingCode = () => {
     copyToClipboard(pairingCode);
     toast.success('Copiado!');
+    handleOpenWhatsAppLink(1000);
   };
 
   const handleLocalStorageMetaData = () => {
@@ -152,6 +161,7 @@ export const LoginForm = () => {
                 <ModalPrivacyPolicy />
               </> : 
               <div className='w-full flex flex-col items-center gap-4 mt-2'>
+                <WhatsappCardFloat onClick={() => handleOpenWhatsAppLink(0)} />
                 <QRCode
                   style={{ height: '10rem', width: '10rem' }}
                   value={qrCode}
