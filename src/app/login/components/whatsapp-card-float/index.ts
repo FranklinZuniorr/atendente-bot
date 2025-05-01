@@ -1,0 +1,1 @@
+export { WhatsappCardFloat } from './whatsapp-card-float';
