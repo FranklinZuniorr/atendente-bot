@@ -80,9 +80,8 @@ export const HowWork = () => {
       playsInline
       muted
     >
-      <source src="example.webm" type="video/webm" />
-      <source src="example.mp4" type="video/mp4" />
-        Seu navegador não suporta a tag de vídeo.
+      <source src="https://res.cloudinary.com/dazmcv1qj/video/upload/v1746406900/d5c23197cd4f3374bd174ee007f1275d.mp4" type="video/mp4" />
+      Seu navegador não suporta a tag de vídeo.
     </video>
   </div>;
 };

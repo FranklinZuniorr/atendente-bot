@@ -25,7 +25,7 @@ export const ModalGuide = () => {
         playsInline
         muted
       >
-        <source src="guide.mp4" type="video/mp4" />
+        <source src="https://res.cloudinary.com/dazmcv1qj/video/upload/v1746406901/78aea9d1a3850834ac044628958828aa.mp4" type="video/mp4" />
         Seu navegador não suporta a tag de vídeo.
       </video>
     </Modal>
