@@ -57,7 +57,7 @@ export const AuthMiddleware = ({ children }: AuthMiddlewareProps) => {
 
   useEffect(() => {
     handleLastAccess();
-  }, []);
+  }, [pathname]);
 
   if (isLoading || !client.id && pathname !== '/login') {
     return <GlobalLoading />;
