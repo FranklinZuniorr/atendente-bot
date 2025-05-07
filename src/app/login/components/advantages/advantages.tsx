@@ -36,7 +36,7 @@ export const Advantages = () => {
     }
   ];
 
-  return <div className="w-full p-8 px-4 flex flex-col gap-8 items-center bg-white rounded-t-[1rem]">
+  return <div className="w-full p-14 px-4 flex flex-col gap-8 items-center bg-white rounded-t-[1rem]">
     <MDiv 
       ref={refTitle}
       className="flex gap-2 items-center text-[2.5rem] max-md:text-[2rem] text-primary max-md:flex-col"

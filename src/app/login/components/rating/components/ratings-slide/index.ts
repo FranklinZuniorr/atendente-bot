@@ -1,0 +1,1 @@
+export { RatingsSlide } from './ratings-slide';

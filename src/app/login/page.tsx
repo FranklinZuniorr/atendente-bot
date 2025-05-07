@@ -4,6 +4,7 @@ import { Footer } from './components/footer';
 import { HowWork } from './components/how-work';
 import { LoginForm } from './components/login-form';
 import { PriceInfo } from './components/price-info';
+import { Rating } from './components/rating';
 import { TopMenuProspect } from './components/top-menu-prospect';
 
 export default function Login() {
@@ -15,6 +16,7 @@ export default function Login() {
       <HowWork />
       <Advantages />
       <Charges />
+      <Rating />
       <Footer />
     </div>
   );
