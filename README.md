@@ -23,7 +23,8 @@ Utilizamos um modelo de cobrança **baseado em tokens**:
 - **PostgreSQL** – Banco de dados relacional seguro e robusto  
 - **Evolution API** – Gerenciamento de múltiplas instâncias de conexão com o WhatsApp  
 - **Stripe** – Pagamentos simples e seguros  
-- **OpenAI** – Geração de respostas inteligentes e personalizadas  
+- **OpenAI** – Geração de respostas inteligentes e personalizadas
+- **MongoDB** – Armazenamento flexível para dados não relacionais  
 
 ## Funcionalidades Principais
 
