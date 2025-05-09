@@ -11,7 +11,6 @@ import QRCode from 'react-qr-code';
 import { ModalPrivacyPolicy } from '../modal-privacy-policy';
 import { copyToClipboard, formatTelephone } from '@/app/utils';
 import RobotIcon from '../../../assets/images/robot.png';
-import ZapSecurityIcon from '../../../assets/images/zap-security.png';
 import { ModalGuide } from '../modal-guide';
 import Image from 'next/image';
 import { CopyOutlined } from '@ant-design/icons';
@@ -32,6 +31,12 @@ export const LoginForm = () => {
 
   const hasCodes = qrCode.length > 0 && pairingCode.length > 0;
   const normalizedTelephone = `55${removePhoneFormatting(inputTelephoneText)}`;
+
+  const calmInfo = `
+  Ao conectar seu WhatsApp, nenhuma mensagem será respondida de imediato.
+  Você poderá configurar tudo com calma. A conexão pode ser pausada ou 
+  desconectada quando desejar.
+  `;
 
   const getQrCode = async () => {
     if (normalizedTelephone.length < 13) {
@@ -185,11 +190,18 @@ export const LoginForm = () => {
                   </span>
                 </div>
                 <ModalGuide />
-                <div className="w-full flex gap-2 items-center mt-2">
+                {/* <div className="w-full flex gap-2 items-center mt-2">
                   <img className='w-[50px]' src={ZapSecurityIcon.src} alt='robot' />
                   <span className="text-[0.8rem] font-normal text-left">
                   🔒 Integração oficial com o <strong className='text-green-500 font-bold underline underline-offset-2'>WhatsApp</strong>.
                     <strong className='font-bold'> Conexão 100% segura e criptografada com a plataforma.</strong>
+                  </span>
+                </div> */}
+                <div className="relative mt-2 pl-3">
+                  <div className='h-full w-1 bg-primary absolute left-0 rounded-2xl' />
+                  <span className="text-[0.8rem] font-normal text-left tracking-[0.1rem]">
+                    <strong>IMPORTANTE!</strong>
+                    {calmInfo}
                   </span>
                 </div>
                 <Button 
