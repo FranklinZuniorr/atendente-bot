@@ -1,0 +1,1 @@
+export { ModalPrivacyPolicy } from './privacy-policy';
