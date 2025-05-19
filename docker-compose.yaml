@@ -1,7 +1,6 @@
 version: "3.8"
 
 services:
-  # Serviço PostgreSQL
   postgres:
     image: postgres:14.13
     container_name: postgres_db
@@ -27,7 +26,7 @@ services:
       working_dir: /app
       restart: unless-stopped
       ports:
-        - "80:80"  # Porta alterada para 8080
+        - "80:80" 
       volumes:
         - .:/app  # Monta a pasta local dentro do contêiner
       command: sh -c "yarn && yarn build && yarn start"
@@ -37,7 +36,6 @@ services:
       networks:
         - rede_geral
 
-  # Serviço Evolution API
   evolution_v2:
     image: atendai/evolution-api:v2.1.1-homolog  # Versão da Evolution API
     container_name: evolution_v2
@@ -56,7 +54,7 @@ services:
 
       # Dados de Autenticação
       - AUTHENTICATION_TYPE=apikey
-      - AUTHENTICATION_API_KEY=KFZOm3Hc3GSNWwHBywEm67xYgjN8xGTH
+      - AUTHENTICATION_API_KEY=${EVOLUTION_API_KEY}
       - AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES=true
 
       # Configurações gerais
