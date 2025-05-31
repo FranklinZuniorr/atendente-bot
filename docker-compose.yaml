@@ -37,7 +37,7 @@ services:
         - rede_geral
 
   evolution_v2:
-    image: atendai/evolution-api:v2.2.3  # Versão da Evolution API
+    image: atendai/evolution-api:v2.2.3  # Evolution API version
     container_name: evolution_v2
     volumes:
       - evolution_instancesv2:/evolution/instances  # Volume para persistência de dados da Evolution
