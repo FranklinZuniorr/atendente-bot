@@ -37,7 +37,7 @@ export async function POST(req: Request) {
         return NextResponse.json({}, { status: 201 });
       }
 
-      const receivedMessage = `${body.data.pushName}: ${body.data.message.conversation}`;
+      const receivedMessage = `O usuário (${body.data.pushName}), perguntou: ${body.data.message.conversation}`;
 
       if (receivedMessage.match(/undefined/ig)) {
         return NextResponse.json({}, { status: 400 });
