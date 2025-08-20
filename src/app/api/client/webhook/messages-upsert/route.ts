@@ -34,20 +34,14 @@ export async function POST(req: Request) {
       const clientInfos: InfoRepositoryRepresentation[] = await getInfosOfClientByTelephone(body.instance);
 
       if (clientInfos.length === 0) {
-        await EvolutionService.
-          sendMessage(
-            body.instance, 
-            { 
-              number: body.data.key.remoteJid.replace('@s.whatsapp.net', ''), 
-              text: 'Nenhuma informação disponível!',
-              delay: 0,
-              quoted: {...body.data }
-            }
-          );
         return NextResponse.json({}, { status: 201 });
       }
 
       const receivedMessage = `${body.data.pushName}: ${body.data.message.conversation}`;
+
+      if (receivedMessage.match(/undefined/ig)) {
+        return NextResponse.json({}, { status: 400 });
+      }
 
       let lastGPTMessages: OpenAiInput[] = [];
 
