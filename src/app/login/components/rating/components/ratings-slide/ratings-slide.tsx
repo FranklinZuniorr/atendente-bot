@@ -67,7 +67,7 @@ export const RatingsSlide = () => {
       }}
     >
       <Image 
-        className='!min-w-[5rem] !min-h-[5rem] !max-md:min-w-[4rem] !max-md:min-h-[4rem] rounded-2xl object-cover' 
+        className='!min-w-[5rem] !min-h-[5rem] !max-w-[5rem] !max-h-[5rem] rounded-2xl object-cover' 
         src={currentRating.picture} 
         alt='user' 
       />
