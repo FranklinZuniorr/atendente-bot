@@ -4,38 +4,39 @@ import { useState } from 'react';
 import { Rating } from '../../types';
 import { CircleChevronLeft, CircleChevronRight } from 'lucide-react';
 import { div as MDiv } from 'motion/react-client';
+import Image from 'next/image';
 
 export const RatingsSlide = () => {
   const RATINGS: Rating[] = [
     {
       username: 'Ana Silva',
       review: 'O atendimento pelo chatbot parece real! Meus clientes se sentem ouvidos de verdade.',
-      picture: 'https://randomuser.me/api/portraits/women/85.jpg',
+      picture: 'https://images.unsplash.com/photo-1484863137850-59afcfe05386?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
     {
       username: 'João Moura',
       review: 'Mais que um bot… é como ter alguém da equipe sempre online pro cliente.',
-      picture: 'https://randomuser.me/api/portraits/men/32.jpg',
+      picture: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
     {
       username: 'Carol Fernandes',
       review: 'Achei que seria só mais um robô, mas o chatbot interage de forma tão natural que até elogiaram.',
-      picture: 'https://randomuser.me/api/portraits/women/71.jpg',
+      picture: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
     {
       username: 'Rafael Oliveira',
       review: 'Vivo, direto e presente. É como se tivesse um atendente real no WhatsApp o tempo todo.',
-      picture: 'https://randomuser.me/api/portraits/men/23.jpg',
+      picture: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
     {
       username: 'Juliana Costa',
       review: 'Transformou meu atendimento. Sem robôzices, só conversa de verdade com quem chega na loja.',
-      picture: 'https://randomuser.me/api/portraits/women/45.jpg',
+      picture: 'https://images.unsplash.com/photo-1619895862022-09114b41f16f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
     {
       username: 'Lucas Santos',
       review: 'É automático, mas parece humano. Meus clientes até perguntam o nome do atendente!',
-      picture: 'https://randomuser.me/api/portraits/men/71.jpg',
+      picture: 'https://plus.unsplash.com/premium_photo-1664199486587-37f325d15182?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
   ];  
 
@@ -65,7 +66,11 @@ export const RatingsSlide = () => {
         scale: { type: 'spring', visualDuration: 0.4, bounce: 0.5 },
       }}
     >
-      <img className='w-[5rem] max-md:w-[4rem] rounded-2xl object-cover' src={currentRating.picture} alt='user' />
+      <Image 
+        className='!min-w-[5rem] !min-h-[5rem] !max-md:min-w-[4rem] !max-md:min-h-[4rem] rounded-2xl object-cover' 
+        src={currentRating.picture} 
+        alt='user' 
+      />
       <div className='flex flex-col gap-3 my-3.5'>
         <div className='text-[1.3rem] leading-2'>{currentRating.username}</div>
         <div className='leading-4 break-words'>{currentRating.review}</div>
