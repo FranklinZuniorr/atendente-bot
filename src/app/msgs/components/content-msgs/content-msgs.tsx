@@ -33,6 +33,8 @@ export const ContentMsgs = () => {
 
   const reversedMessages = [...normalizedDataGetMessagesHistory].reverse();
 
+  const normalizedReversedMessages = selectedUserTelephoneFilter ? reversedMessages.filter(reversedMessage => reversedMessage.userTelephone === selectedUserTelephoneFilter) : reversedMessages;
+
   const allUsersMap = new Map<string, HeaderUsersElement>();
 
   normalizedDataGetMessagesHistory?.forEach((message) => {
@@ -77,7 +79,7 @@ export const ContentMsgs = () => {
             />
           ) : (
             <>
-              {reversedMessages.map((message, index) => (
+              {normalizedReversedMessages.map((message, index) => (
                 <CardMessage key={index} message={message} />
               ))}
             </>
