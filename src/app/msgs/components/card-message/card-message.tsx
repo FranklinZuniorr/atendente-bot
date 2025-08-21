@@ -19,6 +19,8 @@ export const CardMessage = ({
 }: CardMessageProps) => {
   const stylesDivMessage = 'w-full flex';
 
+  const userMessage = message.receivedMessage.replace(/^O usuário \(([^)]+)\), perguntou:/, '').replace(`${message.user}:`, '');
+
   const handleOpenUseZap = () => {
     const link = `https://api.whatsapp.com/send?phone=${message.userTelephone}`;
 
@@ -39,7 +41,7 @@ export const CardMessage = ({
     <div className={`${stylesDivMessage} justify-start`}>
       <div className="flex flex-col gap-1.5 w-fit rounded-lg max-w-[50%] max-md:max-w-[100%]">
         <strong>{message.user}</strong>
-        <div className='p-2 bg-gray-200 rounded-lg w-fit whitespace-pre-line'>{message.receivedMessage.replace(`${message.user}:`, '')}</div>
+        <div className='p-2 bg-gray-200 rounded-lg w-fit whitespace-pre-line'>{userMessage}</div>
       </div>
     </div>
     <div className={`${stylesDivMessage} justify-end`}>
