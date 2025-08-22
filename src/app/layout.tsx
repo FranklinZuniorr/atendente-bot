@@ -3,6 +3,7 @@ import { AdditionalProviders } from './components/additional-providers';
 import { AuthMiddleware } from './components/auth-middleware';
 import ReduxProvider from './configs/redux/provider/redux-provider';
 import './globals.css';
+import { Suspense } from 'react';
 
 export const metadata = {
   icons: {
@@ -53,9 +54,11 @@ export default function RootLayout({
       </head>
       <body>
         <ReduxProvider>
-          <AuthMiddleware>
-            <AdditionalProviders>{children}</AdditionalProviders>
-          </AuthMiddleware>
+          <Suspense fallback={null}>
+            <AuthMiddleware>
+              <AdditionalProviders>{children}</AdditionalProviders>
+            </AuthMiddleware>
+          </Suspense>
         </ReduxProvider>
       </body>
     </html>
