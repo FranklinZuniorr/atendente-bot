@@ -25,7 +25,7 @@ export async function GET(req: Request): Promise<NextResponse<IResponse<{ id: st
             id: clientId,
             title: '+300 Tokens para respostas humanizadas com IA',
             quantity: 1,
-            unit_price: 1
+            unit_price: 19.99
           }
         ],
         metadata: {
