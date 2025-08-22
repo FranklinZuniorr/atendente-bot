@@ -11,6 +11,7 @@ export interface AffiliateSell {
     value: number;
     invoiceId: string;
     affiliateId: string;
+    isPaid: boolean;
 }
 
 export interface GetAffiliateSellRepositoryResponse {
@@ -19,6 +20,7 @@ export interface GetAffiliateSellRepositoryResponse {
     value: number;
     invoiceId: string;
     affiliateId: string;
+    isPaid: boolean;
     createdAt: string;
     updatedAt: string;
 }
