@@ -1,3 +1,4 @@
+import { AffiliateSellClient } from '../../repositories/affiliate/interfaces';
 import { ENUM_EVOLUTION_CONNECTION_STATE } from '../../services/evolution/constants';
 
 export interface GenerateQrCodeResponse {
@@ -74,4 +75,18 @@ export interface AffiliateTokenInfos {
   telephone: string;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface GetAllAffiliateSellResponse {
+  _id: string;
+  client: AffiliateSellClient
+  value: number;
+  invoiceId: string;
+  affiliateId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface GetAllAffiliateSellsResponse {
+  sells: GetAllAffiliateSellResponse[]
 }

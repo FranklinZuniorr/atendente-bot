@@ -12,3 +12,13 @@ export interface AffiliateSell {
     invoiceId: string;
     affiliateId: string;
 }
+
+export interface GetAffiliateSellRepositoryResponse {
+    _id: string;
+    client: AffiliateSellClient
+    value: number;
+    invoiceId: string;
+    affiliateId: string;
+    createdAt: string;
+    updatedAt: string;
+}

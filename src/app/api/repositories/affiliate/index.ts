@@ -1,4 +1,4 @@
-import { AffiliateSell } from './interfaces';
+import { AffiliateSell, GetAffiliateSellRepositoryResponse } from './interfaces';
 import AffiliateSellModel from './models/affiliate';
 
 
@@ -15,6 +15,18 @@ export class AffiliateRepository {
   async createSell(sell: AffiliateSell) {
     try {  
       await this.affiliateSellModal.create(sell);
+    } catch (error) {
+      throw new Error('Affiliate sell do not created!', { cause: error });
+    }
+  }
+
+  async getAllSells(clientId: string): Promise<GetAffiliateSellRepositoryResponse[]> {
+    try {  
+      const allSells: GetAffiliateSellRepositoryResponse[] = await this.affiliateSellModal.find({ affiliateId: clientId }).lean<GetAffiliateSellRepositoryResponse[]>();
+
+      if(!allSells.length) throw new Error('None sell founded!');
+
+      return allSells;
     } catch (error) {
       throw new Error('Affiliate sell do not created!', { cause: error });
     }
