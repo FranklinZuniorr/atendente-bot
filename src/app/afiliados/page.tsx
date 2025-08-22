@@ -1,4 +1,5 @@
 import { LinkArea } from './components/link-area';
+import { ListSells } from './components/list-sells';
 
 const Afiliados = () => {
   return <div className='flex flex-col gap-6'>
@@ -7,7 +8,7 @@ const Afiliados = () => {
       <span className='top-0 w-1 h-full absolute bg-primary left-0' />
     </div>
     <LinkArea />
-    Nenhuma venda realizada!
+    <ListSells />
   </div>;
 };
 

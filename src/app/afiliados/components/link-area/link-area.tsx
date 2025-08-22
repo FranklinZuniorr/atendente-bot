@@ -38,7 +38,7 @@ export const LinkArea = () => {
       onClick={handleCopyToClipboard}
     >
       {normalizedUrl}
-      <CopyOutlined size={14} />
+      <CopyOutlined size={18} />
     </div>
   </div>;
 };
