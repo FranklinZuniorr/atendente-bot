@@ -16,7 +16,9 @@ export interface StripeWebhookProcessBody {
         amount: number,
         amount_capturable: number,
         amount_received: number,
+        amount_total: number;
         currency: string,
+        payment_intent: string;
         metadata: StripeCheckoutParams,
         status: string
         customer_details: {

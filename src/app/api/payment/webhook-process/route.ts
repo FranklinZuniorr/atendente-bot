@@ -33,8 +33,8 @@ export async function POST(req: Request): Promise<NextResponse<IResponse>> {
 
       if (affiliateInfos) {
         await affiliateRepository.createSell({ 
-          value: response.data.object.amount, 
-          invoiceId: response.data.object.id, 
+          value: response.data.object.amount_total, 
+          invoiceId: response.data.object.payment_intent, 
           affiliateId: affiliateInfos._id,
           client: {
             clientId,
