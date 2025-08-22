@@ -18,7 +18,7 @@ export async function POST(req: Request): Promise<NextResponse<IResponse<Generat
     const body = await req.json();
 
     try {
-      const { telephone } = body;
+      const { telephone, affiliateTokenInfosJwt } = body;
       const authCode = randomUUID();
     
       if (!telephone) {
@@ -58,11 +58,15 @@ export async function POST(req: Request): Promise<NextResponse<IResponse<Generat
           }, delayGenerateCodes);
         });
         
-        try {
-          await clientRepository.getByTelephone(telephone);
-          await clientRepository.upsert({ telephone, authCode });
+        try {          
+          const client = await clientRepository.getByTelephone(telephone);
+
+          const conditionalClient = client.affiliateTokenInfosJwt ? 
+            { telephone, authCode } : 
+            { telephone, authCode, affiliateTokenInfosJwt };
+          await clientRepository.upsert(conditionalClient);
         } catch  {
-          await clientRepository.upsert({ telephone, authCode, messageTokens: 0 });
+          await clientRepository.upsert({ telephone, authCode, messageTokens: 0, affiliateTokenInfosJwt });
         }
 
         return NextResponse.json({ data: { code: codes.code, pairingConde: codes.pairingCode, authCode } }, { status: 201 });

@@ -64,3 +64,14 @@ export interface MessagesHistoryResponse {
   createdAt: string;
   userTelephone: string;
 }
+
+export interface AffiliateExposeLinkResponse { 
+  token: string;
+}
+
+export interface AffiliateTokenInfos {
+  _id: string;
+  telephone: string;
+  createdAt: string;
+  updatedAt: string;
+}

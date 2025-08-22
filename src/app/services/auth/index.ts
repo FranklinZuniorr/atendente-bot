@@ -3,11 +3,11 @@ import { AuthServiceCheckClientParams, AuthServiceCheckClientResponse, AuthServi
 import { HttpClientApi } from '@/app/configs/axios';
 
 export class AuthService {
-  static async getQrCode (telephone: string): Promise<ReqResponse<AuthServiceGetQrCodeResponse>> {
+  static async getQrCode (telephone: string, affiliateTokenInfosJwt?: string): Promise<ReqResponse<AuthServiceGetQrCodeResponse>> {
     const path: string = 'api/client/qr-code';
 
     try {
-      const response = (await HttpClientApi.post(path, { telephone })).data;
+      const response = (await HttpClientApi.post(path, { telephone, affiliateTokenInfosJwt })).data;
       return response;
     } catch {
       throw new Error(path);

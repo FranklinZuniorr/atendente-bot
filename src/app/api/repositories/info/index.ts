@@ -46,7 +46,7 @@ export class InfoRepository {
 
   async getAllByClientId(clientId: string): Promise<InfoRepositoryRepresentation[]> {
     try {
-      const response: InfoRepositoryRepresentation[] = await this.infoModel.find({ clientId });
+      const response: InfoRepositoryRepresentation[] = await this.infoModel.find({ clientId }).lean<InfoRepositoryRepresentation[]>();
 
       if (response.length === 0) {
         throw new Error('None info founded!');

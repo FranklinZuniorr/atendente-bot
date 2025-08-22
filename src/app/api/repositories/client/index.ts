@@ -1,4 +1,4 @@
-import { Client, GetClientByTelephoneResponse } from './interfaces';
+import { Client, GetClientRepositoryResponse } from './interfaces';
 import ClientModel from './models/client';
 
 export class ClientRepository {
@@ -25,9 +25,23 @@ export class ClientRepository {
     }
   }
 
-  async getByTelephone(telephone: string): Promise<GetClientByTelephoneResponse> {
+  async getByTelephone(telephone: string): Promise<GetClientRepositoryResponse> {
     try {
-      const client: GetClientByTelephoneResponse | null = await this.clientModel.findOne({ telephone });
+      const client: GetClientRepositoryResponse | null = await this.clientModel.findOne({ telephone }).lean<GetClientRepositoryResponse>();
+
+      if (!client) throw new Error('Client not found!');
+
+      return client;
+
+    } catch (error) {
+      const errorMessage = (error as Error).message;
+      throw new Error(errorMessage);
+    }
+  }
+
+  async getById(id: string): Promise<GetClientRepositoryResponse> {
+    try {
+      const client: GetClientRepositoryResponse | null = await this.clientModel.findOne({ _id: id }).lean<GetClientRepositoryResponse>();
 
       if (!client) throw new Error('Client not found!');
 
