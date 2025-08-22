@@ -37,6 +37,10 @@ export async function GET(req: Request): Promise<NextResponse<IResponse<{ id: st
           failure: ENVS.mercadoPagoCallbackUrlError,
         },
         auto_return: 'approved',
+        redirect_urls: { 
+          success: ENVS.mercadoPagoCallbackUrlSuccess, 
+          failure: ENVS.mercadoPagoCallbackUrlError, 
+        }
       }
     });
     
