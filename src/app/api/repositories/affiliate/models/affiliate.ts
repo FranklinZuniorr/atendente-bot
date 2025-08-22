@@ -6,6 +6,7 @@ const AffiliateSellSchema: Schema<AffiliateSell & Document> = new Schema(
     value: { type: Number, required: true },
     invoiceId: { type: String, required: true },
     affiliateId: { type: String, ref: 'Client', required: true },
+    isPaid: { type: Boolean, required: true },
     client: {
       clientId: { type: String, ref: 'Client', required: true },
       name: { type: String, required: true },

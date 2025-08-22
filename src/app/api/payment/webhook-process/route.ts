@@ -36,6 +36,7 @@ export async function POST(req: Request): Promise<NextResponse<IResponse>> {
           value: response.data.object.amount_total / 100, 
           invoiceId: response.data.object.payment_intent, 
           affiliateId: affiliateInfos._id,
+          isPaid: false,
           client: {
             clientId,
             name: response.data.object.customer_details.name,

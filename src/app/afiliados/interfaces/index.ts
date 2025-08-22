@@ -11,6 +11,7 @@ export interface AffiliateSellExternal {
     value: number;
     invoiceId: string;
     affiliateId: string;
+    isPaid: boolean;
     createdAt: string;
     updatedAt: string;
 }
@@ -21,5 +22,6 @@ export interface AffiliateSellInternal {
     invoiceId: string;
     createdAt: string;
     clientName: string;
+    isPaid: boolean;
     clientTelephone: string;
 }

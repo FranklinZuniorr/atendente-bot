@@ -38,6 +38,13 @@ export const ListSells = () => {
       render: (text) => <span>{formatMoney(text, 'BRL', 'pt-BR', true)}</span>,
     },
     {
+      title: 'Pagamento',
+      dataIndex: 'isPaid',
+      key: 'isPaid',
+      ellipsis: true,
+      render: (isPaid: boolean) => <span>{isPaid ? 'Pago' : 'Pendente'}</span>,
+    },
+    {
       title: 'Data',
       dataIndex: 'createdAt',
       key: 'createdAt',
@@ -61,7 +68,8 @@ export const ListSells = () => {
     createdAt: sell.createdAt,
     id: sell._id,
     invoiceId: sell.invoiceId,
-    value: sell.value
+    value: sell.value,
+    isPaid: sell.isPaid
   })) : [];
 
   return <div className='overflow-x-auto flex flex-col gap-3 border-t border-neutral-300 pt-4'>
