@@ -4,11 +4,11 @@ import ClientModel from '../repositories/client/models/client';
 import { connectDB } from '../infra/mongoDb';
 import { IResponse } from '../interfaces';
 import { GetClientResponse } from './interfaces';
-import { GetClientByTelephoneResponse } from '../repositories/client/interfaces';
 import { validateTelephone } from '@/app/utils';
 import { EvolutionService } from '../services/evolution';
 import { ENUM_EVOLUTION_CONNECTION_STATE } from '../services/evolution/constants';
 import { checkClientMiddleware } from '../middlewares/check-client/middleware';
+import { GetClientRepositoryResponse } from '../repositories/client/interfaces';
 
 const clientRepository = new ClientRepository(ClientModel, connectDB);
 
@@ -40,13 +40,14 @@ export async function GET(req: Request): Promise<NextResponse<IResponse<GetClien
     }
 
     try {
-      const client: GetClientByTelephoneResponse = await clientRepository.getByTelephone(telephone);
+      const client: GetClientRepositoryResponse = await clientRepository.getByTelephone(telephone);
+      const { _id, authCode, createdAt, updatedAt, messageTokens } = client;
 
       if (authCode !== client.authCode) {
         return NextResponse.json({ message: 'Código de autorização inválido!' }, { status: 403 });
       }
 
-      return NextResponse.json({ data: client }, { status: 200 });
+      return NextResponse.json({ data: { _id, authCode, createdAt, telephone, updatedAt, messageTokens } }, { status: 200 });
     } catch {
       return NextResponse.json({ message: 'Cliente não encontrado!' }, { status: 404 });
     }

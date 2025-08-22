@@ -70,6 +70,8 @@ export const RatingsSlide = () => {
         className='!min-w-[5rem] !min-h-[5rem] !max-w-[5rem] !max-h-[5rem] rounded-2xl object-cover' 
         src={currentRating.picture} 
         alt='user' 
+        width={80}
+        height={80}
       />
       <div className='flex flex-col gap-3 my-3.5'>
         <div className='text-[1.3rem] leading-2'>{currentRating.username}</div>

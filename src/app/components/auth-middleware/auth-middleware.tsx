@@ -2,7 +2,7 @@
 
 import { ReactNode, useEffect, useState } from 'react';
 import { GlobalLoading } from '../global-loading';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { AUTH_CODE_LOCAL_STORAGE_KEY, TELEPHONE_LOCAL_STORAGE_KEY } from '@/constants';
 import { useAppDispatch, useAppSelector } from '@/app/configs/redux/store';
 import { AuthService } from '@/app/services/auth';
@@ -17,8 +17,14 @@ export const AuthMiddleware = ({ children }: AuthMiddlewareProps) => {
   const navigate = useRouter();
   const dispatch = useAppDispatch();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const client = useAppSelector(state => state.client);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const goToLogin = () => {
+    const queryString = searchParams.toString();
+    navigate.push(`/login${queryString ? '?' + queryString : ''}`);
+  };
 
   const handleLastAccess = async () => {
     const authCode = localStorage.getItem(AUTH_CODE_LOCAL_STORAGE_KEY);
@@ -43,14 +49,14 @@ export const AuthMiddleware = ({ children }: AuthMiddlewareProps) => {
         localStorage.removeItem(TELEPHONE_LOCAL_STORAGE_KEY);
         dispatch(setClient(initialStateClientReduxState));
         setAuthorizationMetadata('', '');
-        navigate.push('/login');
+        goToLogin();
       }
 
       return;
     }
 
     if (!client.id) {
-      navigate.push('/login');
+      goToLogin();
       setIsLoading(false);
     };
   };

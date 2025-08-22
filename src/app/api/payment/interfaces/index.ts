@@ -19,6 +19,9 @@ export interface StripeWebhookProcessBody {
         currency: string,
         metadata: StripeCheckoutParams,
         status: string
+        customer_details: {
+          name: string;
+        }
       }
     }
   }

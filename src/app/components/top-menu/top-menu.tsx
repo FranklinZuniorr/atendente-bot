@@ -3,7 +3,7 @@
 import { useAppSelector } from '@/app/configs/redux/store';
 import RobotIcon from '../../assets/images/robot.png';
 import { Button, Tooltip } from 'antd';
-import { CheckOutlined, PauseCircleOutlined, PoweroffOutlined, RedoOutlined } from '@ant-design/icons';
+import { CheckOutlined, NotificationOutlined, PauseCircleOutlined, PoweroffOutlined, RedoOutlined, } from '@ant-design/icons';
 import { AuthService } from '@/app/services/auth';
 import { useEffect, useState } from 'react';
 import { TopMenuOption } from './components/top-menu-option';
@@ -99,6 +99,7 @@ export const TopMenu = () => {
       <TopMenuOption pathname='/' text='Informações' icon={<Info size={14} />} />
       <TopMenuOption pathname='/comprar-tokens' text='Comprar tokens' icon={<DollarSign size={14} />} />
       <TopMenuOption pathname='/msgs' text='Mensagens recebidas' icon={<MessageSquare size={14} />} />
+      <TopMenuOption pathname='/afiliados' text='Seja um afiliado' icon={<NotificationOutlined size={14} />} />
     </div>
   </div>;
 };

@@ -21,7 +21,7 @@ export class MessageHisotryRepository {
 
   async getAllByClientId(clientId: string): Promise<MessageHistoryRepositoryRepresentation[]> {
     try {
-      const response: MessageHistoryRepositoryRepresentation[] = await this.messageHistoryModel.find({ clientId });
+      const response: MessageHistoryRepositoryRepresentation[] = await this.messageHistoryModel.find({ clientId }).lean<MessageHistoryRepositoryRepresentation[]>();
 
       if (response.length === 0) {
         throw new Error('None message history founded!');   

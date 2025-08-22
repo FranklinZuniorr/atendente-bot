@@ -8,7 +8,7 @@ import { ClientRepository } from '../../repositories/client';
 import ClientModel from '../../repositories/client/models/client';
 import { InfoRepository } from '../../repositories/info';
 import InfoModel from '../../repositories/info/models/info';
-import { GetClientByTelephoneResponse } from '../../repositories/client/interfaces';
+import { GetClientRepositoryResponse } from '../../repositories/client/interfaces';
 
 export const validadeInstanceStateAndGenerateQrCode = async (
   telephone: string
@@ -56,7 +56,7 @@ export const getInfosOfClientByTelephone = async (telephone: string): Promise<In
   const clientRepository = new ClientRepository(ClientModel, connectDB);
   const infoRepository = new InfoRepository(InfoModel, connectDB);
   try {
-    const client: GetClientByTelephoneResponse = await clientRepository.getByTelephone(telephone);
+    const client: GetClientRepositoryResponse = await clientRepository.getByTelephone(telephone);
     const clientInfos: InfoRepositoryRepresentation[] = await infoRepository.getAllByClientId(client._id);
 
     return clientInfos;

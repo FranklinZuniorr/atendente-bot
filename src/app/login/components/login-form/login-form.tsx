@@ -4,7 +4,7 @@ import { removePhoneFormatting, setClientGlobalStateRedux } from '@/app/helpers'
 import { AuthService } from '@/app/services/auth';
 import { AUTH_CODE_LOCAL_STORAGE_KEY, META_DATA_LOGIN_LOCAL_STORAGE_KEY, TELEPHONE_LOCAL_STORAGE_KEY } from '@/constants';
 import { Button, Input } from 'antd';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import QRCode from 'react-qr-code';
@@ -22,6 +22,10 @@ export const LoginForm = () => {
   const navigate = useRouter();
   const screenWidth = useScreenWidth();
   const isMobile = screenWidth <= 1024;
+  const searchParams = useSearchParams();
+
+  const affiliateTokenInfosJwtSearchParams = searchParams.get('affiliateToken') || undefined;
+
   const [inputTelephoneText, setInputTelephoneText] = useState<string>('');
   const [qrCode, setQrCode] = useState<string>('');
   const [pairingCode, setPairingCode] = useState<string>('');
@@ -46,7 +50,7 @@ export const LoginForm = () => {
 
     try {
       setIsLoadingGetCodes(true);
-      const response = await AuthService.getQrCode(normalizedTelephone);
+      const response = await AuthService.getQrCode(normalizedTelephone, affiliateTokenInfosJwtSearchParams);
       setIsLoadingGetCodes(false);
       setQrCode(response.data.code);
       setPairingCode(response.data.pairingConde);

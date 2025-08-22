@@ -3,7 +3,7 @@ import { IResponse } from '../../interfaces';
 import { validateTelephone } from '@/app/utils';
 import { ENUM_EVOLUTION_CONNECTION_STATE } from '../../services/evolution/constants';
 import { EvolutionService } from '../../services/evolution';
-import { GetClientByTelephoneResponse } from '../../repositories/client/interfaces';
+import { GetClientRepositoryResponse } from '../../repositories/client/interfaces';
 import { ClientRepository } from '../../repositories/client';
 import ClientModel from '../../repositories/client/models/client';
 import { connectDB } from '../../infra/mongoDb';
@@ -28,7 +28,7 @@ export const checkClientMiddleware = async <TResponseData = unknown>(request: Re
   }
 
   try {
-    const client: GetClientByTelephoneResponse = await clientRepository.getByTelephone(telephone);
+    const client: GetClientRepositoryResponse = await clientRepository.getByTelephone(telephone);
 
     if (authCode !== client.authCode) {
       return NextResponse.json({ message: 'Código de autorização inválido!' }, { status: 403 });
