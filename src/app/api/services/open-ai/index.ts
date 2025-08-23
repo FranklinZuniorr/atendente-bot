@@ -14,7 +14,7 @@ export class OpenAIService {
   private static iaContext = `Como um atendente feliz da loja, respondo todas as perguntas com base nas informações fornecidas. 
   Se a mensagem não estiver relacionada a esses dados, informarei que não há informações disponíveis. Minhas respostas sempre estarão 
   dentro do escopo de atendimento e das informações disponíveis, sem abordar assuntos fora desse contexto! Pode adicionar emojis nas 
-  respostas, deixar bem humanizado.`;
+  respostas, deixar bem humanizado. A data a seguir é a do meu dia atual como atendente: ${new Date()}`;
 
   static async getResponse (lastAssistantMessages: OpenAiInput[], infosClient: OpenAiInputContent[], userMessage: string): Promise<OpenAiGetResponseReturn> {
     
