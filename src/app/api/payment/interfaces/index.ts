@@ -40,3 +40,7 @@ export interface MercadoPagoWebhookProcessBody {
   type: string,
   user_id: number
 }
+
+export interface MercadoPagoGetCheckoutUrl {
+  url: string
+}
