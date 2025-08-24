@@ -11,9 +11,13 @@ import { connectDB } from '../../../infra/mongoDb';
 import { MessageHisotryRepository } from '@/app/api/repositories/message-history';
 import MessageHistoryModel from '@/app/api/repositories/message-history/models/message-history';
 import { ENUM_OPEN_AI_INPUT_ROLES } from '@/app/api/services/open-ai/constants';
+import { UserActivityRepository } from '@/app/api/repositories/userActivity';
+import UserActivityModel from '@/app/api/repositories/userActivity/models/userActivity';
+import { UserActivityRepositoryRepresentational } from '@/app/api/repositories/userActivity/interfaces';
 
 const clientRepository = new ClientRepository(ClientModel, connectDB);
 const messageHistoryRepository = new MessageHisotryRepository(MessageHistoryModel, connectDB);
+const userActivityRepository = new UserActivityRepository(UserActivityModel, connectDB);
 
 export async function POST(req: Request) {
   try {
@@ -21,7 +25,14 @@ export async function POST(req: Request) {
     const client = await clientRepository.getByTelephone(body.instance);
 
     const userTelephone = body.data.key.remoteJid.replace('@s.whatsapp.net', '');
+    
+    const userInfos: UserActivityRepositoryRepresentational | null =
+    await userActivityRepository.getByTelephone(userTelephone).catch(() => null);
 
+    if (!userInfos?.isEnabled) {
+      return NextResponse.json({ message: 'O usuário está pausado!' }, { status: 403 });
+    }
+    
     if (client.messageTokens === 0) return NextResponse.json({ message: 'O cliente não possui tokens suficientes!' }, { status: 403 });
 
     if(
@@ -30,6 +41,17 @@ export async function POST(req: Request) {
       body.event === 'messages.upsert' &&
       body.data.pushName.length > 0
     ) {
+
+      try {
+        await userActivityRepository.create({ 
+          clientId: client._id,
+          isEnabled: true,
+          name: body.data.pushName,
+          telephone: userTelephone
+        });
+      } catch {
+        return NextResponse.json({ message: 'Não foi possível registrar o usuário!' }, { status: 500 });
+      }
 
       const clientInfos: InfoRepositoryRepresentation[] = await getInfosOfClientByTelephone(body.instance);
 

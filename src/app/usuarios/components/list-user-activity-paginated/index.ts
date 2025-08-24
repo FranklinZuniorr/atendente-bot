@@ -1,0 +1,1 @@
+export { ListUserActivityPaginated } from './list-user-activity-paginated';
