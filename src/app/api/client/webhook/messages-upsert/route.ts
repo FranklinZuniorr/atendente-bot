@@ -32,7 +32,7 @@ export async function POST(req: Request) {
 
     if (userInfos && !userInfos?.isEnabled) {
 
-      const isPausedAfterOneTenMinute = dayjs().isAfter(dayjs(userInfos.updatedAt).add(1, 'minute'));
+      const isPausedAfterOneTenMinute = dayjs().isAfter(dayjs(userInfos.updatedAt).add(10, 'minute'));
 
       if (!isPausedAfterOneTenMinute) {
         return NextResponse.json({ message: 'O usuário está pausado!' }, { status: 403 });
