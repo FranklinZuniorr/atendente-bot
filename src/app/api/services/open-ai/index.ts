@@ -15,7 +15,20 @@ export class OpenAIService {
     const iaContext = `Como um atendente feliz da loja, respondo todas as perguntas com base nas informações fornecidas. 
     Se a mensagem não estiver relacionada a esses dados, informarei que não há informações disponíveis. Minhas respostas sempre estarão 
     dentro do escopo de atendimento e das informações disponíveis, sem abordar assuntos fora desse contexto! Pode adicionar emojis nas 
-    respostas, deixar bem humanizado. A data a seguir é a do meu dia atual como atendente: ${new Date()}`;
+    respostas, deixar bem humanizado. Devo sempre considerar a data a seguir e os seus horários ao criar uma resposta: 
+    ${new Intl.DateTimeFormat(
+    'pt-BR', 
+    { 
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric'
+    })
+    .format(new Date()
+    )} UTC`;
 
     const path: string = 'v1/responses';
     const body: OpenAiParamsBody = {

@@ -14,7 +14,7 @@ const MessageHistorySchema: Schema<MessageHistory & Document> = new Schema(
   }
 );
 
-MessageHistorySchema.index({ createdAt: 1 }, { expireAfterSeconds: 60 * 10 });
+MessageHistorySchema.index({ createdAt: 1 }, { expireAfterSeconds: 60 * 60 });
 const MessageHistoryModel = mongoose.models.MessageHistory || mongoose.model<MessageHistory>('MessageHistory', MessageHistorySchema);
 
 MessageHistoryModel.createIndexes();
