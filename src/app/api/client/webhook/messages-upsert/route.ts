@@ -11,9 +11,14 @@ import { connectDB } from '../../../infra/mongoDb';
 import { MessageHisotryRepository } from '@/app/api/repositories/message-history';
 import MessageHistoryModel from '@/app/api/repositories/message-history/models/message-history';
 import { ENUM_OPEN_AI_INPUT_ROLES } from '@/app/api/services/open-ai/constants';
+import { UserActivityRepository } from '@/app/api/repositories/userActivity';
+import UserActivityModel from '@/app/api/repositories/userActivity/models/userActivity';
+import { UserActivityRepositoryRepresentational } from '@/app/api/repositories/userActivity/interfaces';
+import dayjs from 'dayjs';
 
 const clientRepository = new ClientRepository(ClientModel, connectDB);
 const messageHistoryRepository = new MessageHisotryRepository(MessageHistoryModel, connectDB);
+const userActivityRepository = new UserActivityRepository(UserActivityModel, connectDB);
 
 export async function POST(req: Request) {
   try {
@@ -21,7 +26,21 @@ export async function POST(req: Request) {
     const client = await clientRepository.getByTelephone(body.instance);
 
     const userTelephone = body.data.key.remoteJid.replace('@s.whatsapp.net', '');
+    
+    const userInfos: UserActivityRepositoryRepresentational | null =
+    await userActivityRepository.getByTelephone(userTelephone).catch(() => null);
 
+    if (userInfos && !userInfos?.isEnabled) {
+
+      const isPausedAfterOneTenMinute = dayjs().isAfter(dayjs(userInfos.updatedAt).add(1, 'minute'));
+
+      if (!isPausedAfterOneTenMinute) {
+        return NextResponse.json({ message: 'O usuário está pausado!' }, { status: 403 });
+      }
+
+      await userActivityRepository.changeStatus(true, userInfos._id);
+    }
+    
     if (client.messageTokens === 0) return NextResponse.json({ message: 'O cliente não possui tokens suficientes!' }, { status: 403 });
 
     if(
@@ -30,6 +49,16 @@ export async function POST(req: Request) {
       body.event === 'messages.upsert' &&
       body.data.pushName.length > 0
     ) {
+      try {
+        await userActivityRepository.create({ 
+          clientId: client._id,
+          isEnabled: true,
+          name: body.data.pushName,
+          telephone: userTelephone
+        });
+      } catch {
+        return NextResponse.json({ message: 'Não foi possível registrar o usuário!' }, { status: 500 });
+      }
 
       const clientInfos: InfoRepositoryRepresentation[] = await getInfosOfClientByTelephone(body.instance);
 
@@ -78,6 +107,19 @@ export async function POST(req: Request) {
         userTelephone: userTelephone
       });
       return NextResponse.json({}, { status: 201 });
+    }
+
+    if (body.data.key.fromMe && 
+      body.data.key.remoteJid.includes('@s.whatsapp.net') && 
+      body.event === 'messages.upsert' &&
+      body.data.pushName.length > 0) {
+      if (userInfos) {
+        await userActivityRepository.changeStatus(false, userInfos._id);
+        return NextResponse.json({ 
+          message: `As respostas ao usuário ${userInfos.name} foram pausadas após intereção humana!` }, 
+        { status: 200 }
+        );
+      }
     }
 
     return NextResponse.json({}, { status: 400 });
