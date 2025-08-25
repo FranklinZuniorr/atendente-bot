@@ -5,7 +5,7 @@ import { Button, Skeleton } from 'antd';
 import { useAppSelector } from '@/app/configs/redux/store';
 import { MinusCircleOutlined, PlusCircleOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { useGetMercadoPagoUrl } from '../../query-api/get-mercado-pago-url';
-import { formatMoney } from 'frutils.js';
+import { debounce, formatMoney } from 'frutils.js';
 
 export const MercadoPagoButton = () => {
   const client = useAppSelector(state => state.client);
@@ -13,10 +13,11 @@ export const MercadoPagoButton = () => {
   const defaultPrice = 19.99;
   
   const [itemQty, setItemQty] = useState<number>(1);
+  const [itemQtyExhibition, setItemQtyExhibition] = useState<number>(1);
   const [isLoadingOnStart, setIsLoadingOnStart] = useState<boolean>(true);
   
-  const tokensQty = itemQty * defaultTokenQty;
-  const totalPrice = defaultPrice * itemQty;
+  const tokensQty = itemQtyExhibition * defaultTokenQty;
+  const totalPrice = defaultPrice * itemQtyExhibition;
 
   const { data: url, isFetching } = useGetMercadoPagoUrl({
     clientId: client.id,
@@ -29,14 +30,24 @@ export const MercadoPagoButton = () => {
   };
 
   const handleDecrementItemQty = () => {
-    if(itemQty <= 1) return;
-    setItemQty(prev => prev - 1);
+    if(itemQtyExhibition <= 1) return;
+    const fn = (prev: number) => prev - 1;
+    setItemQtyExhibition(fn);
+  };
+
+  const handleIncrementItemQty = () => {
+    const fn = (prev: number) => prev + 1;
+    setItemQtyExhibition(fn);
   };
 
   useEffect(() => {
     if(!url) return;
     setIsLoadingOnStart(false);
   }, [url]);
+
+  useEffect(() => {
+    debounce(() => setItemQty(itemQtyExhibition), 500);
+  }, [itemQtyExhibition]);
 
   return (
     <>
@@ -69,7 +80,7 @@ export const MercadoPagoButton = () => {
                 {formatMoney(totalPrice, 'BRL', 'pt-BR', true)}
                 <PlusCircleOutlined 
                   className='scale-[1.1] cursor-pointer'
-                  onClick={() => setItemQty(prev => prev + 1)}
+                  onClick={handleIncrementItemQty}
                 />
               </div>
             </div>
