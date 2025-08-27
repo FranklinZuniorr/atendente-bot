@@ -116,7 +116,7 @@ export async function POST(req: Request) {
           quoted: {...body.data }
         });
 
-      const decrementQty = hasImageMsg ? 3 : 1;
+      const decrementQty = hasImageMsg ? 6 : 1;
       await clientRepository.decrementClientTokens(client._id, decrementQty);
       await messageHistoryRepository.create({ 
         clientId: client._id, 
