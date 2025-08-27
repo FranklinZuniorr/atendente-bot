@@ -108,7 +108,7 @@ export const ListUserActivityPaginated = () => {
   
   return <div className='overflow-x-auto flex flex-col gap-3 border-t border-neutral-300 pt-4'>
     <span className='flex items-center gap-1'>
-          Listagem das últimas vendas:
+          Listagem de usuários
     </span>
     <Table<UserActivityInternal>
       bordered
