@@ -62,3 +62,12 @@ export interface EvolutionEditWebhookBody {
 export interface EvolutionWebhookStatusReturn {
     enabled: boolean;
 }
+
+export interface EvolutionFetchMediaBase64Return {
+    mediaType: string,
+    fileName: string,
+    size: { fileLength: string, height: number, width: number },
+    mimetype: string,
+    base64: string,
+    buffer: null
+}

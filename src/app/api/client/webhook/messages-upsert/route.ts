@@ -10,7 +10,7 @@ import ClientModel from '../../../repositories/client/models/client';
 import { connectDB } from '../../../infra/mongoDb';
 import { MessageHisotryRepository } from '@/app/api/repositories/message-history';
 import MessageHistoryModel from '@/app/api/repositories/message-history/models/message-history';
-import { ENUM_OPEN_AI_INPUT_ROLES } from '@/app/api/services/open-ai/constants';
+import { ENUM_OPEN_AI_INPUT_CONTENT_TYPES, ENUM_OPEN_AI_INPUT_ROLES } from '@/app/api/services/open-ai/constants';
 import { UserActivityRepository } from '@/app/api/repositories/userActivity';
 import UserActivityModel from '@/app/api/repositories/userActivity/models/userActivity';
 import { UserActivityRepositoryRepresentational } from '@/app/api/repositories/userActivity/interfaces';
@@ -26,12 +26,15 @@ export async function POST(req: Request) {
     const client = await clientRepository.getByTelephone(body.instance);
 
     const userTelephone = body.data.key.remoteJid.replace('@s.whatsapp.net', '');
+    const image = await EvolutionService.getMediaBase64(body.data.key.id, body.instance).then(data => data.base64).catch(() => '');
+    const imageCaption = body.data.message?.imageMessage?.caption;
+
+    const hasImageMsg = !!image && body.data.messageType === 'imageMessage';
     
     const userInfos: UserActivityRepositoryRepresentational | null =
-    await userActivityRepository.getByTelephone(userTelephone).catch(() => null);
+    await userActivityRepository.getByTelephoneAndClientId(userTelephone, client._id).catch(() => null);
 
     if (userInfos && !userInfos?.isEnabled) {
-
       const isPausedAfterOneTenMinute = dayjs().isAfter(dayjs(userInfos.updatedAt).add(10, 'minute'));
 
       if (!isPausedAfterOneTenMinute) {
@@ -55,7 +58,7 @@ export async function POST(req: Request) {
           isEnabled: true,
           name: body.data.pushName,
           telephone: userTelephone
-        });
+        }, client._id);
       } catch {
         return NextResponse.json({ message: 'Não foi possível registrar o usuário!' }, { status: 500 });
       }
@@ -66,11 +69,25 @@ export async function POST(req: Request) {
         return NextResponse.json({}, { status: 201 });
       }
 
-      const receivedMessage = `O usuário (${body.data.pushName}), perguntou: ${body.data.message.conversation}`;
+      const userQuestion = hasImageMsg ? imageCaption || 'Mandou uma imagem' : body.data.message.conversation;
+      const receivedMessage = `O usuário (${body.data.pushName}), perguntou: ${userQuestion}`;
 
-      if (receivedMessage.match(/undefined/ig)) {
+      if (receivedMessage.match(/undefined/ig) && !hasImageMsg) {
         return NextResponse.json({}, { status: 400 });
       }
+
+      const normalizedUserMessage: OpenAiInputContent[] = hasImageMsg ? [
+        {
+          image_url: `data:image/jpeg+xml;base64,${image}`,
+          type: ENUM_OPEN_AI_INPUT_CONTENT_TYPES.IMAGE
+        },
+        ...(imageCaption ? [{ text: imageCaption, type: ENUM_OPEN_AI_INPUT_CONTENT_TYPES.TEXT }] : [])
+      ] : [
+        {
+          text: receivedMessage,
+          type: ENUM_OPEN_AI_INPUT_CONTENT_TYPES.TEXT
+        }
+      ];
 
       let lastGPTMessages: OpenAiInput[] = [];
 
@@ -86,8 +103,8 @@ export async function POST(req: Request) {
         lastGPTMessages = [];
       }
 
-      const chatGPTInputs: OpenAiInputContent[] = clientInfos.map(info => ({ type: 'input_text', text: `${info.title}: ${info.description}` }));
-      const chatGPTResponse = await OpenAIService.getResponse(lastGPTMessages, chatGPTInputs, receivedMessage);
+      const chatGPTInputs: OpenAiInputContent[] = clientInfos.map(info => ({ type: ENUM_OPEN_AI_INPUT_CONTENT_TYPES.TEXT, text: `${info.title}: ${info.description}` }));
+      const chatGPTResponse = await OpenAIService.getResponse(lastGPTMessages, chatGPTInputs, normalizedUserMessage);
 
       const replyMessage = chatGPTResponse.output[0].content[0].text;
 
@@ -98,7 +115,9 @@ export async function POST(req: Request) {
           delay: 0,
           quoted: {...body.data }
         });
-      await clientRepository.decrementClientTokens(client._id);
+
+      const decrementQty = hasImageMsg ? 3 : 1;
+      await clientRepository.decrementClientTokens(client._id, decrementQty);
       await messageHistoryRepository.create({ 
         clientId: client._id, 
         receivedMessage, 

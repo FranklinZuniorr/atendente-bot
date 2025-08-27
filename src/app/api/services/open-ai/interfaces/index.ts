@@ -1,10 +1,11 @@
-import { ENUM_OPEN_AI_INPUT_ROLES } from '../constants';
+import { ENUM_OPEN_AI_INPUT_CONTENT_TYPES, ENUM_OPEN_AI_INPUT_ROLES } from '../constants';
 
 
 export interface OpenAiInputContent {
-    type: 'input_text',
-    text: string,
-  }
+    type: ENUM_OPEN_AI_INPUT_CONTENT_TYPES,
+    text?: string,
+    image_url?: string,
+}
 
 export interface OpenAiInput {
     role: ENUM_OPEN_AI_INPUT_ROLES,

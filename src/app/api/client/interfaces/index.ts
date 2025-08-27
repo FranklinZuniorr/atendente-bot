@@ -32,6 +32,10 @@ export interface WebhookMessageEventBody {
         messageContextInfo: {
           messageSecret: string;
         };
+        imageMessage?: {
+          caption?: string;
+          jpegThumbnail: string
+        }
       };
       messageType: string;
       messageTimestamp: number;
