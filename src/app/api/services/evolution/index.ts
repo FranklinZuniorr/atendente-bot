@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { EvolutionConnectionStateReturn, EvolutionEditWebhookBody, EvolutionFetchInstanceElementReturn, EvolutionInstanceConnectReturn, EvolutionNewInstanceBody, EvolutionNewMessageBody, EvolutionWebhookStatusReturn } from './interfaces';
+import { EvolutionConnectionStateReturn, EvolutionEditWebhookBody, EvolutionFetchInstanceElementReturn, EvolutionFetchMediaBase64Return, EvolutionInstanceConnectReturn, EvolutionNewInstanceBody, EvolutionNewMessageBody, EvolutionWebhookStatusReturn } from './interfaces';
 import { ENUM_EVOLUTION_CONNECTION_STATE } from './constants';
 import { ENVS } from '@/constants';
 
@@ -113,6 +113,26 @@ export class EvolutionService {
     try {
       const response: EvolutionWebhookStatusReturn = (await this.httpClient.get(path)).data;
       return { enabled: response.enabled };
+    } catch {
+      throw new Error(path);
+    }
+  }
+
+  static async getMediaBase64 (id: string, instance: string): Promise<EvolutionFetchMediaBase64Return> {
+    const path: string = `chat/getBase64FromMediaMessage/${instance}`;
+
+    const body = {
+      message: {
+        key: {
+          id
+        }
+      },
+      convertToMp4: false
+    };
+
+    try {
+      const response: EvolutionFetchMediaBase64Return = (await this.httpClient.post(path, body)).data;
+      return response;
     } catch {
       throw new Error(path);
     }

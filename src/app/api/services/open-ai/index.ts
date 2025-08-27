@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import { ENVS } from '@/constants';
 import { OpenAiGetResponseReturn, OpenAiInput, OpenAiInputContent, OpenAiParamsBody } from './interfaces';
-import { ENUM_OPEN_AI_INPUT_ROLES } from './constants';
+import { ENUM_OPEN_AI_INPUT_CONTENT_TYPES, ENUM_OPEN_AI_INPUT_ROLES } from './constants';
 
 export class OpenAIService {
   private static httpClient: AxiosInstance = axios.create({
@@ -11,7 +11,7 @@ export class OpenAIService {
     }
   });
 
-  static async getResponse (lastAssistantMessages: OpenAiInput[], infosClient: OpenAiInputContent[], userMessage: string): Promise<OpenAiGetResponseReturn> {
+  static async getResponse (lastAssistantMessages: OpenAiInput[], infosClient: OpenAiInputContent[], userMessage: OpenAiInputContent[]): Promise<OpenAiGetResponseReturn> {
     const iaContext = `Como um atendente feliz da loja, respondo todas as perguntas com base nas informações fornecidas. 
     Se a mensagem não estiver relacionada a esses dados, informarei que não há informações disponíveis. Minhas respostas sempre estarão 
     dentro do escopo de atendimento e das informações disponíveis, sem abordar assuntos fora desse contexto! Pode adicionar emojis nas 
@@ -28,7 +28,7 @@ export class OpenAIService {
       second: 'numeric'
     })
     .format(new Date()
-    )} UTC`;
+    )} UTC. Ao receber uma imagem devo detalhar resumidamente o que está aparecendo.`;
 
     const path: string = 'v1/responses';
     const body: OpenAiParamsBody = {
@@ -36,11 +36,11 @@ export class OpenAIService {
       input: [
         {
           role: ENUM_OPEN_AI_INPUT_ROLES.DEVELOPER,
-          content: [{ type: 'input_text', text: iaContext }]
+          content: [{ type: ENUM_OPEN_AI_INPUT_CONTENT_TYPES.TEXT, text: iaContext }]
         }, 
         { role: ENUM_OPEN_AI_INPUT_ROLES.DEVELOPER, content: infosClient },
         ...lastAssistantMessages,
-        { role: ENUM_OPEN_AI_INPUT_ROLES.USER, content: [{ type: 'input_text', text: userMessage }] },
+        { role: ENUM_OPEN_AI_INPUT_ROLES.USER, content: [...userMessage] },
       ],
       text: {
         format: {

@@ -63,9 +63,9 @@ export class ClientRepository {
     }
   }
   
-  async decrementClientTokens(clientId: string) {
+  async decrementClientTokens(clientId: string, qty: number) {
     try {
-      const response = await this.clientModel.updateOne({ _id: clientId }, { $inc: { messageTokens: -1 }});
+      const response = await this.clientModel.updateOne({ _id: clientId }, { $inc: { messageTokens: qty * (-1) }});
 
       if (response.modifiedCount === 0 ) throw new Error('None updated!');
     } catch {
@@ -75,7 +75,7 @@ export class ClientRepository {
 
   async incrementClientTokens(clientId: string, qty: number) {
     try {
-      const response = await this.clientModel.updateOne({ _id: clientId }, { $inc: { messageTokens: qty }});
+      const response = await this.clientModel.updateOne({ _id: clientId }, { $inc: { messageTokens: qty * 1 }});
 
       if (response.modifiedCount === 0 ) throw new Error('None updated!');
     } catch {

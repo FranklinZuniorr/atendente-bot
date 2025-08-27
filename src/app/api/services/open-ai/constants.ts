@@ -3,3 +3,8 @@ export enum ENUM_OPEN_AI_INPUT_ROLES {
     DEVELOPER = 'developer',
     ASSISTANT = 'assistant'
 }
+
+export enum ENUM_OPEN_AI_INPUT_CONTENT_TYPES {
+    TEXT = 'input_text',
+    IMAGE = 'input_image'
+}

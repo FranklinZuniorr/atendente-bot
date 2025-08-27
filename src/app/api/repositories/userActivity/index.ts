@@ -11,10 +11,10 @@ export class UserActivityRepository {
     this.connect();
   }
 
-  async create(userActivity: UserActivity) {
+  async create(userActivity: UserActivity, clientId: string) {
     try {
       await this.userActivityModel.updateOne(
-        { telephone: userActivity.telephone },
+        { telephone: userActivity.telephone, clientId },
         { $set: userActivity },
         { upsert: true }
       );      
@@ -39,6 +39,21 @@ export class UserActivityRepository {
     try {
       const response: UserActivityRepositoryRepresentational | null = 
       await this.userActivityModel.findOne({ telephone }).lean<UserActivityRepositoryRepresentational>();
+
+      if (!response) {
+        throw new Error('None user activity founded!');
+      }
+
+      return response;
+    } catch (error) {
+      throw new Error('User activity not founded!', { cause: error });
+    }
+  }
+
+  async getByTelephoneAndClientId(telephone: string, clientId: string): Promise<UserActivityRepositoryRepresentational> {
+    try {
+      const response: UserActivityRepositoryRepresentational | null = 
+      await this.userActivityModel.findOne({ telephone, clientId }).lean<UserActivityRepositoryRepresentational>();
 
       if (!response) {
         throw new Error('None user activity founded!');
