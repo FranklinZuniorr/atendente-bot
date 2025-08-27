@@ -82,4 +82,14 @@ export class ClientRepository {
       throw new Error('It was not possible increment user tokens!');
     }
   }
+
+  async resetClientTokens(clientId: string) {
+    try {
+      const response = await this.clientModel.updateOne({ _id: clientId }, { $set: { messageTokens: 0 } });
+
+      if (response.modifiedCount === 0 ) throw new Error('None updated!');
+    } catch {
+      throw new Error('It was not possible increment user tokens!');
+    }
+  }
 }

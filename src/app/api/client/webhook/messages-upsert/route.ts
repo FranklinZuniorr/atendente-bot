@@ -30,6 +30,8 @@ export async function POST(req: Request) {
     const imageCaption = body.data.message?.imageMessage?.caption;
 
     const hasImageMsg = !!image && body.data.messageType === 'imageMessage';
+
+    const decrementQty = hasImageMsg ? 6 : 1;
     
     const userInfos: UserActivityRepositoryRepresentational | null =
     await userActivityRepository.getByTelephoneAndClientId(userTelephone, client._id).catch(() => null);
@@ -44,7 +46,9 @@ export async function POST(req: Request) {
       await userActivityRepository.changeStatus(true, userInfos._id);
     }
     
-    if (client.messageTokens === 0) return NextResponse.json({ message: 'O cliente não possui tokens suficientes!' }, { status: 403 });
+    if ((client?.messageTokens || 0) < decrementQty) {
+      return NextResponse.json({ message: 'O cliente não possui tokens suficientes!' }, { status: 403 });
+    };
 
     if(
       !body.data.key.fromMe && 
@@ -116,7 +120,6 @@ export async function POST(req: Request) {
           quoted: {...body.data }
         });
 
-      const decrementQty = hasImageMsg ? 6 : 1;
       await clientRepository.decrementClientTokens(client._id, decrementQty);
       await messageHistoryRepository.create({ 
         clientId: client._id, 
