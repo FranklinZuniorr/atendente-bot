@@ -68,12 +68,15 @@ export const getInfosOfClientByTelephone = async (telephone: string): Promise<In
 
 export const sendChargeMessageWithPaymentLink = async (instanceName: string, anotherMessageId: string, clientId: string) => {
   try {
-    const mercadoPagoUrl = await generateMercadoPagoUrl({ clientId, itemQty: 1 });
     const messageText = `
 🚨🚨🚨 Seus tokens no Atendente Bot acabaram. 
 🚧 Recarregue agora para continuar atendendo seus clientes de forma automática e humanizada!
 
-Link: ${mercadoPagoUrl.url}
+Comprar +300 tokens: ${(await generateMercadoPagoUrl({ clientId, itemQty: 1 })).url}
+
+Comprar +600 tokens: ${(await generateMercadoPagoUrl({ clientId, itemQty: 2 })).url}
+
+Comprar +900 tokens: ${(await generateMercadoPagoUrl({ clientId, itemQty: 3 })).url}
     `;
     EvolutionService.sendMessage(
       instanceName, 

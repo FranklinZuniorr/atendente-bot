@@ -29,6 +29,8 @@ export async function POST(req: Request) {
     const image = await EvolutionService.getMediaBase64(body.data.key.id, body.instance).then(data => data.base64).catch(() => '');
     const imageCaption = body.data.message?.imageMessage?.caption;
 
+    const isMe = body.data.key.fromMe;
+
     const hasImageMsg = !!image && body.data.messageType === 'imageMessage';
 
     const decrementQty = hasImageMsg ? 6 : 1;
@@ -47,12 +49,19 @@ export async function POST(req: Request) {
     }
     
     if ((client?.messageTokens || 0) < decrementQty) {
-      await sendChargeMessageWithPaymentLink(body.instance, body.data.key.id, client._id);
+      if(
+        !isMe && 
+        body.data.key.remoteJid.includes('@s.whatsapp.net') && 
+        body.event === 'messages.upsert' &&
+        body.data.pushName.length > 0
+      ) {
+        await sendChargeMessageWithPaymentLink(body.instance, body.data.key.id, client._id);
+      }
       return NextResponse.json({ message: 'O cliente não possui tokens suficientes!' }, { status: 403 });
     };
 
     if(
-      !body.data.key.fromMe && 
+      !isMe && 
       body.data.key.remoteJid.includes('@s.whatsapp.net') && 
       body.event === 'messages.upsert' &&
       body.data.pushName.length > 0
@@ -132,7 +141,7 @@ export async function POST(req: Request) {
       return NextResponse.json({}, { status: 201 });
     }
 
-    if (body.data.key.fromMe && 
+    if (isMe && 
       body.data.key.remoteJid.includes('@s.whatsapp.net') && 
       body.event === 'messages.upsert' &&
       body.data.pushName.length > 0) {
