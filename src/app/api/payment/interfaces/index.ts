@@ -44,3 +44,8 @@ export interface MercadoPagoWebhookProcessBody {
 export interface MercadoPagoGetCheckoutUrl {
   url: string
 }
+
+export interface GenerateMercadoPagoUrlParams {
+  clientId: string;
+  itemQty: number;
+}

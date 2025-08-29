@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { WebhookMessageEventBody } from '../../interfaces';
 import { EvolutionService } from '../../../services/evolution';
-import { getInfosOfClientByTelephone } from '../../helpers';
+import { getInfosOfClientByTelephone, sendChargeMessageWithPaymentLink } from '../../helpers';
 import { InfoRepositoryRepresentation } from '../../../repositories/info/interfaces';
 import { OpenAIService } from '../../../services/open-ai';
 import { OpenAiInput, OpenAiInputContent } from '../../../services/open-ai/interfaces';
@@ -47,6 +47,7 @@ export async function POST(req: Request) {
     }
     
     if ((client?.messageTokens || 0) < decrementQty) {
+      await sendChargeMessageWithPaymentLink(body.instance, body.data.key.id, client._id);
       return NextResponse.json({ message: 'O cliente não possui tokens suficientes!' }, { status: 403 });
     };
 

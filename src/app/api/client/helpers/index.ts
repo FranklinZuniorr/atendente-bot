@@ -9,6 +9,7 @@ import ClientModel from '../../repositories/client/models/client';
 import { InfoRepository } from '../../repositories/info';
 import InfoModel from '../../repositories/info/models/info';
 import { GetClientRepositoryResponse } from '../../repositories/client/interfaces';
+import { generateMercadoPagoUrl } from '../../payment/helpers';
 
 export const validadeInstanceStateAndGenerateQrCode = async (
   telephone: string
@@ -62,5 +63,23 @@ export const getInfosOfClientByTelephone = async (telephone: string): Promise<In
     return clientInfos;
   } catch  {
     return [];
+  }
+};
+
+export const sendChargeMessageWithPaymentLink = async (instanceName: string, anotherMessageId: string, clientId: string) => {
+  try {
+    const mercadoPagoUrl = await generateMercadoPagoUrl({ clientId, itemQty: 1 });
+    const messageText = `
+🚨🚨🚨 Seus tokens no Atendente Bot acabaram. 
+🚧 Recarregue agora para continuar atendendo seus clientes de forma automática e humanizada!
+
+Link: ${mercadoPagoUrl.url}
+    `;
+    EvolutionService.sendMessage(
+      instanceName, 
+      { delay: 0, number: instanceName, quoted: { key: { id: anotherMessageId } }, text: messageText  }
+    );
+  } catch {
+    throw new Error('Não foi possível enviar a mensagem de cobrança!');
   }
 };
