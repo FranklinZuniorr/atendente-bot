@@ -65,11 +65,22 @@ export class ClientRepository {
   
   async decrementClientTokens(clientId: string, qty: number) {
     try {
-      const response = await this.clientModel.updateOne({ _id: clientId }, { $inc: { messageTokens: qty * (-1) }});
+      const updatedClient = await this.clientModel.findOneAndUpdate(
+        {
+          _id: clientId,
+          messageTokens: { $gte: qty }
+        },
+        { $inc: { messageTokens: -qty } },
+        { new: true }
+      );
 
-      if (response.modifiedCount === 0 ) throw new Error('None updated!');
+      if (!updatedClient) {
+        throw new Error('Client do not have enough tokens!');
+      }
+
+      return updatedClient;
     } catch {
-      throw new Error('It was not possible decrement user tokens!');
+      throw new Error('Client token decrement failed!');
     }
   }
 

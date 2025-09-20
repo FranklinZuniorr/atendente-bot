@@ -32,8 +32,18 @@ export async function POST(req: Request) {
     const isMe = body.data.key.fromMe;
 
     const hasImageMsg = !!image && body.data.messageType === 'imageMessage';
+    const hasConversationMsg = body.data.messageType === 'conversation';
 
-    const decrementQty = hasImageMsg ? 6 : 1;
+    const decrementQty = hasImageMsg ? 6 : hasConversationMsg ? 1 : 0;
+
+    if (decrementQty === 0) {
+      return NextResponse.json({ message: 'Mensagem irrelevante!' }, { status: 400 });
+    }
+
+    const isValidUser = !isMe && 
+        body.data.key.remoteJid.includes('@s.whatsapp.net') && 
+        body.event === 'messages.upsert' &&
+        body.data.pushName.length > 0;
     
     const userInfos: UserActivityRepositoryRepresentational | null =
     await userActivityRepository.getByTelephoneAndClientId(userTelephone, client._id).catch(() => null);
@@ -47,25 +57,17 @@ export async function POST(req: Request) {
 
       await userActivityRepository.changeStatus(true, userInfos._id);
     }
-    
-    if ((client?.messageTokens || 0) < decrementQty) {
-      if(
-        !isMe && 
-        body.data.key.remoteJid.includes('@s.whatsapp.net') && 
-        body.event === 'messages.upsert' &&
-        body.data.pushName.length > 0
-      ) {
-        await sendChargeMessageWithPaymentLink(body.instance, body.data.key.id, client._id);
-      }
-      return NextResponse.json({ message: 'O cliente não possui tokens suficientes!' }, { status: 403 });
-    };
 
     if(
-      !isMe && 
-      body.data.key.remoteJid.includes('@s.whatsapp.net') && 
-      body.event === 'messages.upsert' &&
-      body.data.pushName.length > 0
+      isValidUser
     ) {
+      try {
+        await clientRepository.decrementClientTokens(client._id, decrementQty);
+      } catch {
+        await sendChargeMessageWithPaymentLink(body.instance, body.data.key.id, client._id);
+        return NextResponse.json({ message: 'O cliente não possui tokens suficientes!' }, { status: 403 });
+      }
+
       try {
         await userActivityRepository.create({ 
           clientId: client._id,
@@ -129,8 +131,6 @@ export async function POST(req: Request) {
           delay: 0,
           quoted: {...body.data }
         });
-
-      await clientRepository.decrementClientTokens(client._id, decrementQty);
       await messageHistoryRepository.create({ 
         clientId: client._id, 
         receivedMessage, 
