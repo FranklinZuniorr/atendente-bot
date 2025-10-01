@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# atendente-bot
 
-## Getting Started
+# Sobre o Projeto
 
-First, run the development server:
+Esta é uma plataforma completa de **atendimento automatizado via WhatsApp**, desenvolvida com **Next.js (App Router)**, **Docker** e **PostgreSQL**, que permite a empresas responderem automaticamente seus clientes com base nas informações cadastradas sobre produtos, serviços, comunicados e dados do estabelecimento.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+A conexão com o WhatsApp é realizada por meio da **Evolution API**, que gerencia múltiplas instâncias da aplicação, garantindo alta disponibilidade e estabilidade nas comunicações.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Além disso, o sistema conta com **integração com Stripe para pagamentos** e **OpenAI** para enriquecer as respostas geradas pelo robô, tornando-as mais contextuais, naturais e eficientes.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Sistema de Tokens (Cobrança Justa e Flexível)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Utilizamos um modelo de cobrança **baseado em tokens**:
 
-## Learn More
+- ➡️ **Cada mensagem respondida pelo robô consome 1 token**.  
+- 📦 **Você compra apenas a quantidade que quiser, quando quiser** — sem mensalidades, fidelização ou taxas ocultas.  
+- ⚡ **É você quem decide o ritmo de uso e investimento.**
 
-To learn more about Next.js, take a look at the following resources:
+## Tecnologias Utilizadas
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Next.js (App Router)** – Arquitetura moderna e performática  
+- **Docker** – Contêineres para fácil deploy e escalabilidade  
+- **PostgreSQL** – Banco de dados relacional seguro e robusto  
+- **Evolution API** – Gerenciamento de múltiplas instâncias de conexão com o WhatsApp  
+- **Stripe** – Pagamentos simples e seguros  
+- **OpenAI** – Geração de respostas inteligentes e personalizadas
+- **MongoDB** – Armazenamento flexível para dados não relacionais  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Funcionalidades Principais
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Respostas automáticas com base em dados cadastrados  
+- Conexão via múltiplas instâncias do WhatsApp  
+- Integração com OpenAI para mensagens mais humanas e úteis  
+- Sistema de cobrança flexível com tokens  
+- Histórico de mensagens recebidas  
+- Painel administrativo simples e intuitivo  
