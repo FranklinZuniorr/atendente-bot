@@ -72,11 +72,11 @@ export const sendChargeMessageWithPaymentLink = async (instanceName: string, ano
 🚨🚨🚨 Seus tokens no Atendente Bot acabaram. 
 🚧 Recarregue agora para continuar atendendo seus clientes de forma automática e humanizada!
 
-Comprar +300 tokens: ${(await generateMercadoPagoUrl({ clientId, itemQty: 1 })).url}
+Comprar +100 tokens: ${(await generateMercadoPagoUrl({ clientId, itemQty: 1 })).url}
 
-Comprar +600 tokens: ${(await generateMercadoPagoUrl({ clientId, itemQty: 2 })).url}
+Comprar +200 tokens: ${(await generateMercadoPagoUrl({ clientId, itemQty: 2 })).url}
 
-Comprar +900 tokens: ${(await generateMercadoPagoUrl({ clientId, itemQty: 3 })).url}
+Comprar +300 tokens: ${(await generateMercadoPagoUrl({ clientId, itemQty: 3 })).url}
     `;
     EvolutionService.sendMessage(
       instanceName, 

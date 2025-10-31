@@ -9,7 +9,7 @@ import { debounce, formatMoney } from 'frutils.js';
 
 export const MercadoPagoButton = () => {
   const client = useAppSelector(state => state.client);
-  const defaultTokenQty = 300;
+  const defaultTokenQty = 100;
   const defaultPrice = 19.99;
   
   const [itemQty, setItemQty] = useState<number>(1);

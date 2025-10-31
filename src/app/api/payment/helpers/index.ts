@@ -9,7 +9,7 @@ export const generateMercadoPagoUrl = async (params: GenerateMercadoPagoUrlParam
   const { clientId, itemQty } = params;
   const uuid = randomUUID();
 
-  const tokensQty = itemQty * 300;
+  const tokensQty = itemQty * 100;
 
   try {
     const preference = new Preference(mercadoPagoConfig);
