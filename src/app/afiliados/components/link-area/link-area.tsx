@@ -1,10 +1,10 @@
 'use client';
 
-import { useAppSelector } from '@/app/configs/redux/store';
+import { useAppSelector } from '@/configs/redux/store';
 import { useGetAffiliateExposeToken } from '../../query-api/get-affiliate-expose-token';
 import { limitTextSpread } from 'frutils.js';
 import { CopyOutlined } from '@ant-design/icons';
-import { copyToClipboard } from '@/app/utils';
+import { copyToClipboard } from '@/utils';
 import toast from 'react-hot-toast';
 
 export const LinkArea = () => {

@@ -2,7 +2,7 @@
 
 import { Table } from 'antd';
 import type { TableProps } from 'antd';
-import { useAppSelector } from '@/app/configs/redux/store';
+import { useAppSelector } from '@/configs/redux/store';
 import { useGetAllAffiliateSells } from '../../query-api/get-all-affiliate-sells';
 import { AffiliateSellInternal } from '../../interfaces';
 import { formatMoney, formatTelephone } from 'frutils.js';

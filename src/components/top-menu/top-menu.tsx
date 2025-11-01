@@ -1,14 +1,14 @@
 'use client';
 
-import { useAppSelector } from '@/app/configs/redux/store';
+import { useAppSelector } from '@/configs/redux/store';
 import RobotIcon from '../../assets/images/robot.png';
 import { Button, Tooltip } from 'antd';
 import { CheckOutlined, NotificationOutlined, PauseCircleOutlined, PoweroffOutlined, RedoOutlined, WhatsAppOutlined, } from '@ant-design/icons';
-import { AuthService } from '@/app/services/auth';
+import { AuthService } from '@/services/auth';
 import { useEffect, useState } from 'react';
 import { TopMenuOption } from './components/top-menu-option';
 import { DollarSign, Info, MessageSquare } from 'lucide-react';
-import useScreenWidth from '@/app/hooks/useScreenWidth';
+import useScreenWidth from '@/hooks/useScreenWidth';
 
 export const TopMenu = () => {
   const client = useAppSelector(state => state.client);

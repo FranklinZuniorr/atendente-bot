@@ -1,5 +1,5 @@
-import { HttpClientApi } from '@/app/configs/axios';
-import { generateReactQueryMutation } from '@/app/helpers/react-query';
+import { HttpClientApi } from '@/configs/axios';
+import { generateReactQueryMutation } from '@/helpers/react-query';
 
 export const PUT_USER_ACTIVITY_STATUS_KEY = 'PUT_USER_ACTIVITY_STATUS_KEY';
 

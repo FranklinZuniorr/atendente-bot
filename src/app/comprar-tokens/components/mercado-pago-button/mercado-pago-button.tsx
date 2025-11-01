@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Button, Skeleton } from 'antd';
-import { useAppSelector } from '@/app/configs/redux/store';
+import { useAppSelector } from '@/configs/redux/store';
 import { MinusCircleOutlined, PlusCircleOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { useGetMercadoPagoUrl } from '../../query-api/get-mercado-pago-url';
 import { debounce, formatMoney } from 'frutils.js';

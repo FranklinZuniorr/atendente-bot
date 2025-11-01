@@ -2,7 +2,7 @@
 
 import { Switch, Table, TableProps, Tag } from 'antd';
 import { UserActivityInternal } from '../../interfaces';
-import { useAppSelector } from '@/app/configs/redux/store';
+import { useAppSelector } from '@/configs/redux/store';
 import { invalidateGetAllUserActivityPaginated, useGetAllUserActivityPaginated } from '../../query-api/get-all-user-activity-paginated';
 import { formatTelephone } from 'frutils.js';
 import dayjs from 'dayjs';

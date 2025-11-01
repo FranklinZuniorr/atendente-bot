@@ -1,6 +1,6 @@
 'use client';
 
-import { useAppSelector } from '@/app/configs/redux/store';
+import { useAppSelector } from '@/configs/redux/store';
 import {
   invalidateGetMessagesHistory,
   useGetMessagesHistory,

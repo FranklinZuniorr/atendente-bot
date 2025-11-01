@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { IResponse } from '../../interfaces';
-import { validateTelephone } from '@/app/utils';
+import { validateTelephone } from '@/utils';
 import { ENUM_EVOLUTION_CONNECTION_STATE } from '../../services/evolution/constants';
 import { EvolutionService } from '../../services/evolution';
 import { GetClientRepositoryResponse } from '../../repositories/client/interfaces';

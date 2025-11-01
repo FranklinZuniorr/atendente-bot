@@ -1,6 +1,6 @@
 'use client';
 
-import { useAppSelector } from '@/app/configs/redux/store';
+import { useAppSelector } from '@/configs/redux/store';
 import { DollarOutlined, RedoOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 

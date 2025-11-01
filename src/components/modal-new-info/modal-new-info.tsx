@@ -5,9 +5,9 @@ import { object, string } from 'yup';
 import TextArea from 'antd/es/input/TextArea';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { PlusOutlined } from '@ant-design/icons';
-import { usePostNewInfo } from '@/app/query-api/post-new-info';
-import { invalidateGetAllInfos } from '@/app/query-api/get-all-infos';
-import { useAppSelector } from '@/app/configs/redux/store';
+import { usePostNewInfo } from '@/query-api/post-new-info';
+import { invalidateGetAllInfos } from '@/query-api/get-all-infos';
+import { useAppSelector } from '@/configs/redux/store';
 
 interface ModalNewInfoProps {
     isOpen: boolean;

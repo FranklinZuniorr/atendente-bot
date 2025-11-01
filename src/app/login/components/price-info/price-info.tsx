@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import SmileWoman from '../../../assets/images/mulher-sorridente-apontando-para-voce.png';
+import SmileWoman from '../../../../assets/images/mulher-sorridente-apontando-para-voce.png';
 import { Receipt } from 'lucide-react';
 import { div as MDiv } from 'motion/react-client';
 

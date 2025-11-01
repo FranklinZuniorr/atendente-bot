@@ -1,13 +1,13 @@
 'use client';
 
-import { useAppSelector } from '@/app/configs/redux/store';
+import { useAppSelector } from '@/configs/redux/store';
 import { COLORS } from '@/constants';
 import { ConfigProvider } from 'antd';
 import { ReactNode } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { TopMenu } from '../top-menu';
 import { QueryClientProvider } from '@tanstack/react-query';
-import { queryClient } from '@/app/configs/react-query';
+import { queryClient } from '@/configs/react-query';
 import { ModalAttentionTokens } from '../modal-attention-tokens';
 import { usePathname } from 'next/navigation';
 

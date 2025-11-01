@@ -1,5 +1,5 @@
-import { HttpClientApi } from '@/app/configs/axios';
-import { generateReactQuery } from '@/app/helpers/react-query';
+import { HttpClientApi } from '@/configs/axios';
+import { generateReactQuery } from '@/helpers/react-query';
 
 export const GET_MERCADO_PAGO_URL_KEY = 'GET_MERCADO_PAGO_URL_KEY';
 

@@ -1,6 +1,6 @@
-import { HttpClientApi } from '@/app/configs/axios';
-import { generateReactQuery } from '@/app/helpers/react-query';
-import { ReqResponse } from '@/app/interfaces';
+import { HttpClientApi } from '@/configs/axios';
+import { generateReactQuery } from '@/helpers/react-query';
+import { ReqResponse } from '@/interfaces';
 
 export const GET_AFFILIATE_EXPOSE_TOKEN_KEY = 'GET_AFFILIATE_EXPOSE_TOKEN_KEY';
 
