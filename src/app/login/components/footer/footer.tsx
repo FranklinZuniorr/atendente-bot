@@ -1,4 +1,4 @@
-import RobotIcon from '../../../assets/images/robot.png';
+import RobotIcon from '../../../../assets/images/robot.png';
 
 export const Footer = () => {
 

@@ -1,8 +1,8 @@
-import { ReqResponse } from '@/app/interfaces';
+import { ReqResponse } from '@/interfaces';
 import { UserActivityExternal } from '../interfaces';
-import { HttpClientApi } from '@/app/configs/axios';
-import { generateReactQuery } from '@/app/helpers/react-query';
-import { queryClient } from '@/app/configs/react-query';
+import { HttpClientApi } from '@/configs/axios';
+import { generateReactQuery } from '@/helpers/react-query';
+import { queryClient } from '@/configs/react-query';
 
 export const GET_ALL_USER_ACTIVITY_PAGINATED_KEY = 'GET_ALL_USER_ACTIVITY_PAGINATED_KEY';
 

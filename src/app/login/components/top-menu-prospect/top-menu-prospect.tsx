@@ -1,7 +1,7 @@
 'use client';
 
-import useCurrentScroll from '@/app/hooks/useCurrentScroll';
-import RobotIcon from '../../../assets/images/robot.png';
+import useCurrentScroll from '@/hooks/useCurrentScroll';
+import RobotIcon from '../../../../assets/images/robot.png';
 import { Button } from 'antd';
 import { AnimatePresence } from 'motion/react';
 import { div as MDiv } from 'motion/react-client';

@@ -4,10 +4,10 @@ import { ReactNode, useEffect, useState } from 'react';
 import { GlobalLoading } from '../global-loading';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { AUTH_CODE_LOCAL_STORAGE_KEY, TELEPHONE_LOCAL_STORAGE_KEY } from '@/constants';
-import { useAppDispatch, useAppSelector } from '@/app/configs/redux/store';
-import { AuthService } from '@/app/services/auth';
-import { initialStateClientReduxState, setClient } from '@/app/configs/redux/slices/clientSlice';
-import { setAuthorizationMetadata } from '@/app/configs/axios';
+import { useAppDispatch, useAppSelector } from '@/configs/redux/store';
+import { AuthService } from '@/services/auth';
+import { initialStateClientReduxState, setClient } from '@/configs/redux/slices/clientSlice';
+import { setAuthorizationMetadata } from '@/configs/axios';
 
 interface AuthMiddlewareProps {
   children: ReactNode;

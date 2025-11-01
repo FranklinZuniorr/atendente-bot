@@ -1,7 +1,7 @@
 'use client';
 
-import { removePhoneFormatting, setClientGlobalStateRedux } from '@/app/helpers';
-import { AuthService } from '@/app/services/auth';
+import { removePhoneFormatting, setClientGlobalStateRedux } from '@/helpers';
+import { AuthService } from '@/services/auth';
 import { AUTH_CODE_LOCAL_STORAGE_KEY, META_DATA_LOGIN_LOCAL_STORAGE_KEY, TELEPHONE_LOCAL_STORAGE_KEY } from '@/constants';
 import { Button, Input } from 'antd';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -9,13 +9,13 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import QRCode from 'react-qr-code';
 import { ModalPrivacyPolicy } from '../modal-privacy-policy';
-import { copyToClipboard, formatTelephone } from '@/app/utils';
-import RobotIcon from '../../../assets/images/robot.png';
+import { copyToClipboard, formatTelephone } from '@/utils';
+import RobotIcon from '../../../../assets/images/robot.png';
 import { ModalGuide } from '../modal-guide';
 import Image from 'next/image';
 import { CopyOutlined } from '@ant-design/icons';
 import { WhatsappCardFloat } from '../whatsapp-card-float';
-import useScreenWidth from '@/app/hooks/useScreenWidth';
+import useScreenWidth from '@/hooks/useScreenWidth';
  
 export const LoginForm = () => {
   const SPLIT_CODE_CHAR = '<!!!>';

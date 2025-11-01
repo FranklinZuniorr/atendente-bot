@@ -1,7 +1,7 @@
 import Script from 'next/script';
-import { AdditionalProviders } from './components/additional-providers';
-import { AuthMiddleware } from './components/auth-middleware';
-import ReduxProvider from './configs/redux/provider/redux-provider';
+import { AdditionalProviders } from '../components/additional-providers';
+import { AuthMiddleware } from '../components/auth-middleware';
+import ReduxProvider from '../configs/redux/provider/redux-provider';
 import './globals.css';
 import { Suspense } from 'react';
 

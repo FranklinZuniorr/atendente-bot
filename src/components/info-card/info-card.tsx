@@ -5,9 +5,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Collapse, Input, Typography } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import { DeleteOutlined } from '@ant-design/icons';
-import { useDeleteInfo } from '@/app/query-api/delete-info';
-import { invalidateGetAllInfos } from '@/app/query-api/get-all-infos';
-import { usePutInfo } from '@/app/query-api/put-info';
+import { useDeleteInfo } from '@/query-api/delete-info';
+import { invalidateGetAllInfos } from '@/query-api/get-all-infos';
+import { usePutInfo } from '@/query-api/put-info';
 
 interface InfoCardProps {
     title: string;

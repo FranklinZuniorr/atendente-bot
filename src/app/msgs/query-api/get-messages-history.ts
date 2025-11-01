@@ -1,6 +1,6 @@
-import { HttpClientApi } from '@/app/configs/axios';
-import { queryClient } from '@/app/configs/react-query';
-import { generateReactQuery } from '@/app/helpers/react-query';
+import { HttpClientApi } from '@/configs/axios';
+import { queryClient } from '@/configs/react-query';
+import { generateReactQuery } from '@/helpers/react-query';
 
 export const KEY_GET_MESSAGES_HISTORY = 'KEY_GET_MESSAGES_HISTORY';
 

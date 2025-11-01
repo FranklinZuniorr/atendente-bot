@@ -1,5 +1,5 @@
-import { HttpClientApi } from '@/app/configs/axios';
-import { generateReactQuery } from '@/app/helpers/react-query';
+import { HttpClientApi } from '@/configs/axios';
+import { generateReactQuery } from '@/helpers/react-query';
 
 export const KEY_GET_CHECKOUT_URL = 'KEY_GET_CHECKOUT_URL';
 

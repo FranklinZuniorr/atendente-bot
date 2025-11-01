@@ -6,7 +6,7 @@ import { IResponse } from '../../interfaces';
 import { randomUUID } from 'crypto';
 import { validadeInstanceStateAndGenerateQrCode } from '../helpers';
 import { GenerateQrCodeResponse } from '../interfaces';
-import { validateTelephone } from '@/app/utils';
+import { validateTelephone } from '@/utils';
 import { EvolutionService } from '../../services/evolution';
 import { ENUM_EVOLUTION_CONNECTION_STATE } from '../../services/evolution/constants';
 import { EvolutionInstanceConnectReturn } from '../../services/evolution/interfaces';

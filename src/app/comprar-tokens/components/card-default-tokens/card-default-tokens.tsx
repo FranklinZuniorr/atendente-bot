@@ -2,7 +2,7 @@
 
 import { Button } from 'antd';
 import { useGetCheckoutUrl } from '../../query-api/get-checkout-url';
-import { useAppSelector } from '@/app/configs/redux/store';
+import { useAppSelector } from '@/configs/redux/store';
 
 export const CardDefaultTokens = () => {
   const client = useAppSelector(state => state.client);

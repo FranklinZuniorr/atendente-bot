@@ -34,7 +34,7 @@ export async function POST(req: Request) {
     const hasImageMsg = !!image && body.data.messageType === 'imageMessage';
     const hasConversationMsg = body.data.messageType === 'conversation';
 
-    const decrementQty = hasImageMsg ? 6 : hasConversationMsg ? 1 : 0;
+    const decrementQty = hasImageMsg ? 20 : hasConversationMsg ? 1 : 0;
 
     if (decrementQty === 0) {
       return NextResponse.json({ message: 'Mensagem irrelevante!' }, { status: 400 });

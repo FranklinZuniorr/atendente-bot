@@ -1,12 +1,12 @@
 'use client';
 
 import { Alert, Button, Skeleton } from 'antd';
-import { useAppSelector } from './configs/redux/store';
-import { useGetAllInfos } from './query-api/get-all-infos';
-import { InfoCard } from './components/info-card';
+import { useAppSelector } from '../configs/redux/store';
+import { useGetAllInfos } from '../query-api/get-all-infos';
+import { InfoCard } from '../components/info-card';
 import { PlusOutlined } from '@ant-design/icons';
 import { useState } from 'react';
-import { ModalNewInfo } from './components/modal-new-info/modal-new-info';
+import { ModalNewInfo } from '../components/modal-new-info/modal-new-info';
 
 export default function Home() {
   const client = useAppSelector(state  => state.client);

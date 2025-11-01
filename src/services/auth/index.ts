@@ -1,6 +1,6 @@
-import { ReqResponse } from '@/app/interfaces';
+import { ReqResponse } from '@/interfaces';
 import { AuthServiceCheckClientParams, AuthServiceCheckClientResponse, AuthServiceGetQrCodeResponse, AuthServiceWebhookStatusResponse } from './interfaces';
-import { HttpClientApi } from '@/app/configs/axios';
+import { HttpClientApi } from '@/configs/axios';
 
 export class AuthService {
   static async getQrCode (telephone: string, affiliateTokenInfosJwt?: string): Promise<ReqResponse<AuthServiceGetQrCodeResponse>> {
