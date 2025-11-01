@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import ZapIcon from '../../../assets/images/chat-logo-social-social-media-whatsapp.svg';
+import ZapIcon from '../../../../assets/images/chat-logo-social-social-media-whatsapp.svg';
 import Image from 'next/image';
 
 interface Message {
