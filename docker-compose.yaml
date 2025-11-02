@@ -37,12 +37,18 @@ services:
       - rede_geral
 
   evolution_v2:
-    image: evoapicloud/evolution-api:latest
+    image: evoapicloud/evolution-api:v2.3.1
     container_name: evolution_v2
     volumes:
       - evolution_instancesv2:/evolution/instances
     networks:
       - rede_geral
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=1
+      - net.ipv6.conf.default.disable_ipv6=1
     ports:
       - "8080:8080"
     restart: unless-stopped
@@ -51,6 +57,9 @@ services:
     environment:
       # URL da Evolution API
       - SERVER_URL=http://0.0.0.0:8080
+
+      # IP
+      - NODE_OPTIONS=--dns-result-order=ipv4first
 
       # Dados de Autenticação
       - AUTHENTICATION_TYPE=apikey
@@ -61,7 +70,6 @@ services:
       - LANGUAGE=pt-BR
       - CONFIG_SESSION_PHONE_CLIENT=InovaBoost
       - CONFIG_SESSION_PHONE_NAME=chrome
-      - CONFIG_SESSION_PHONE_VERSION=2.3000.1026005110
 
       # Configurações do WhatsApp Business Cloud (API Oficial)
       - WA_BUSINESS_TOKEN_WEBHOOK=evolution
