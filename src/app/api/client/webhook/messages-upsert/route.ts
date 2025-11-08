@@ -25,7 +25,14 @@ export async function POST(req: Request) {
     const body: WebhookMessageEventBody = await req.json();
     const client = await clientRepository.getByTelephone(body.instance);
 
-    const userTelephone = body.data.key.remoteJid.replace('@s.whatsapp.net', '');
+    const regexSufixUniqueDevice = /@s\.whatsapp\.net/i;
+    const regexSufixMergeUniqueAndMulti = /(@s\.whatsapp\.net|@lid)/i;
+
+    const userTelephone = 
+    regexSufixUniqueDevice.test(body.data.key.remoteJid) ? 
+      body.data.key.remoteJid.replace(regexSufixUniqueDevice, '') : 
+      body.data.key.remoteJidAlt.replace(regexSufixUniqueDevice, '');
+
     const image = await EvolutionService.getMediaBase64(body.data.key.id, body.instance).then(data => data.base64).catch(() => '');
     const imageCaption = body.data.message?.imageMessage?.caption;
 
@@ -37,11 +44,11 @@ export async function POST(req: Request) {
     const decrementQty = hasImageMsg ? 50 : hasConversationMsg ? 1 : 0;
 
     if (decrementQty === 0) {
-      return NextResponse.json({ message: 'Mensagem irrelevante!' }, { status: 400 });
+      return NextResponse.json({ message: 'Msg irrelevante!' }, { status: 400 });
     }
 
     const isValidUser = !isMe && 
-        body.data.key.remoteJid.includes('@s.whatsapp.net') && 
+        regexSufixMergeUniqueAndMulti.test(body.data.key.remoteJid) && 
         body.event === 'messages.upsert' &&
         body.data.pushName.length > 0;
     
@@ -142,7 +149,7 @@ export async function POST(req: Request) {
     }
 
     if (isMe && 
-      body.data.key.remoteJid.includes('@s.whatsapp.net') && 
+      regexSufixMergeUniqueAndMulti.test(body.data.key.remoteJid) && 
       body.event === 'messages.upsert' &&
       body.data.pushName.length > 0) {
       if (userInfos) {
