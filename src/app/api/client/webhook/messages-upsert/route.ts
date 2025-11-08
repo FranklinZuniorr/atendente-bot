@@ -33,15 +33,17 @@ export async function POST(req: Request) {
       body.data.key.remoteJid.replace(regexSufixUniqueDevice, '') : 
       body.data.key.remoteJidAlt.replace(regexSufixUniqueDevice, '');
 
-    const image = await EvolutionService.getMediaBase64(body.data.key.id, body.instance).then(data => data.base64).catch(() => '');
+    const isMe = body.data.key.fromMe;
+      
+    const media = await EvolutionService.getMediaBase64(body.data.key.id, body.instance).then(data => data.base64).catch(() => '');
+
     const imageCaption = body.data.message?.imageMessage?.caption;
 
-    const isMe = body.data.key.fromMe;
+    const hasImageMsg = !!media && body.data.messageType === 'imageMessage';
 
-    const hasImageMsg = !!image && body.data.messageType === 'imageMessage';
     const hasConversationMsg = body.data.messageType === 'conversation';
 
-    const decrementQty = hasImageMsg ? 50 : hasConversationMsg ? 1 : 0;
+    const decrementQty = hasImageMsg ? 20 : hasConversationMsg ? 1 : 0;
 
     if (decrementQty === 0) {
       return NextResponse.json({ message: 'Msg irrelevante!' }, { status: 400 });
@@ -101,7 +103,7 @@ export async function POST(req: Request) {
 
       const normalizedUserMessage: OpenAiInputContent[] = hasImageMsg ? [
         {
-          image_url: `data:image/jpeg+xml;base64,${image}`,
+          image_url: `data:image/jpeg+xml;base64,${media}`,
           type: ENUM_OPEN_AI_INPUT_CONTENT_TYPES.IMAGE
         },
         ...(imageCaption ? [{ text: imageCaption, type: ENUM_OPEN_AI_INPUT_CONTENT_TYPES.TEXT }] : [])
