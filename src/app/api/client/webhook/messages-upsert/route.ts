@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { WebhookMessageEventBody } from '../../interfaces';
+import { NormalizeUserMessageReturn, WebhookMessageEventBody } from '../../interfaces';
 import { EvolutionService } from '../../../services/evolution';
-import { getInfosOfClientByTelephone, sendChargeMessageWithPaymentLink } from '../../helpers';
+import { getInfosOfClientByTelephone, sendChargeMessageWithPaymentLink, normalizeUserMessage } from '../../helpers';
 import { InfoRepositoryRepresentation } from '../../../repositories/info/interfaces';
 import { OpenAIService } from '../../../services/open-ai';
 import { OpenAiInput, OpenAiInputContent } from '../../../services/open-ai/interfaces';
@@ -39,16 +39,6 @@ export async function POST(req: Request) {
 
     const imageCaption = body.data.message?.imageMessage?.caption;
 
-    const hasImageMsg = !!media && body.data.messageType === 'imageMessage';
-
-    const hasConversationMsg = body.data.messageType === 'conversation';
-
-    const decrementQty = hasImageMsg ? 20 : hasConversationMsg ? 1 : 0;
-
-    if (decrementQty === 0) {
-      return NextResponse.json({ message: 'Msg irrelevante!' }, { status: 400 });
-    }
-
     const isValidUser = !isMe && 
         regexSufixMergeUniqueAndMulti.test(body.data.key.remoteJid) && 
         body.event === 'messages.upsert' &&
@@ -70,13 +60,32 @@ export async function POST(req: Request) {
     if(
       isValidUser
     ) {
+      const userQuestion = body.data.message.conversation || 'Sent a media file!';
+      const receivedMessage = `O usuário (${body.data.pushName}), perguntou: ${userQuestion}`;
+
+      if (receivedMessage.match(/undefined/ig)) {
+        return NextResponse.json({}, { status: 400 });
+      }
+
+      const normalizedUserMessage: NormalizeUserMessageReturn | undefined = 
+      await normalizeUserMessage({
+        messageType: body.data.messageType,
+        receivedMessage,
+        imageCaption,
+        media
+      });
+
+      if(!normalizedUserMessage) {
+        return NextResponse.json({}, { status: 400 });
+      }
+
       try {
-        await clientRepository.decrementClientTokens(client._id, decrementQty);
+        await clientRepository.decrementClientTokens(client._id, normalizedUserMessage.tokenDecrementQty);
       } catch {
         await sendChargeMessageWithPaymentLink(body.instance, body.data.key.id, client._id);
         return NextResponse.json({ message: 'O cliente não possui tokens suficientes!' }, { status: 403 });
       }
-
+      
       try {
         await userActivityRepository.create({ 
           clientId: client._id,
@@ -94,26 +103,6 @@ export async function POST(req: Request) {
         return NextResponse.json({}, { status: 201 });
       }
 
-      const userQuestion = hasImageMsg ? imageCaption || 'Mandou uma imagem' : body.data.message.conversation;
-      const receivedMessage = `O usuário (${body.data.pushName}), perguntou: ${userQuestion}`;
-
-      if (receivedMessage.match(/undefined/ig) && !hasImageMsg) {
-        return NextResponse.json({}, { status: 400 });
-      }
-
-      const normalizedUserMessage: OpenAiInputContent[] = hasImageMsg ? [
-        {
-          image_url: `data:image/jpeg+xml;base64,${media}`,
-          type: ENUM_OPEN_AI_INPUT_CONTENT_TYPES.IMAGE
-        },
-        ...(imageCaption ? [{ text: imageCaption, type: ENUM_OPEN_AI_INPUT_CONTENT_TYPES.TEXT }] : [])
-      ] : [
-        {
-          text: receivedMessage,
-          type: ENUM_OPEN_AI_INPUT_CONTENT_TYPES.TEXT
-        }
-      ];
-
       let lastGPTMessages: OpenAiInput[] = [];
 
       try {
@@ -129,7 +118,7 @@ export async function POST(req: Request) {
       }
 
       const chatGPTInputs: OpenAiInputContent[] = clientInfos.map(info => ({ type: ENUM_OPEN_AI_INPUT_CONTENT_TYPES.TEXT, text: `${info.title}: ${info.description}` }));
-      const chatGPTResponse = await OpenAIService.getResponse(lastGPTMessages, chatGPTInputs, normalizedUserMessage);
+      const chatGPTResponse = await OpenAIService.getResponse(lastGPTMessages, chatGPTInputs, normalizedUserMessage.content);
 
       const replyMessage = chatGPTResponse.output[0].content[0].text;
 

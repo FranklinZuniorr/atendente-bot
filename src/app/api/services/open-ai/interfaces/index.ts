@@ -5,6 +5,7 @@ export interface OpenAiInputContent {
     type: ENUM_OPEN_AI_INPUT_CONTENT_TYPES,
     text?: string,
     image_url?: string,
+    audio_url?: string
 }
 
 export interface OpenAiInput {
@@ -44,4 +45,8 @@ export interface OpenAiGetResponseOutput {
 
 export interface OpenAiGetResponseReturn {
     output: OpenAiGetResponseOutput[],
+}
+
+export interface OpenAiGetAudioTranscriptionReturn {
+    text: string;
 }

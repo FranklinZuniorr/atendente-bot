@@ -10,6 +10,11 @@ import { InfoRepository } from '../../repositories/info';
 import InfoModel from '../../repositories/info/models/info';
 import { GetClientRepositoryResponse } from '../../repositories/client/interfaces';
 import { generateMercadoPagoUrl } from '../../payment/helpers';
+import { ENUM_MEDIA_TYPES } from '../../constants';
+import { OpenAiInputContent } from '../../services/open-ai/interfaces';
+import { ENUM_OPEN_AI_INPUT_CONTENT_TYPES } from '../../services/open-ai/constants';
+import { NormalizeUserMessageParams, NormalizeUserMessageReturn } from '../interfaces';
+import { OpenAIService } from '../../services/open-ai';
 
 export const validadeInstanceStateAndGenerateQrCode = async (
   telephone: string
@@ -84,5 +89,50 @@ Comprar +300 tokens: ${(await generateMercadoPagoUrl({ clientId, itemQty: 3 })).
     );
   } catch {
     throw new Error('Não foi possível enviar a mensagem de cobrança!');
+  }
+};
+
+export const normalizeUserMessage = async ({ 
+  messageType, 
+  receivedMessage, 
+  imageCaption, 
+  media 
+}: NormalizeUserMessageParams): 
+  Promise<NormalizeUserMessageReturn | undefined> => {
+  switch (messageType) {
+  case ENUM_MEDIA_TYPES.IMAGE:
+    const image: OpenAiInputContent[] = [
+      {
+        image_url: `data:image/jpeg+xml;base64,${media}`,
+        type: ENUM_OPEN_AI_INPUT_CONTENT_TYPES.IMAGE
+      },
+      ...(imageCaption ? [{ text: imageCaption, type: ENUM_OPEN_AI_INPUT_CONTENT_TYPES.TEXT }] : [])
+    ];
+
+    return { content: image, tokenDecrementQty: 20, type: messageType };
+  case ENUM_MEDIA_TYPES.CONVERSATION:
+    const conversation: OpenAiInputContent[] = [
+      {
+        text: receivedMessage,
+        type: ENUM_OPEN_AI_INPUT_CONTENT_TYPES.TEXT
+      }
+    ];
+    return { content: conversation, tokenDecrementQty: 1, type: messageType };
+  case ENUM_MEDIA_TYPES.AUDIO:
+    try {
+      const transcription: string = (await OpenAIService.getAudioTranscription(media as string)).text;
+
+      const audio: OpenAiInputContent[] = [
+        {
+          text: transcription,
+          type: ENUM_OPEN_AI_INPUT_CONTENT_TYPES.TEXT
+        },
+      ];
+      return { content: audio, tokenDecrementQty: 20, type: messageType };
+    } catch  {
+      return undefined;
+    }
+  default:
+    return undefined;
   }
 };

@@ -1,6 +1,8 @@
 import axios, { AxiosInstance } from 'axios';
+import FormData from 'form-data';
+import { Buffer } from 'buffer';
 import { ENVS } from '@/constants';
-import { OpenAiGetResponseReturn, OpenAiInput, OpenAiInputContent, OpenAiParamsBody } from './interfaces';
+import { OpenAiGetAudioTranscriptionReturn, OpenAiGetResponseReturn, OpenAiInput, OpenAiInputContent, OpenAiParamsBody } from './interfaces';
 import { ENUM_OPEN_AI_INPUT_CONTENT_TYPES, ENUM_OPEN_AI_INPUT_ROLES } from './constants';
 
 export class OpenAIService {
@@ -57,6 +59,33 @@ export class OpenAIService {
     try {
       const response: OpenAiGetResponseReturn = (await this.httpClient.post(path, body)).data;
       return response;
+    } catch {
+      throw new Error(path);
+    }
+  }
+
+  static async getAudioTranscription(base64Audio: string): Promise<OpenAiGetAudioTranscriptionReturn> {
+    const path = 'v1/audio/transcriptions';
+
+    try {
+      const cleanBase64 = base64Audio.replace(/^data:audio\/\w+;base64,/, '');
+      const audioBuffer = Buffer.from(cleanBase64, 'base64');
+
+      const formData = new FormData();
+      formData.append('file', audioBuffer, { filename: 'audio.ogg' });
+      formData.append('model', 'gpt-4o-mini-transcribe');
+
+      const response = await this.httpClient.post<OpenAiGetAudioTranscriptionReturn>(
+        path,
+        formData,
+        {
+          headers: {
+            ...formData.getHeaders(),
+          },
+        }
+      );
+
+      return response.data;
     } catch {
       throw new Error(path);
     }
