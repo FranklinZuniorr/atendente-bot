@@ -1,5 +1,7 @@
+import { ENUM_MEDIA_TYPES } from '../../constants';
 import { AffiliateSellClient } from '../../repositories/affiliate/interfaces';
 import { ENUM_EVOLUTION_CONNECTION_STATE } from '../../services/evolution/constants';
+import { OpenAiInputContent } from '../../services/open-ai/interfaces';
 
 export interface GenerateQrCodeResponse {
     code: string;
@@ -38,7 +40,7 @@ export interface WebhookMessageEventBody {
           jpegThumbnail: string
         }
       };
-      messageType: string;
+      messageType: ENUM_MEDIA_TYPES;
       messageTimestamp: number;
     };
 }
@@ -94,4 +96,17 @@ export interface GetAllAffiliateSellResponse {
 
 export interface GetAllAffiliateSellsResponse {
   sells: GetAllAffiliateSellResponse[]
+}
+
+export interface NormalizeUserMessageReturn { 
+  content: OpenAiInputContent[], 
+  tokenDecrementQty: number ,
+  type: ENUM_MEDIA_TYPES
+}
+
+export interface NormalizeUserMessageParams { 
+  messageType: ENUM_MEDIA_TYPES, 
+  receivedMessage: string, 
+  imageCaption?: string, 
+  media?: string
 }
