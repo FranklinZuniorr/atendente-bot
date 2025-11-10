@@ -109,7 +109,7 @@ export const normalizeUserMessage = async ({
       ...(imageCaption ? [{ text: imageCaption, type: ENUM_OPEN_AI_INPUT_CONTENT_TYPES.TEXT }] : [])
     ];
 
-    return { content: image, tokenDecrementQty: 20, type: messageType };
+    return { content: image, tokenDecrementQty: 8, type: messageType };
   case ENUM_MEDIA_TYPES.CONVERSATION:
     const conversation: OpenAiInputContent[] = [
       {
@@ -128,7 +128,7 @@ export const normalizeUserMessage = async ({
           type: ENUM_OPEN_AI_INPUT_CONTENT_TYPES.TEXT
         },
       ];
-      return { content: audio, tokenDecrementQty: 20, type: messageType };
+      return { content: audio, tokenDecrementQty: 8, type: messageType };
     } catch  {
       return undefined;
     }
