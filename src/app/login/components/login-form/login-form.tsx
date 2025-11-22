@@ -168,7 +168,7 @@ export const LoginForm = () => {
                   loading={isLoadingGetCodes}
                   onClick={getQrCode}
                 >
-                  Iniciar conexão
+                  Criar conta
                 </Button>
                 <ModalPrivacyPolicy />
               </> : 
