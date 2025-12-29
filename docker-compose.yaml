@@ -37,7 +37,7 @@ services:
       - rede_geral
 
   evolution_v2:
-    image: evoapicloud/evolution-api:v2.3.6
+    image: evoapicloud/evolution-api:v2.3.7
     container_name: evolution_v2
     volumes:
       - evolution_instancesv2:/evolution/instances
