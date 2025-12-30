@@ -11,9 +11,10 @@ import { EvolutionService } from '../../services/evolution';
 import { ENUM_EVOLUTION_CONNECTION_STATE } from '../../services/evolution/constants';
 import { EvolutionInstanceConnectReturn } from '../../services/evolution/interfaces';
 
-const clientRepository = new ClientRepository(ClientModel, connectDB);
-
 export async function POST(req: Request): Promise<NextResponse<IResponse<GenerateQrCodeResponse>>> {
+
+  const clientRepository = new ClientRepository(ClientModel, connectDB);
+
   try {
     const body = await req.json();
 

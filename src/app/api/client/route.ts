@@ -10,9 +10,11 @@ import { ENUM_EVOLUTION_CONNECTION_STATE } from '../services/evolution/constants
 import { checkClientMiddleware } from '../middlewares/check-client/middleware';
 import { GetClientRepositoryResponse } from '../repositories/client/interfaces';
 
-const clientRepository = new ClientRepository(ClientModel, connectDB);
 
 export async function GET(req: Request): Promise<NextResponse<IResponse<GetClientResponse>>> {
+
+  const clientRepository = new ClientRepository(ClientModel, connectDB);
+
   try {
     const { url } = req;
     const{ searchParams } = new URL(url);
@@ -58,6 +60,9 @@ export async function GET(req: Request): Promise<NextResponse<IResponse<GetClien
 }
 
 export async function DELETE(req: Request): Promise<NextResponse<IResponse>> {
+
+  const clientRepository = new ClientRepository(ClientModel, connectDB);
+
   const execute = async () => {
     try {
       const body = await req.json();

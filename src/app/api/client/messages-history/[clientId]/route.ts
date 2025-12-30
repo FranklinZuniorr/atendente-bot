@@ -6,9 +6,10 @@ import MessageHistoryModel from '@/app/api/repositories/message-history/models/m
 import { connectDB } from '@/app/api/infra/mongoDb';
 import { MessagesHistoryResponse } from '../../interfaces';
 
-const messageHistoryRepository = new MessageHisotryRepository(MessageHistoryModel, connectDB);
-
 export async function GET(req: Request, { params }: { params: Promise<{ clientId: string }> }): Promise<NextResponse<IResponse<MessagesHistoryResponse[]>>> {
+  
+  const messageHistoryRepository = new MessageHisotryRepository(MessageHistoryModel, connectDB);
+  
   const execute = async () => {
     const clientId = (await params).clientId;
       
