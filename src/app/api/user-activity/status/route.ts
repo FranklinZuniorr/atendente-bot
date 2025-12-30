@@ -5,9 +5,10 @@ import { connectDB } from '../../infra/mongoDb';
 import { IResponse } from '../../interfaces';
 import { checkClientMiddleware } from '../../middlewares/check-client/middleware';
 
-const userActivityRepository = new UserActivityRepository(UserActivityModel, connectDB);
-
 export async function PUT(req: Request): Promise<NextResponse<IResponse>> {
+
+  const userActivityRepository = new UserActivityRepository(UserActivityModel, connectDB);
+
   const execute = async () => {
     try {
       const body = await req.json();

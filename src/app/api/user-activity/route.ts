@@ -6,9 +6,10 @@ import UserActivityModel from '../repositories/userActivity/models/userActivity'
 import { GetAllUserActivitiesByClientIdPaginated } from './interfaces';
 import { checkClientMiddleware } from '../middlewares/check-client/middleware';
 
-const userActivityRepository = new UserActivityRepository(UserActivityModel, connectDB);
-
 export async function GET(req: Request): Promise<NextResponse<IResponse<GetAllUserActivitiesByClientIdPaginated>>> {
+
+  const userActivityRepository = new UserActivityRepository(UserActivityModel, connectDB);
+
   const execute = async () => {
     try {
       const { url } = req;

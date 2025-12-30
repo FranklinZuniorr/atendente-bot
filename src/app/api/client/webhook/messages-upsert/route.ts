@@ -16,11 +16,13 @@ import UserActivityModel from '@/app/api/repositories/userActivity/models/userAc
 import { UserActivityRepositoryRepresentational } from '@/app/api/repositories/userActivity/interfaces';
 import dayjs from 'dayjs';
 
-const clientRepository = new ClientRepository(ClientModel, connectDB);
-const messageHistoryRepository = new MessageHisotryRepository(MessageHistoryModel, connectDB);
-const userActivityRepository = new UserActivityRepository(UserActivityModel, connectDB);
 
 export async function POST(req: Request) {
+
+  const clientRepository = new ClientRepository(ClientModel, connectDB);
+  const messageHistoryRepository = new MessageHisotryRepository(MessageHistoryModel, connectDB);
+  const userActivityRepository = new UserActivityRepository(UserActivityModel, connectDB);
+  
   try {
     const body: WebhookMessageEventBody = await req.json();
     const client = await clientRepository.getByTelephone(body.instance);

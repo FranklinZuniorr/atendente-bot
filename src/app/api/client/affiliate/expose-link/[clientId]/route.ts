@@ -7,11 +7,10 @@ import { AffiliateExposeLinkResponse, AffiliateTokenInfos } from '../../../inter
 import { checkClientMiddleware } from '@/app/api/middlewares/check-client/middleware';
 import { createToken } from '@/app/api/utils';
 
-
-const clientRepository = new ClientRepository(ClientModel, connectDB);
-
 export async function GET(req: Request, { params }: { params: Promise<{ clientId: string }> }): Promise<NextResponse<IResponse<AffiliateExposeLinkResponse>>> {
   
+  const clientRepository = new ClientRepository(ClientModel, connectDB);
+
   const execute = async () => {
     const clientId = (await params).clientId;
       

@@ -8,11 +8,11 @@ import { GetAllAffiliateSellsResponse } from '../../../interfaces';
 import { AffiliateRepository } from '../../../../repositories/affiliate';
 import AffiliateSellModel from '../../../../repositories/affiliate/models/affiliate';
 
-const clientRepository = new ClientRepository(ClientModel, connectDB);
-const affiliateRepository = new AffiliateRepository(AffiliateSellModel, connectDB);
-
 export async function GET(req: Request, { params }: { params: Promise<{ clientId: string }> }): Promise<NextResponse<IResponse<GetAllAffiliateSellsResponse>>> {
   
+  const clientRepository = new ClientRepository(ClientModel, connectDB);
+  const affiliateRepository = new AffiliateRepository(AffiliateSellModel, connectDB);
+
   const execute = async () => {
     const clientId = (await params).clientId;
       

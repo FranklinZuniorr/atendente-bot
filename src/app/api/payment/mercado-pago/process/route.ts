@@ -12,10 +12,11 @@ import { GetClientRepositoryResponse } from '@/app/api/repositories/client/inter
 import { decodeToken } from '@/app/api/utils';
 import { AffiliateTokenInfos } from '@/app/api/client/interfaces';
 
-const clientRepository = new ClientRepository(ClientModel, connectDB);
-const affiliateRepository = new AffiliateRepository(AffiliateSellModel, connectDB);
-
 export async function POST(req: Request): Promise<NextResponse<IResponse>> {
+
+  const clientRepository = new ClientRepository(ClientModel, connectDB);
+  const affiliateRepository = new AffiliateRepository(AffiliateSellModel, connectDB);
+
   try {
     const body = await req.json();
          

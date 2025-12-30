@@ -6,9 +6,10 @@ import { InfoRepository } from '../../repositories/info';
 import { InfoRepositoryRepresentation } from '../../repositories/info/interfaces';
 import { checkClientMiddleware } from '../../middlewares/check-client/middleware';
 
-const infoRepository = new InfoRepository(InfoModel, connectDB);
-
 export async function GET(req: Request): Promise<NextResponse<IResponse<InfoRepositoryRepresentation[]>>> {
+
+  const infoRepository = new InfoRepository(InfoModel, connectDB);
+
   const execute = async () => {
     try {
       const { url } = req;
