@@ -20,8 +20,13 @@ import dayjs from 'dayjs';
 export async function POST(req: Request) {
 
   const clientRepository = new ClientRepository(ClientModel, connectDB);
+  await clientRepository.connect();
+
   const messageHistoryRepository = new MessageHisotryRepository(MessageHistoryModel, connectDB);
+  await messageHistoryRepository.connect();
+
   const userActivityRepository = new UserActivityRepository(UserActivityModel, connectDB);
+  await userActivityRepository.connect();
   
   try {
     const body: WebhookMessageEventBody = await req.json();

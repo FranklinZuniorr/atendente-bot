@@ -9,6 +9,7 @@ import { checkClientMiddleware } from '../middlewares/check-client/middleware';
 export async function GET(req: Request): Promise<NextResponse<IResponse<GetAllUserActivitiesByClientIdPaginated>>> {
 
   const userActivityRepository = new UserActivityRepository(UserActivityModel, connectDB);
+  await userActivityRepository.connect();
 
   const execute = async () => {
     try {

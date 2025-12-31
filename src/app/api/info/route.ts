@@ -9,6 +9,7 @@ import { checkClientMiddleware } from '../middlewares/check-client/middleware';
 export async function POST(req: Request): Promise<NextResponse<IResponse>> {
 
   const infoRepository = new InfoRepository(InfoModel, connectDB);
+  await infoRepository.connect();
 
   const execute = async () => {
     try {
@@ -50,6 +51,7 @@ export async function POST(req: Request): Promise<NextResponse<IResponse>> {
 export async function DELETE(req: Request): Promise<NextResponse<IResponse>> {
 
   const infoRepository = new InfoRepository(InfoModel, connectDB);
+  await infoRepository.connect();
 
   const execute = async () => {
     try {
@@ -81,6 +83,7 @@ export async function DELETE(req: Request): Promise<NextResponse<IResponse>> {
 export async function PUT(req: Request): Promise<NextResponse<IResponse>> {
 
   const infoRepository = new InfoRepository(InfoModel, connectDB);
+  await infoRepository.connect();
 
   const execute = async () => {
     try {

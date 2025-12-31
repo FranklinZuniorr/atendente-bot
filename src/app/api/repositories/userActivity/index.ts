@@ -3,12 +3,11 @@ import UserActivityModel from './models/userActivity';
 
 export class UserActivityRepository {
   private userActivityModel: typeof UserActivityModel;
-  private connect: () => Promise<void>;
+  connect: () => Promise<void>;
 
   constructor(userActivityModel: typeof UserActivityModel, connect: () => Promise<void>) {
     this.userActivityModel = userActivityModel;
     this.connect = connect;
-    this.connect();
   }
 
   async create(userActivity: UserActivity, clientId: string) {

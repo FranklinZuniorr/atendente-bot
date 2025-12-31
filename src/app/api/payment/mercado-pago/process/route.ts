@@ -15,7 +15,10 @@ import { AffiliateTokenInfos } from '@/app/api/client/interfaces';
 export async function POST(req: Request): Promise<NextResponse<IResponse>> {
 
   const clientRepository = new ClientRepository(ClientModel, connectDB);
+  await clientRepository.connect();
+
   const affiliateRepository = new AffiliateRepository(AffiliateSellModel, connectDB);
+  await affiliateRepository.connect();
 
   try {
     const body = await req.json();

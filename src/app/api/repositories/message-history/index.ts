@@ -3,12 +3,11 @@ import MessageHistoryModel from './models/message-history';
 
 export class MessageHisotryRepository {
   private messageHistoryModel: typeof MessageHistoryModel;
-  private connect: () => Promise<void>;
+  connect: () => Promise<void>;
 
   constructor(messageHistoryModel: typeof MessageHistoryModel, connect: () => Promise<void>) {
     this.messageHistoryModel = messageHistoryModel;
     this.connect = connect;
-    this.connect();
   }
 
   async create(messageHistory: MessageHistory) {

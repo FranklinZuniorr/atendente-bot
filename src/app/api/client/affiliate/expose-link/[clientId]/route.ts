@@ -10,6 +10,7 @@ import { createToken } from '@/app/api/utils';
 export async function GET(req: Request, { params }: { params: Promise<{ clientId: string }> }): Promise<NextResponse<IResponse<AffiliateExposeLinkResponse>>> {
   
   const clientRepository = new ClientRepository(ClientModel, connectDB);
+  await clientRepository.connect();
 
   const execute = async () => {
     const clientId = (await params).clientId;

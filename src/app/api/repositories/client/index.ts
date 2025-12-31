@@ -3,12 +3,11 @@ import ClientModel from './models/client';
 
 export class ClientRepository {
   private clientModel: typeof ClientModel;
-  private connect: () => Promise<void>;
+  connect: () => Promise<void>;
 
   constructor(clientModel: typeof ClientModel, connect: () => Promise<void>) {
     this.clientModel = clientModel;
     this.connect = connect;
-    this.connect();
   }
 
   async upsert(client: Client) {

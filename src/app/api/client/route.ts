@@ -14,6 +14,7 @@ import { GetClientRepositoryResponse } from '../repositories/client/interfaces';
 export async function GET(req: Request): Promise<NextResponse<IResponse<GetClientResponse>>> {
 
   const clientRepository = new ClientRepository(ClientModel, connectDB);
+  await clientRepository.connect();
 
   try {
     const { url } = req;
@@ -62,6 +63,7 @@ export async function GET(req: Request): Promise<NextResponse<IResponse<GetClien
 export async function DELETE(req: Request): Promise<NextResponse<IResponse>> {
 
   const clientRepository = new ClientRepository(ClientModel, connectDB);
+  await clientRepository.connect();
 
   const execute = async () => {
     try {

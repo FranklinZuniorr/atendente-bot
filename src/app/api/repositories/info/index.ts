@@ -3,12 +3,11 @@ import InfoModel from './models/info';
 
 export class InfoRepository {
   private infoModel: typeof InfoModel;
-  private connect: () => Promise<void>;
+  connect: () => Promise<void>;
 
   constructor(infoModel: typeof InfoModel, connect: () => Promise<void>) {
     this.infoModel = infoModel;
     this.connect = connect;
-    this.connect();
   }
 
   async create(client: Info) {
