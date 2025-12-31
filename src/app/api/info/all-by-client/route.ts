@@ -9,6 +9,7 @@ import { checkClientMiddleware } from '../../middlewares/check-client/middleware
 export async function GET(req: Request): Promise<NextResponse<IResponse<InfoRepositoryRepresentation[]>>> {
 
   const infoRepository = new InfoRepository(InfoModel, connectDB);
+  await infoRepository.connect();
 
   const execute = async () => {
     try {

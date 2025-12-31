@@ -8,6 +8,7 @@ import { checkClientMiddleware } from '../../middlewares/check-client/middleware
 export async function PUT(req: Request): Promise<NextResponse<IResponse>> {
 
   const userActivityRepository = new UserActivityRepository(UserActivityModel, connectDB);
+  await userActivityRepository.connect();
 
   const execute = async () => {
     try {

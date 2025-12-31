@@ -9,6 +9,7 @@ import { MessagesHistoryResponse } from '../../interfaces';
 export async function GET(req: Request, { params }: { params: Promise<{ clientId: string }> }): Promise<NextResponse<IResponse<MessagesHistoryResponse[]>>> {
   
   const messageHistoryRepository = new MessageHisotryRepository(MessageHistoryModel, connectDB);
+  await messageHistoryRepository.connect();
   
   const execute = async () => {
     const clientId = (await params).clientId;

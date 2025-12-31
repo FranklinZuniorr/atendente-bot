@@ -11,7 +11,10 @@ import AffiliateSellModel from '../../../../repositories/affiliate/models/affili
 export async function GET(req: Request, { params }: { params: Promise<{ clientId: string }> }): Promise<NextResponse<IResponse<GetAllAffiliateSellsResponse>>> {
   
   const clientRepository = new ClientRepository(ClientModel, connectDB);
+  await clientRepository.connect();
+
   const affiliateRepository = new AffiliateRepository(AffiliateSellModel, connectDB);
+  await affiliateRepository.connect();
 
   const execute = async () => {
     const clientId = (await params).clientId;

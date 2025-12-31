@@ -14,6 +14,7 @@ import { EvolutionInstanceConnectReturn } from '../../services/evolution/interfa
 export async function POST(req: Request): Promise<NextResponse<IResponse<GenerateQrCodeResponse>>> {
 
   const clientRepository = new ClientRepository(ClientModel, connectDB);
+  await clientRepository.connect();
 
   try {
     const body = await req.json();
