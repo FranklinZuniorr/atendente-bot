@@ -51,6 +51,23 @@ export default function RootLayout({
             `,
           }}
         />
+        <Script id="gtag-conversion" strategy="afterInteractive">
+          {`
+            function gtag_report_conversion(url) {
+              var callback = function () {
+                if (typeof(url) != 'undefined') {
+                  window.location = url;
+                }
+              };
+              gtag('event', 'conversion', {
+                  'send_to': 'AW-17016272973/RR2jCInw_dkbEM3w_rE_',
+                  'transaction_id': '',
+                  'event_callback': callback
+              });
+              return false;
+            }
+          `}
+        </Script>
       </head>
       <body>
         <ReduxProvider>

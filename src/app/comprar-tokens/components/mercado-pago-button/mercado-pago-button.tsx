@@ -26,6 +26,10 @@ export const MercadoPagoButton = () => {
 
   const handleClickBuyButton = () => {
     if(!url) return;
+
+    // @ts-expect-error html script function
+    gtag_report_conversion();
+
     window.open(url);
   };
 
